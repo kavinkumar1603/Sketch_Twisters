@@ -1,38 +1,331 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.app-container {
+  font-family: Arial, sans-serif;
   color: white;
+  background-color: black;
+  text-align: center;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  word-spacing: 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.background-text {
+  font-size: 10rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  white-space: nowrap;
+  padding-left: 80vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack video and text vertically */
+  align-items: flex-start; /* Align everything to the left */
+  justify-content: flex-start;
+  height: 100%;
+  margin-left: 20px; /* Add spacing from the left edge */
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+.video-container {
+  position: absolute; /* Position the video absolutely */
+  top: 50%; /* Center vertically */
+  left: 0; /* Align to the left side */
+  transform: translateY(-60%); /* Adjust for vertical centering */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  overflow: hidden; /* Ensure no overflow issues */
+  z-index: 2; /* Ensure it doesn't overlap important elements */
+  margin-left: 150px;
+  margin-top: 5vh;
+}
+
+.video {
+  width: 100%; /* Make the video responsive */
+  max-width: 450px; /* Set a maximum width */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow for better appearance */
+  display: block; /* Ensure the video is displayed as a block element */
+  pointer-events: none; /* Disable interaction with the video */
+}
+
+.description {
+  text-align: center; /* Align text to the right */
+  font-size: 1.2rem; /* Increase font size for better readability */
+  line-height: 1.8; /* Improve line spacing */
+  color: #f0f0f0; /* Use a lighter shade of white for better contrast */
+  margin-left: 500px; /* Push the text to the right */
+  margin-right: 20px; /* Add spacing from the right edge */
+  max-width: 50%; /* Limit the width of the text to avoid overlapping with the video */
+  padding-bottom: 200px;
+  padding-top: 20vh;
+  padding-left: 20vh;
+}
+
+.login-button {
+  background-color: #ffffff; /* Use a blue color for the button */
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 12px 24px; /* Increase padding for a larger button */
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 0; /* Remove extra spacing above the button */
+  position: absolute; /* Position the button absolutely */
+  right: 20px; /* Move the button to the right side */
+  bottom: 50px; /* Position it near the bottom of the screen */
+  margin-bottom: 150px;
+  margin-right: 55vh;
+  
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.header-title {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 2rem;
+  color: #fff;
+  z-index: 10;
+}
+
+
+@keyframes slideleft {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes circularMove {
+  0% {
+    transform: translateX(-100%); /* Start completely off the left side */
+  }
+  50% {
+    transform: translateX(0); /* Fully visible in the center */
+  }
+  100% {
+    transform: translateX(100vw); /* Move completely off the right side */
+  }
+}
+
+@keyframes circularMoveDelayed {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0; /* Start invisible */
+  }
+  50% {
+    transform: translateX(0); /* Fully visible in the center */
+    opacity: 1; /* Become visible */
+  }
+  100% {
+    transform: translateX(100vw); /* Move completely off the right side */
+    opacity: 1; /* Stay visible */
+  }
+}
+
+@keyframes circularMoveSubtitle {
+  0% {
+    transform: translateX(-100%); /* Start completely off the left side */
+  }
+  50% {
+    transform: translateX(100vw); /* Move completely off the right side */
+  }
+  100% {
+    transform: translateX(100vw); /* Stay off the screen */
+  }
+}
+
+@keyframes circularMoveSubtitleDelayed {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0; /* Start invisible */
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0; /* Stay invisible while the first text moves */
+  }
+  100% {
+    transform: translateX(100vw); /* Move completely off the right side */
+    opacity: 1; /* Become visible */
+  }
+}
+
+.animated-title {/*top*/
+  animation: circularMove 6s linear infinite; /* First text animation */
+  font-size: 10rem; /* Adjust font size to make it lengthier */
+  color: #fff;
+  z-index: 10;
+  position: absolute; /* Ensure the text can be positioned absolutely */
+  top: -100px; /* Move the text closer to the top of the screen */
+  left: 0; /* Align the text to the left */
+  width: 100%; /* Make the title span the full width of the screen */
+  text-align: left; /* Align the text to the left within its container */
+  padding: 10px 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Include padding in the element's width */
+  color: transparent; /* Make the fill transparent */
+  -webkit-text-stroke: 2px #fff; /* Add a white stroke around the text */
+  text-stroke: 2px #fff; /* Add a white stroke for non-webkit browsers */
+}
+
+.animated-subtitle {/*bottom*/
+  animation: rightToLeftMove 6s linear infinite; /* Right to left animation */
+  font-size: 10rem; /* Adjust font size to make it lengthier */
+  color: #fff;
+  z-index: 10;
+  position: absolute; /* Ensure the text can be positioned absolutely */
+  top: 400px; /* Move the text closer to the top of the screen */
+  left: 0; /* Align the text to the left */
+  width: 100%; /* Make the title span the full width of the screen */
+  text-align: left; /* Align the text to the left within its container */
+  padding: 10px 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Include padding in the element's width */
+  color: transparent; /* Make the fill transparent */
+  -webkit-text-stroke: 2px #fff; /* Add a white stroke around the text */
+  text-stroke: 2px #fff; /* Add a white stroke for non-webkit browsers */
+}
+
+@keyframes rightToLeftMove {
+  0% {
+    transform: translateX(100%); /* Start completely off the right side */
+  }
+  100% {
+    transform: translateX(-100%); /* Move completely off the left side */
+  }
+}
+
+.event-sphere-text {
+  animation: rightToLeftMove 6s linear infinite; /* Right to left animation */
+  animation-delay: 3s; /* Add delay to move after .animated-subtitle */
+  font-size: 10rem; /* Same font size as the existing animated title */
+  color: #fff;
+  z-index: 10;
+  position: absolute; /* Ensure the text can be positioned absolutely */
+  top: 450px; /* Position it slightly below the existing animated title */
+  left: 0; /* Align the text to the left */
+  width: 100%; /* Make the text span the full width of the screen */
+  text-align: left; /* Align the text to the left within its container */
+  padding: 10px 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Include padding in the element's width */
+  color: transparent; /* Make the fill transparent */
+  -webkit-text-stroke: 2px #fff; /* Add a white stroke around the text */
+  text-stroke: 2px #fff; /* Add a white stroke for non-webkit browsers */
+}
+
+.infinite-opportunities-text {
+  animation: circularMoveDelayed 6s linear infinite; /* Second text animation with delay */
+  animation-delay: 3s; /* Start halfway through the first animation */
+  font-size: 10rem; /* Same font size as the existing animated title */
+  color: #fff;
+  z-index: 10;
+  position: absolute; /* Ensure the text can be positioned absolutely */
+  top: -150px; /* Position it slightly below the existing animated title */
+  left: 0; /* Align the text to the left */
+  width: 100%; /* Make the text span the full width of the screen */
+  text-align: left; /* Align the text to the left within its container */
+  padding: 10px 20px; /* Add some padding for spacing */
+  box-sizing: border-box; /* Include padding in the element's width */
+  color: transparent; /* Make the fill transparent */
+  -webkit-text-stroke: 2px #fff; /* Add a white stroke around the text */
+  text-stroke: 2px #fff; /* Add a white stroke for non-webkit browsers */
+}
+
+.login-options-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.login-options {
+  background-color: #000000;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding-left: 10px;
+  animation: slideDown 0.5s ease-out;
+}
+
+.login-options button {
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 0px;
+  border-radius: 6px;
+  margin: 10px;
+  padding: 10px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.login-options button:hover {
+  background-color: #003d80;
+  transform: scale(1.1);
+}
+
+.login-options div {
+  text-align: center; /* Center-align each option */
+}
+
+.login-options label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333; /* Darker color for labels */
+}
+
+.login-options-row {
+  display: flex;
+  justify-content: space-around; /* Space out the options evenly */
+  align-items: center;
+  margin-top: 20px;
+}
+
+.text {
+  color:rgb(205, 197, 197);
 }
