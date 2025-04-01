@@ -193,7 +193,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: -100px; /* Move the text closer to the top of the screen */
+  top: -140px; /* Move the text closer to the top of the screen */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the title span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -255,7 +255,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: -150px; /* Position it slightly below the existing animated title */
+  top: -195px; /* Position it slightly below the existing animated title */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the text span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -277,6 +277,15 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  visibility: visible; /* Ensure the modal is visible */
+  opacity: 1; /* Ensure the modal is fully opaque */
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer; /* Allow clicking outside */
+}
+
+.login-options-modal.hidden {
+  visibility: hidden; /* Hide the modal when not active */
+  opacity: 0; /* Make the modal transparent */
 }
 
 .login-options {
@@ -285,47 +294,110 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
-  padding-left: 10px;
   animation: slideDown 0.5s ease-out;
+  width: 400px; /* Set a fixed width for the modal */
+  cursor: default; /* Prevent clicking inside the modal from closing it */
 }
 
 .login-options button {
   background-color: #ffffff;
   color: #000000;
   border: none;
-  padding: 15px 30px;
+  padding: 1x 20px;
   font-size: 1.2rem;
   cursor: pointer;
-  border-radius: 0px;
-  border-radius: 6px;
+  border-radius: 10px;
   margin: 10px;
-  padding: 10px;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .login-options button:hover {
-  background-color: #003d80;
+  background-color: #2575fc;
+  color: #ffffff;
   transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .login-options div {
-  text-align: center; /* Center-align each option */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-option-image {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-option-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.3);
 }
 
 .login-options label {
-  display: block;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: #f0f0f0;
   margin-bottom: 10px;
-  color: #333; /* Darker color for labels */
+  display: block;
 }
 
 .login-options-row {
   display: flex;
-  justify-content: space-around; /* Space out the options evenly */
+  justify-content: space-around;
   align-items: center;
   margin-top: 20px;
 }
 
 .text {
   color:rgb(205, 197, 197);
+}
+
+.dynamic-input-container {
+  margin-top: 20px;
+  text-align: left;
+  color: #f0f0f0;
+  position: relative; /* Ensure positioning context for the button */
+}
+
+.dynamic-input-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.dynamic-input-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.dynamic-input-container button {
+  background-color: #0056b3;
+  color: #fff;
+  border: none;
+  display:flex;
+  padding: 10px 20px;
+  right: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s, transform 0.2s;
+  position: absolute; /* Position the button absolutely */
+  left: 50%; /* Move to the horizontal center */
+  transform: translateX(-50%); /* Adjust for centering */
+}
+
+.dynamic-input-container button:hover {
+  background-color: #003d80;
+}
+.profile-name {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #f0f0f0;
+  text-align: center;
 }
