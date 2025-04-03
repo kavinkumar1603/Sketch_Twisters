@@ -13,6 +13,7 @@ function App() {
     password: "",
     confirmPassword: "",
   });
+  const [errors, setErrors] = useState({}); // State to track field errors
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
@@ -42,23 +43,26 @@ function App() {
 
   const handleRegisterSubmit = () => {
     const { name, studentId, password, confirmPassword } = registrationDetails;
+    const newErrors = {};
 
-    if (!name || !studentId || !password || !confirmPassword) {
-      alert("Please fill in all fields.");
-      return;
+    if (!name) newErrors.name = "Name is required.";
+    if (!studentId) newErrors.studentId = "Student ID is required.";
+    if (!password) newErrors.password = "Password is required.";
+    if (!confirmPassword) newErrors.confirmPassword = "Confirm Password is required.";
+    if (password && confirmPassword && password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
     }
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
+    setErrors(newErrors);
 
-    // Simulate registration success
-    console.log("Registration successful:", registrationDetails);
-    localStorage.setItem("studentLoggedIn", true); // Save login state
-    alert("Registration successful! You can now log in.");
-    setShowLoginOptions(false); // Close modal
-    setSelectedOption(null); // Reset selectedOption
+    if (Object.keys(newErrors).length === 0) {
+      // Simulate registration success
+      console.log("Registration successful:", registrationDetails);
+      localStorage.setItem("studentLoggedIn", true); // Save login state
+      alert("Registration successful! You can now log in.");
+      setShowLoginOptions(false); // Close modal
+      setSelectedOption(null); // Reset selectedOption
+    }
   };
 
   const renderModalContent = () => {
@@ -67,45 +71,62 @@ function App() {
 
       if (selectedOption === "Register") {
         return (
-          <div className="dynamic-input-container">
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Enter your name"
-              value={registrationDetails.name}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="student-id">Student ID</label>
-            <input
-              type="text"
-              id="studentId"
-              placeholder="Enter your student ID"
-              value={registrationDetails.studentId}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-              value={registrationDetails.password}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm your password"
-              value={registrationDetails.confirmPassword}
-              onChange={handleInputChange}
-            />
-            <button
-              className="register-button"
-              onClick={handleRegisterSubmit}
-            >
-              Register
-            </button>
+          <div className="register-form-container">
+            <h2 className="register-form-title">Create Your Account</h2>
+            <p className="register-form-subtitle">Join us and explore amazing opportunities!</p>
+            <form className="register-form">
+              <div className="form-group">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your name"
+                  value={registrationDetails.name}
+                  onChange={handleInputChange}
+                />
+                {errors.name && <p className="error-message">{errors.name}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="studentId">Student ID</label>
+                <input
+                  type="text"
+                  id="studentId"
+                  placeholder="Enter your student ID"
+                  value={registrationDetails.studentId}
+                  onChange={handleInputChange}
+                />
+                {errors.studentId && <p className="error-message">{errors.studentId}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  value={registrationDetails.password}
+                  onChange={handleInputChange}
+                />
+                {errors.password && <p className="error-message">{errors.password}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                  value={registrationDetails.confirmPassword}
+                  onChange={handleInputChange}
+                />
+                {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+              </div>
+              <button
+                type="button"
+                className="submit-registration-button"
+                onClick={handleRegisterSubmit}
+              >
+                Register
+              </button>
+            </form>
           </div>
         );
       }
@@ -143,7 +164,8 @@ function App() {
               )}
             </>
           )}
-          <button
+          <button 
+            className="dynamic-submit-button" // Updated class name
             onClick={() => {
               if (selectedOption === "Student" && !isStudentLoggedIn) {
                 localStorage.setItem("studentLoggedIn", true); // Simulate student login
@@ -156,9 +178,10 @@ function App() {
           </button>
 
           {isStudentLoggedIn && (
-            <p>
+            <p className="register-container">
+              <span>Don't have an account?</span> {/* Add the sentence */}
               <button
-                className="register-button"
+                className="register-text-button" // Update class name
                 onClick={() => setSelectedOption("Register")} // Show registration form
               >
                 Register

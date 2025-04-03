@@ -378,23 +378,24 @@
 }
 
 .dynamic-input-container button {
-  background-color: #0056b3;
-  color: #fff;
+  background-color: black; /* White background */
+  color: #0400ff; /* Black text for contrast */
   border: none;
-  display:flex;
-  padding: 10px 20px;
-  right: 20px;
+  padding: 12px 20px; /* Adjust padding for better appearance */
   font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.2s, transform 0.2s;
-  position: absolute; /* Position the button absolutely */
-  left: 50%; /* Move to the horizontal center */
-  transform: translateX(-50%); /* Adjust for centering */
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block; /* Ensure it behaves as a block element */
+  margin: 20px auto; /* Center horizontally */
 }
 
 .dynamic-input-container button:hover {
-  background-color: #003d80;
+  background-color: #003d80; /* Darker blue on hover */
+  color: #ffffff; /* White text on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 .dynamic-input-container p {
@@ -419,21 +420,187 @@
   text-align: center;
 }
 .register-button {
-  background-color: transparent; /* No background */
+  background-color: black; /* No background */
   color: #2575fc; /* Text color */
   border: 2px solid #2575fc; /* Border color */
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 100px 20px;
+  font-size: rem;
   cursor: pointer;
   border-radius: 5px; /* Rounded corners */
   text-align: center;
   transition: background-color 0.3s, color 0.3s, transform 0.3s;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative; /* Change to relative for proper alignment */
+  margin: 25px auto; /* Center horizontally */
+  display: block; /* Ensure it behaves as a block element */
 }
 
 .register-button:hover {
   background-color: #2575fc; /* Add background on hover */
   color: #fff; /* Change text color on hover */
+}
+
+.register-text-button {
+  background-color: transparent; /* Remove background */
+  color: #2575fc; /* Text color */
+  border: none; /* Remove border */
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline; /* Add underline to mimic text */
+  padding: 0; /* Remove padding */
+  margin-left: 5px; /* Add spacing from the span */
+}
+
+.register-text-button:hover {
+  color: #003d80; /* Darker blue on hover */
+}
+
+.dynamic-input-container span {
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.submit-registration-button {
+  background-color: #ffffff; /* Change background to white */
+  color: #000000; /* Adjust text color for contrast */
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-registration-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+}
+
+.register-container {
+  display: flex; /* Align text and button inline */
+  align-items: center;
+  justify-content: center;
+  gap: 50px; /* Add spacing between the text and button */
+  margin-top: 15px; /* Add spacing from the previous element */
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.register-text-button {
+  background-color: transparent; /* Remove background */
+  color: #2575fc; /* Text color */
+  border: none; /* Remove border */
+  font-size: 1rem;
+  bottom: 10px;
+  cursor: pointer;
+  text-decoration: underline; /* Add underline to mimic text */
+  padding: 0; /* Remove padding */
+}
+
+.register-text-button:hover {
+  color: #003d80; /* Darker blue on hover */
+}
+
+.register-container span {
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.register-form-container {
+  background: linear-gradient(130deg, #000000, #a6a1ab); /* Gradient background */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  max-width: 350px;
+  margin: 20px auto; /* Center the form and reduce height */
+  text-align: center;
+  color: #ffffff; /* White text for contrast */
+}
+
+.register-form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.register-form-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #e0e0e0; /* Slightly lighter text for subtitle */
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reduced spacing between form fields */
+  height: 325px; /* Allow the form to take full height */
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #ffffff; /* White text for labels */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #ffffff; /* White background for inputs */
+  color: #333333; /* Dark text for inputs */
+}
+
+.form-group input:focus {
+  border: 2px solid #435237; /* Highlight border on focus */
+  outline: none;
+}
+
+.submit-registration-button {
+  background-color: #ffffff; /* Change background to white */
+  color: #000000; /* Adjust text color for contrast */
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-registration-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+}
+
+.dynamic-input-container .dynamic-submit-button {
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text for contrast */
+  border: none;
+  padding: 12px 20px; /* Adjust padding for better appearance */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block; /* Ensure it behaves as a block element */
+  margin: 20px auto; /* Center horizontally */
+}
+
+.dynamic-input-container .dynamic-submit-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+  color: #ffffff; /* White text on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.error-message {
+  color: #ff4d4d; /* Red color for errors */
+  font-size: 0.9rem;
+  margin-top: 5px;
 }
