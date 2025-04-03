@@ -7,9 +7,16 @@ import StudentProfile1 from './assests/Student-profile1.avif'; // Import Student
 function App() {
   const [showLoginOptions, setShowLoginOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [registrationDetails, setRegistrationDetails] = useState({
+    name: "",
+    studentId: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
+    setSelectedOption(null); // Reset selectedOption to show Admin/Student login options
   };
 
   const handleOptionClick = (option) => {
@@ -25,9 +32,84 @@ function App() {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setRegistrationDetails((prevDetails) => ({
+      ...prevDetails,
+      [id]: value,
+    }));
+  };
+
+  const handleRegisterSubmit = () => {
+    const { name, studentId, password, confirmPassword } = registrationDetails;
+
+    if (!name || !studentId || !password || !confirmPassword) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    // Simulate registration success
+    console.log("Registration successful:", registrationDetails);
+    localStorage.setItem("studentLoggedIn", true); // Save login state
+    alert("Registration successful! You can now log in.");
+    setShowLoginOptions(false); // Close modal
+    setSelectedOption(null); // Reset selectedOption
+  };
+
   const renderModalContent = () => {
     if (selectedOption) {
-      // Render dynamic input fields for the selected option
+      const isStudentLoggedIn = selectedOption === "Student" && localStorage.getItem("studentLoggedIn");
+
+      if (selectedOption === "Register") {
+        return (
+          <div className="dynamic-input-container">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your name"
+              value={registrationDetails.name}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="student-id">Student ID</label>
+            <input
+              type="text"
+              id="studentId"
+              placeholder="Enter your student ID"
+              value={registrationDetails.studentId}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={registrationDetails.password}
+              onChange={handleInputChange}
+            />
+            <label htmlFor="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm your password"
+              value={registrationDetails.confirmPassword}
+              onChange={handleInputChange}
+            />
+            <button
+              className="register-button"
+              onClick={handleRegisterSubmit}
+            >
+              Register
+            </button>
+          </div>
+        );
+      }
+
       return (
         <div className="dynamic-input-container">
           {selectedOption === "Teacher" && (
@@ -40,17 +122,49 @@ function App() {
           )}
           {selectedOption === "Student" && (
             <>
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" placeholder="Enter your name" />
-              <label htmlFor="student-id">Student ID</label>
-              <input type="text" id="student-id" placeholder="Enter your student ID" />
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" placeholder="Enter your email" />
-              <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Enter your password" />
+              {isStudentLoggedIn ? (
+                <>
+                  <label htmlFor="student-id">Student ID</label>
+                  <input type="text" id="student-id" placeholder="Enter your student ID" />
+                  <label htmlFor="password">Password</label>
+                  <input type="password" id="password" placeholder="Enter your password" />
+                </>
+              ) : (
+                <>
+                  <label htmlFor="name">Name</label>
+                  <input type="text" id="name" placeholder="Enter your name" />
+                  <label htmlFor="student-id">Student ID</label>
+                  <input type="text" id="student-id" placeholder="Enter your student ID" />
+                  <label htmlFor="password">Password</label>
+                  <input type="password" id="password" placeholder="Enter your password" />
+                  <label htmlFor="confirm-password">Confirm Password</label>
+                  <input type="password" id="confirm-password" placeholder="Confirm your password" />
+                </>
+              )}
             </>
           )}
-          <button onClick={() => setShowLoginOptions(false)}>Submit</button>
+          <button
+            onClick={() => {
+              if (selectedOption === "Student" && !isStudentLoggedIn) {
+                localStorage.setItem("studentLoggedIn", true); // Simulate student login
+              }
+              setShowLoginOptions(false); // Close modal
+              setSelectedOption(null); // Reset selectedOption
+            }}
+          >
+            Submit
+          </button>
+
+          {isStudentLoggedIn && (
+            <p>
+              <button
+                className="register-button"
+                onClick={() => setSelectedOption("Register")} // Show registration form
+              >
+                Register
+              </button>
+            </p>
+          )}
         </div>
       );
     }
