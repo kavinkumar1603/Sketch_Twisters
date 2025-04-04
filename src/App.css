@@ -91,8 +91,8 @@
   position: absolute; /* Position the button absolutely */
   right: 0px; /* Move the button to the right side */
   bottom: 100px; /* Position it near the bottom of the screen */
-  margin-bottom: 150px;
-  margin-right: 55vh;
+  margin-bottom: 120px;
+  margin-right: 57vh;
   
 }
 
@@ -329,7 +329,7 @@
   width: 100px;
   height: 100px;
   cursor: pointer;
-  border-radius: 10p;
+  border-radius: 10px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
