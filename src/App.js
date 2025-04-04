@@ -3,17 +3,19 @@ import './App.css';
 import videoSrc from './assests/logodesign.mp4'; // Ensure the folder name matches the actual directory
 import AdminProfile from './assests/Admin-Profile.png'; // Import Admin profile image
 import StudentProfile1 from './assests/Student-profile1.avif'; // Import Student profile image
+import successIcon from './assests/success-icon.png'; // Import success icon image
 
 function App() {
   const [showLoginOptions, setShowLoginOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [registrationDetails, setRegistrationDetails] = useState({
-    name: "",
+5    name: "",
     studentId: "",
     password: "",
     confirmPassword: "",
   });
-  const [errors, setErrors] = useState({}); // State to track field errors
+  const [errors, setErrors] = useState({});
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
@@ -59,9 +61,10 @@ function App() {
       // Simulate registration success
       console.log("Registration successful:", registrationDetails);
       localStorage.setItem("studentLoggedIn", true); // Save login state
-      alert("Registration successful! You can now log in.");
       setShowLoginOptions(false); // Close modal
       setSelectedOption(null); // Reset selectedOption
+      setShowSuccessModal(true); // Show success modal
+      setTimeout(() => setShowSuccessModal(false), 3000); // Hide modal after 3 seconds
     }
   };
 
@@ -258,6 +261,14 @@ function App() {
           </div>
         )}
       </div>
+      {showSuccessModal && (
+        <div className="registration-success-modal">
+          <div className="registration-success-content">
+            <img src={successIcon} alt="Success" className="success-icon" />
+            <p className="success-text">Registration Successful!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
