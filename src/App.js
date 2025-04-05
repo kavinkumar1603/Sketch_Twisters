@@ -43,6 +43,7 @@ function App() {
   };
 
   const handleInputChange = (e) => {
+    console.log("")
     const { id, value } = e.target;
     setRegistrationDetails((prevDetails) => ({
       ...prevDetails,
