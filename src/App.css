@@ -1,11 +1,18 @@
+html, body {
+  height: 100%; /* Ensure the body takes the full height */
+  overflow: hidden; /* Disable scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
 .app-container {
   font-family: Arial, sans-serif;
   color: white;
   background-color: black;
   text-align: center;
   position: relative;
-  height: 100vh;
-  overflow: hidden;
+  height: 100vh; /* Ensure the container takes the full viewport height */
+  overflow: hidden; /* Prevent scrolling within the container */
   word-spacing: 2px;
 }
 
@@ -89,10 +96,10 @@
   border-radius: 5px;
   margin-top: 0; /* Remove extra spacing above the button */
   position: absolute; /* Position the button absolutely */
-  right: 20px; /* Move the button to the right side */
-  bottom: 50px; /* Position it near the bottom of the screen */
-  margin-bottom: 150px;
-  margin-right: 55vh;
+  right: 0px; /* Move the button to the right side */
+  bottom: 100px; /* Position it near the bottom of the screen */
+  margin-bottom: 120px;
+  margin-right: 57vh;
   
 }
 
@@ -193,7 +200,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: -100px; /* Move the text closer to the top of the screen */
+  top: -140px; /* Move the text closer to the top of the screen */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the title span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -210,7 +217,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: 400px; /* Move the text closer to the top of the screen */
+  top: 440px; /* Move the text closer to the top of the screen */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the title span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -237,7 +244,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: 450px; /* Position it slightly below the existing animated title */
+  top: 500px; /* Position it slightly below the existing animated title */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the text span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -255,7 +262,7 @@
   color: #fff;
   z-index: 10;
   position: absolute; /* Ensure the text can be positioned absolutely */
-  top: -150px; /* Position it slightly below the existing animated title */
+  top: -195px; /* Position it slightly below the existing animated title */
   left: 0; /* Align the text to the left */
   width: 100%; /* Make the text span the full width of the screen */
   text-align: left; /* Align the text to the left within its container */
@@ -277,6 +284,15 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  visibility: visible; /* Ensure the modal is visible */
+  opacity: 1; /* Ensure the modal is fully opaque */
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer; /* Allow clicking outside */
+}
+
+.login-options-modal.hidden {
+  visibility: hidden; /* Hide the modal when not active */
+  opacity: 0; /* Make the modal transparent */
 }
 
 .login-options {
@@ -285,47 +301,575 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   text-align: center;
-  padding-left: 10px;
   animation: slideDown 0.5s ease-out;
+  width: 400px; /* Set a fixed width for the modal */
+  cursor: default; /* Prevent clicking inside the modal from closing it */
 }
 
 .login-options button {
   background-color: #ffffff;
   color: #000000;
   border: none;
-  padding: 15px 30px;
+  padding: 7px 15px; /* Increase padding for a larger button background */
   font-size: 1.2rem;
   cursor: pointer;
-  border-radius: 0px;
-  border-radius: 6px;
-  margin: 10px;
-  padding: 10px;
-  transition: transform 0.2s, background-color 0.2s;
+  border-radius: 5px; /* Make the buttons rectangular */
+  margin: 20px;
+  transition: transform 0.3s, background-color 0.3s;
 }
 
 .login-options button:hover {
-  background-color: #003d80;
+  background-color: #2575fc;
+  color: #ffffff;
   transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0; /* Ensure hover state remains rectangular */
+  padding: 10px 20px; /* Ensure hover state matches the larger size */
 }
 
 .login-options div {
-  text-align: center; /* Center-align each option */
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-option-image {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-option-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.3);
 }
 
 .login-options label {
-  display: block;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  color: #f0f0f0;
   margin-bottom: 10px;
-  color: #333; /* Darker color for labels */
+  display: block;
 }
 
 .login-options-row {
   display: flex;
-  justify-content: space-around; /* Space out the options evenly */
+  justify-content: space-around;
   align-items: center;
   margin-top: 20px;
 }
-
 .text {
   color:rgb(205, 197, 197);
 }
+
+.dynamic-input-container {
+  margin-top: 20px;
+  text-align: left;
+  color: #f0f0f0;
+  position: relative; /* Ensure positioning context for the button */
+}
+
+.dynamic-input-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.dynamic-input-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.dynamic-input-container button {
+  background-color: black; /* White background */
+  color: #0400ff; /* Black text for contrast */
+  border: none;
+  padding: 12px 20px; /* Adjust padding for better appearance */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block; /* Ensure it behaves as a block element */
+  margin: 20px auto; /* Center horizontally */
+}
+
+.dynamic-input-container button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+  color: #ffffff; /* White text on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dynamic-input-container p {
+  margin-top: 15px; /* Add spacing from the submit button */
+  cursor: pointer;
+  color: #2575fc; /* Bright blue color for visibility */
+  font-size: 1.1rem; /* Slightly larger font size for better visibility */
+  text-align: center; /* Center the text */
+  font-weight: bold; /* Make the text bold */
+  text-decoration: underline; /* Add underline for emphasis */
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.dynamic-input-container p:hover {
+  color: #003d80; /* Darker blue on hover */
+}
+
+.profile-name {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #f0f0f0;
+  text-align: center;
+}
+.register-button {
+  background-color: black; /* No background */
+  color: #2575fc; /* Text color */
+  border: 2px solid #2575fc; /* Border color */
+  padding: 100px 20px;
+  font-size: rem;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  position: relative; /* Change to relative for proper alignment */
+  margin: 25px auto; /* Center horizontally */
+  display: block; /* Ensure it behaves as a block element */
+}
+
+.register-button:hover {
+  background-color: #2575fc; /* Add background on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+.register-text-button {
+  background-color: transparent; /* Remove background */
+  color: #2575fc; /* Text color */
+  border: none; /* Remove border */
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: underline; /* Add underline to mimic text */
+  padding: 0; /* Remove padding */
+  margin-left: 5px; /* Add spacing from the span */
+}
+
+.register-text-button:hover {
+  color: #003d80; /* Darker blue on hover */
+}
+
+.dynamic-input-container span {
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.submit-registration-button {
+  background-color: #ffffff; /* Change background to white */
+  color: #000000; /* Adjust text color for contrast */
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-registration-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+}
+
+.register-container {
+  display: flex; /* Align text and button inline */
+  align-items: center;
+  justify-content: center;
+  gap: 50px; /* Add spacing between the text and button */
+  margin-top: 15px; /* Add spacing from the previous element */
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.register-text-button {
+  background-color: transparent; /* Remove background */
+  color: #2575fc; /* Text color */
+  border: none; /* Remove border */
+  font-size: 1rem;
+  bottom: 10px;
+  cursor: pointer;
+  text-decoration: underline; /* Add underline to mimic text */
+  padding: 0; /* Remove padding */
+}
+
+.register-text-button:hover {
+  color: #003d80; /* Darker blue on hover */
+}
+
+.register-container span {
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+}
+
+.register-form-container {
+  background: linear-gradient(130deg, #000000, #a6a1ab); /* Gradient background */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  max-width: 350px;
+  margin: 20px auto; /* Center the form and reduce height */
+  text-align: center;
+  color: #ffffff; /* White text for contrast */
+}
+
+.register-form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.register-form-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #e0e0e0; /* Slightly lighter text for subtitle */
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reduced spacing between form fields */
+  height: 325px; /* Allow the form to take full height */
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #ffffff; /* White text for labels */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #ffffff; /* White background for inputs */
+  color: #333333; /* Dark text for inputs */
+}
+
+.form-group input:focus {
+  border: 2px solid #435237; /* Highlight border on focus */
+  outline: none;
+}
+
+.submit-registration-button {
+  background-color: #ffffff; /* Change background to white */
+  color: #000000; /* Adjust text color for contrast */
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-registration-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+}
+
+.dynamic-input-container .dynamic-submit-button {
+  background-color: #ffffff; /* White background */
+  color: #000000; /* Black text for contrast */
+  border: none;
+  padding: 12px 20px; /* Adjust padding for better appearance */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px; /* Rounded corners */
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s;
+  display: block; /* Ensure it behaves as a block element */
+  margin: 20px auto; /* Center horizontally */
+}
+
+.dynamic-input-container .dynamic-submit-button:hover {
+  background-color: #003d80; /* Darker blue on hover */
+  color: #ffffff; /* White text on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.error-message {
+  color: #ff4d4d; /* Red color for errors */
+  font-size: 0.9rem;
+  margin-top: 5px;
+  word-wrap: break-word; /* Ensure long error messages wrap */
+}
+
+.registration-success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.registration-success-content {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.success-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  animation: tickAnimation 1s ease-in-out;
+}
+
+.success-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+@keyframes tickAnimation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.success-screen {
+  font-family: Arial, sans-serif;
+  color: #000;
+  text-align: center;
+  background-color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.success-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Le Jour Serif', serif;
+  align-items: center;
+  padding: 10px 20px; /* Reduce padding for a smaller header */
+  background-color: #000; /* Black background for contrast */
+  color: #fff; /* White text for visibility */
+  font-size: 1.2rem; /* Reduce font size for a compact look */
+  height: 60px; /* Set a smaller height for the header */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  -webkit-text-stroke: 0px #fff; /* Add a white stroke around the text */
+  text-stroke: 0px #fff; /* Add a white stroke for non-webkit browsers */ 
+}
+
+.success-header h1 {
+  font-size: 1.5rem; /* Adjust font size for the title */
+  margin: 0;
+}
+
+.user-profile {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.main-content {
+  text-align: center;
+  padding: 20px; /* Reduce padding for a cleaner layout */
+  color: #fff;
+  background-color: #000;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.navigation-menu {
+  background-color: #000; /* Add a background color to the menu */
+  padding: 15px 0; /* Add padding for spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  position: relative; /* Ensure proper positioning */
+  margin-top: 80px; /* Add margin to move it below the header */
+  text-align: center; /* Center align the buttons */
+  top:-100px;
+}
+
+.navigation-menu ul {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-menu li {
+  margin: 0 20px; /* Add spacing between buttons */
+  font-size: 20rem; /* Increase font size */
+  font-weight: bold; /* Make text bold */
+  color: #ffffff; /* White text color */
+  cursor: pointer;
+  position: relative; /* For hover effects */
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.navigation-menu li:hover {
+  color: #2575fc; /* Change text color on hover */
+}
+
+.navigation-menu li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Position the underline below the text */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #2575fc; /* Underline color */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.navigation-menu li:hover::after {
+  width: 100%; /* Expand underline on hover */
+  left: 0; /* Align underline with the text */
+}
+
+.navigation-menu ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.navigation-menu li {
+  margin: 0 15px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid; /* Use grid layout for better alignment */
+  grid-template-columns: repeat(2, 1fr); /* Two images per row */
+  gap: 15px; /* Add spacing between images */
+  padding: 20px;
+  max-width: 40%; /* Restrict the grid to 40% of the screen */
+  position: absolute; /* Position it absolutely */
+  top: 20%; /* Align vertically */
+  left: 1%; /* Align to the left side of the screen */
+  bottom:20px;
+}
+
+.grid-item {
+  width: 250px; /* Ensure the grid item takes full width */
+  aspect-ratio: 1 / 1; /* Make the images square */
+  background-color: #fff; /* White background for images */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensure images don't overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add hover effects */
+}
+
+.grid-item:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+.grid-image {
+  width: 100%; /* Make images responsive */
+  height: 100%; /* Ensure images fill the container */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+  border-radius: 10px; /* Match the container's rounded corners */
+}
+
+.grid-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+.grid-image-1{
+  width: 100%; /* Make images responsive */
+  height: 100%; /* Ensure images fill the container */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+  border-radius: 0px; /* Match the container's rounded corners */
+}
+
+.know-more-button {
+  background-color: #2575fc; /* Bright blue background */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding for a larger button */
+  font-size: 1rem; /* Adjust font size */
+  cursor: pointer;
+  border-radius: 5px; /* Add rounded corners */
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+}
+
+.know-more-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.text-container {
+  max-width: 50%; /* Adjust width for the text container */
+  padding: 25px; /* Add padding for spacing */
+  text-align: center; /* Align text to the left */
+  color: #f0f0f0; /* Light gray text */
+  line-height: 1.8; /* Improve readability */
+  position: absolute; /* Position it absolutely */
+  top: 20%; /* Align vertically */
+  right: 0%; /* Align to the right side of the screen */
+  transform: translateX(0); /* Remove centering adjustment */
+  background: rgba(0, 0, 0, 0.8); /* Add a semi-transparent black background */
+  border-radius: 15px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  
+}
+
+.text-container h2 {
+  font-size: 2rem; /* Increase font size for the heading */
+  margin-bottom: 20px;
+  color: #fff; /* White text for the heading */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+}
+
+.text-container p {
+  font-size: 1.2rem; /* Adjust font size for better readability */
+  margin-bottom: 15px;
+}
+
+.text-container ul {
+  list-style: none; /* Remove bullet points */
+  margin-left: 0; /* Adjust margin to align text properly */
+  padding: 0; /* Remove padding */
+}
+
+.text-container ul li {
+  margin-bottom: 10px;
+}
+
