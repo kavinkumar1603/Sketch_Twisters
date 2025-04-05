@@ -4,10 +4,10 @@ import videoSrc from './assests/logodesign.mp4'; // Ensure the folder name match
 import AdminProfile from './assests/Admin-Profile.png'; // Import Admin profile image
 import StudentProfile1 from './assests/Student-profile1.avif'; // Import Student profile image
 import successIcon from './assests/success-icon.png'; // Import success icon image
-import image1 from './assests/1000_F_220355751_dMFNFyBElZyq9Lu2nYVGD2d2F9QqO2wr.jpg';
+import image1 from './assests/photo 4.jpg';
 import image2 from './assests/photo1.png';
 import image3 from './assests/photo2.png';
-import image4 from './assests/photo3.png';
+import image4 from './assests/photo3.jpg';
 import image5 from './assests/sivan.jpg';
 import image6 from './assests/satoro anime.png';
 
@@ -244,9 +244,18 @@ function App() {
             <span>{registrationDetails.name || "USER NAME"}</span> {/* Display user's name or fallback to "USER NAME" */}
           </div>
         </header>
+        <div className="navigation-menu">
+          <ul>
+            <li>Home</li>
+            <li>Calendar</li>
+            <li>Events</li>
+            <li>Achievements</li>
+            <li>Notifications</li>
+          </ul>
+        </div>
         <div className="grid-container">
           <div className="grid-item">
-            <img src={image1} alt="College Event 1" className="grid-image" />
+            <img src={image1} alt="College Event 1" className="grid-image-1" />
           </div>
           <div className="grid-item">
             <img src={image2} alt="College Event 2" className="grid-image" />

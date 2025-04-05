@@ -674,6 +674,7 @@ html, body {
 .success-header {
   display: flex;
   justify-content: space-between;
+  font-family: 'Le Jour Serif', serif;
   align-items: center;
   padding: 10px 20px; /* Reduce padding for a smaller header */
   background-color: #000; /* Black background for contrast */
@@ -681,6 +682,8 @@ html, body {
   font-size: 1.2rem; /* Reduce font size for a compact look */
   height: 60px; /* Set a smaller height for the header */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  -webkit-text-stroke: 0px #fff; /* Add a white stroke around the text */
+  text-stroke: 0px #fff; /* Add a white stroke for non-webkit browsers */ 
 }
 
 .success-header h1 {
@@ -706,11 +709,15 @@ html, body {
   background-color: #000; /* Add a background color to the menu */
   padding: 15px 0; /* Add padding for spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+  position: relative; /* Ensure proper positioning */
+  margin-top: 80px; /* Add margin to move it below the header */
+  text-align: center; /* Center align the buttons */
+  top:-100px;
 }
 
 .navigation-menu ul {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Center the buttons horizontally */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -718,9 +725,9 @@ html, body {
 
 .navigation-menu li {
   margin: 0 20px; /* Add spacing between buttons */
-  font-size: 1.2rem; /* Increase font size */
+  font-size: 20rem; /* Increase font size */
   font-weight: bold; /* Make text bold */
-  color: #fff; /* White text color */
+  color: #ffffff; /* White text color */
   cursor: pointer;
   position: relative; /* For hover effects */
   transition: color 0.3s ease-in-out; /* Smooth color transition */
@@ -804,6 +811,12 @@ html, body {
   color: #333;
   margin-bottom: 20px;
 }
+.grid-image-1{
+  width: 100%; /* Make images responsive */
+  height: 100%; /* Ensure images fill the container */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+  border-radius: 0px; /* Match the container's rounded corners */
+}
 
 .know-more-button {
   background-color: #2575fc; /* Bright blue background */
@@ -825,7 +838,7 @@ html, body {
 .text-container {
   max-width: 50%; /* Adjust width for the text container */
   padding: 25px; /* Add padding for spacing */
-  text-align: left; /* Align text to the left */
+  text-align: center; /* Align text to the left */
   color: #f0f0f0; /* Light gray text */
   line-height: 1.8; /* Improve readability */
   position: absolute; /* Position it absolutely */
@@ -835,7 +848,7 @@ html, body {
   background: rgba(0, 0, 0, 0.8); /* Add a semi-transparent black background */
   border-radius: 15px; /* Add rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
-  border: 1px solid #fff; /* Add a white border for contrast */
+  
 }
 
 .text-container h2 {
@@ -851,10 +864,12 @@ html, body {
 }
 
 .text-container ul {
-  list-style: disc; /* Use a disc for list items */
-  margin-left: 20px;
+  list-style: none; /* Remove bullet points */
+  margin-left: 0; /* Adjust margin to align text properly */
+  padding: 0; /* Remove padding */
 }
 
 .text-container ul li {
   margin-bottom: 10px;
 }
+
