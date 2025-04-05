@@ -243,28 +243,28 @@ function App() {
           <div className="user-profile">
             <span>{registrationDetails.name || "USER NAME"}</span> {/* Display user's name or fallback to "USER NAME" */}
           </div>
+          <div className="navigation-menu">
+            <ul>
+              <li>Home</li>
+              <li>Calendar</li>
+              <li>Events</li>
+              <li>Achievements</li>
+              <li>Notifications</li>
+            </ul>
+          </div>
         </header>
-        <div className="navigation-menu">
-          <ul>
-            <li>Home</li>
-            <li>Calendar</li>
-            <li>Events</li>
-            <li>Achievements</li>
-            <li>Notifications</li>
-          </ul>
-        </div>
         <div className="grid-container">
           <div className="grid-item">
-            <img src={image1} alt="College Event 1" className="grid-image-1" />
+            <img src={image1} alt="College Event 1" className="grid-image-top-left" />
           </div>
           <div className="grid-item">
-            <img src={image2} alt="College Event 2" className="grid-image" />
+            <img src={image2} alt="College Event 2" className="grid-image-top-right" />
           </div>
           <div className="grid-item">
-            <img src={image3} alt="College Event 3" className="grid-image" />
+            <img src={image3} alt="College Event 3" className="grid-image-bottom-left" />
           </div>
           <div className="grid-item">
-            <img src={image4} alt="College Event 4" className="grid-image" />
+            <img src={image4} alt="College Event 4" className="grid-image-bottom-right" />
           </div>
         </div>
         <div className="text-container">

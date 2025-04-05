@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap'); /* Import Raleway font */
+
 html, body {
-  height: 100%; /* Ensure the body takes the full height */
-  overflow: hidden; /* Disable scrolling */
+  height: auto; /* Allow the body to adjust height dynamically */
+  overflow: auto; /* Enable scrolling */
   margin: 0; /* Remove default margin */
   padding: 0; /* Remove default padding */
 }
@@ -11,8 +13,8 @@ html, body {
   background-color: black;
   text-align: center;
   position: relative;
-  height: 100vh; /* Ensure the container takes the full viewport height */
-  overflow: hidden; /* Prevent scrolling within the container */
+  height: auto; /* Allow the container to expand with content */
+  overflow: visible; /* Ensure content is not clipped */
   word-spacing: 2px;
 }
 
@@ -98,8 +100,8 @@ html, body {
   position: absolute; /* Position the button absolutely */
   right: 0px; /* Move the button to the right side */
   bottom: 100px; /* Position it near the bottom of the screen */
-  margin-bottom: 120px;
-  margin-right: 57vh;
+  margin-bottom: 80px;
+  margin-right: 55vh;
   
 }
 
@@ -207,7 +209,7 @@ html, body {
   padding: 10px 20px; /* Add some padding for spacing */
   box-sizing: border-box; /* Include padding in the element's width */
   color: transparent; /* Make the fill transparent */
-  -webkit-text-stroke: 2px #fff; /* Add a white stroke around the text */
+  -webkit-text-stroke: 2px #fff; /* Add a white stroke around   the text */
   text-stroke: 2px #fff; /* Add a white stroke for non-webkit browsers */
 }
 
@@ -676,10 +678,12 @@ html, body {
   justify-content: space-between;
   font-family: 'Le Jour Serif', serif;
   align-items: center;
+  top:-100px;`    
   padding: 10px 20px; /* Reduce padding for a smaller header */
   background-color: #000; /* Black background for contrast */
-  color: #fff; /* White text for visibility */
-  font-size: 1.2rem; /* Reduce font size for a compact look */
+  color: #ffffff; /* White text for visibility */
+  font-size: 1.2rem; /* Reduce font size for a compact look */   
+  
   height: 60px; /* Set a smaller height for the header */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
   -webkit-text-stroke: 0px #fff; /* Add a white stroke around the text */
@@ -689,6 +693,7 @@ html, body {
 .success-header h1 {
   font-size: 1.5rem; /* Adjust font size for the title */
   margin: 0;
+  top:-100px;
 }
 
 .user-profile {
@@ -706,35 +711,39 @@ html, body {
 }
 
 .navigation-menu {
-  background-color: #000; /* Add a background color to the menu */
+  background-color: #ffffff; /* Add a background color to the menu */
   padding: 15px 0; /* Add padding for spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
-  position: relative; /* Ensure proper positioning */
-  margin-top: 80px; /* Add margin to move it below the header */
+  position: fixed; /* Fix the navigation menu at the top */
+  top: 0; /* Align it to the top of the page */
+  left: 0; /* Ensure it touches the left edge */
+  right: 0; /* Ensure it touches the right edge */
+  width: 100%; /* Make it span the full width */
+  z-index: 1000; /* Ensure it stays above other elements */
   text-align: center; /* Center align the buttons */
-  top:-100px;
 }
 
 .navigation-menu ul {
-  display: flex;
+  display: flex; /* Align buttons horizontally */
   justify-content: center; /* Center the buttons horizontally */
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove extra padding */
+  margin: 0; /* Remove extra margin */
 }
 
 .navigation-menu li {
   margin: 0 20px; /* Add spacing between buttons */
-  font-size: 20rem; /* Increase font size */
+  font-size: 1.2rem; /* Adjust font size */
   font-weight: bold; /* Make text bold */
-  color: #ffffff; /* White text color */
+  color: #000; /* Black text color */
   cursor: pointer;
   position: relative; /* For hover effects */
-  transition: color 0.3s ease-in-out; /* Smooth color transition */
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
 }
 
 .navigation-menu li:hover {
   color: #2575fc; /* Change text color on hover */
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
 }
 
 .navigation-menu li::after {
@@ -753,36 +762,22 @@ html, body {
   left: 0; /* Align underline with the text */
 }
 
-.navigation-menu ul {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-}
-
-.navigation-menu li {
-  margin: 0 15px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
 .grid-container {
   display: grid; /* Use grid layout for better alignment */
-  grid-template-columns: repeat(2, 1fr); /* Two images per row */
-  gap: 15px; /* Add spacing between images */
-  padding: 20px;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-rows: auto auto; /* Two rows for the images */
+  gap: 5px; /* Add spacing between images */
+  padding: 0px;
   max-width: 40%; /* Restrict the grid to 40% of the screen */
-  position: absolute; /* Position it absolutely */
-  top: 20%; /* Align vertically */
-  left: 1%; /* Align to the left side of the screen */
-  bottom:20px;
+  position: relative; /* Change to relative to avoid clipping */
+  top: 25%; /* Move the entire grid slightly down */
+  left: 5%; /* Adjust alignment to the left */
+  padding-right: 250px;
+  padding-left: 20px;
 }
 
 .grid-item {
-  width: 250px; /* Ensure the grid item takes full width */
-  aspect-ratio: 1 / 1; /* Make the images square */
-  background-color: #fff; /* White background for images */
+  /* Removed background-color property */
   border-radius: 10px; /* Rounded corners */
   overflow: hidden; /* Ensure images don't overflow */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
@@ -790,11 +785,7 @@ html, body {
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add hover effects */
-}
-
-.grid-item:hover {
-  transform: scale(1.05); /* Slightly enlarge on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+  max-width: 100%; /* Ensure grid items stay within the container */
 }
 
 .grid-image {
@@ -802,6 +793,16 @@ html, body {
   height: 100%; /* Ensure images fill the container */
   object-fit: cover; /* Maintain aspect ratio and fill the container */
   border-radius: 10px; /* Match the container's rounded corners */
+  max-width: 100%; /* Prevent images from exceeding container width */
+  max-height: 100%; /* Prevent images from exceeding container height */
+}
+
+.grid-item:nth-child(1), .grid-item:nth-child(4) {
+  aspect-ratio: 3 / 4; /* Portrait orientation */
+}
+
+.grid-item:nth-child(2), .grid-item:nth-child(3) {
+  aspect-ratio: 4 / 3; /* Landscape orientation */
 }
 
 .grid-title {
@@ -810,12 +811,6 @@ html, body {
   font-weight: bold;
   color: #333;
   margin-bottom: 20px;
-}
-.grid-image-1{
-  width: 100%; /* Make images responsive */
-  height: 100%; /* Ensure images fill the container */
-  object-fit: cover; /* Maintain aspect ratio and fill the container */
-  border-radius: 0px; /* Match the container's rounded corners */
 }
 
 .know-more-button {
@@ -837,8 +832,11 @@ html, body {
 
 .text-container {
   max-width: 50%; /* Adjust width for the text container */
-  padding: 25px; /* Add padding for spacing */
+  padding: 25px; /* Add
+  
+  padding for spacing */
   text-align: center; /* Align text to the left */
+  font-family: 'Raleway', serif; /* Apply Raleway font */
   color: #f0f0f0; /* Light gray text */
   line-height: 1.8; /* Improve readability */
   position: absolute; /* Position it absolutely */
@@ -871,5 +869,46 @@ html, body {
 
 .text-container ul li {
   margin-bottom: 10px;
+}
+
+.grid-image-top-left {
+  grid-area: 1 / 1; /* Top-left position */
+  object-fit: cover; /* Ensure the image fills the grid division */
+  width: 100%; /* Make the image responsive */
+  height: 100%; /* Ensure it occupies the full height of the grid cell */
+  border-radius: 10px; /* Match the container's rounded corners */
+  padding: 0; /* Remove unnecessary padding */
+}
+
+.grid-image-top-right {
+  grid-area: 1 / 2; /* Top-right position */
+  object-fit: fill; /* Ensure the image fills the grid division */
+  width: 100%; /* Make the image responsive */
+  height: 80%; /* Ensure it occupies the full height of the grid cell */
+  border-radius: 10px; /* Match the container's rounded corners */
+  padding-bottom: 0px;
+  margin-top: 20px; /* Move the image slightly downward */
+}
+
+.grid-image-bottom-left {
+  grid-area: 2 / 1; /* Bottom-left position */
+  object-fit: cover; /* Ensure the image fills the grid division */
+  width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Match the container's rounded corners */
+  margin-top: -60px; /* Move the image slightly upward */
+  padding-top: 0; /* Remove excessive padding */
+}
+
+.grid-image-bottom-right {
+  grid-area: 2 / 2; /* Bottom-right position */
+  object-fit: fill; /* Ensure the image fills the grid division */
+  margin-top: 25px; /* Move the entire division upward */
+  width: 100%; /* Make the image responsive */
+}
+
+.grid-item:nth-child(4) {
+  grid-area: 2 / 2; /* Bottom-right position */
+  margin-top: -175px; /* Move the entire grid item upward */
 }
 
