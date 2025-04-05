@@ -1,11 +1,18 @@
+html, body {
+  height: 100%; /* Ensure the body takes the full height */
+  overflow: hidden; /* Disable scrolling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
 .app-container {
   font-family: Arial, sans-serif;
   color: white;
   background-color: black;
   text-align: center;
   position: relative;
-  height: 100vh;
-  overflow: hidden;
+  height: 100vh; /* Ensure the container takes the full viewport height */
+  overflow: hidden; /* Prevent scrolling within the container */
   word-spacing: 2px;
 }
 
@@ -668,6 +675,186 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px; /* Reduce padding for a smaller header */
+  background-color: #000; /* Black background for contrast */
+  color: #fff; /* White text for visibility */
+  font-size: 1.2rem; /* Reduce font size for a compact look */
+  height: 60px; /* Set a smaller height for the header */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+}
+
+.success-header h1 {
+  font-size: 1.5rem; /* Adjust font size for the title */
+  margin: 0;
+}
+
+.user-profile {
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.main-content {
+  text-align: center;
+  padding: 20px; /* Reduce padding for a cleaner layout */
+  color: #fff;
+  background-color: #000;
+  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+}
+
+.navigation-menu {
+  background-color: #000; /* Add a background color to the menu */
+  padding: 15px 0; /* Add padding for spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+}
+
+.navigation-menu ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation-menu li {
+  margin: 0 20px; /* Add spacing between buttons */
+  font-size: 1.2rem; /* Increase font size */
+  font-weight: bold; /* Make text bold */
+  color: #fff; /* White text color */
+  cursor: pointer;
+  position: relative; /* For hover effects */
+  transition: color 0.3s ease-in-out; /* Smooth color transition */
+}
+
+.navigation-menu li:hover {
+  color: #2575fc; /* Change text color on hover */
+}
+
+.navigation-menu li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px; /* Position the underline below the text */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #2575fc; /* Underline color */
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.navigation-menu li:hover::after {
+  width: 100%; /* Expand underline on hover */
+  left: 0; /* Align underline with the text */
+}
+
+.navigation-menu ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.navigation-menu li {
+  margin: 0 15px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid; /* Use grid layout for better alignment */
+  grid-template-columns: repeat(2, 1fr); /* Two images per row */
+  gap: 15px; /* Add spacing between images */
   padding: 20px;
-  background-color: #f8f8f8;
+  max-width: 40%; /* Restrict the grid to 40% of the screen */
+  position: absolute; /* Position it absolutely */
+  top: 20%; /* Align vertically */
+  left: 1%; /* Align to the left side of the screen */
+  bottom:20px;
+}
+
+.grid-item {
+  width: 250px; /* Ensure the grid item takes full width */
+  aspect-ratio: 1 / 1; /* Make the images square */
+  background-color: #fff; /* White background for images */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensure images don't overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add hover effects */
+}
+
+.grid-item:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+.grid-image {
+  width: 100%; /* Make images responsive */
+  height: 100%; /* Ensure images fill the container */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+  border-radius: 10px; /* Match the container's rounded corners */
+}
+
+.grid-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.know-more-button {
+  background-color: #2575fc; /* Bright blue background */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding for a larger button */
+  font-size: 1rem; /* Adjust font size */
+  cursor: pointer;
+  border-radius: 5px; /* Add rounded corners */
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+}
+
+.know-more-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.text-container {
+  max-width: 50%; /* Adjust width for the text container */
+  padding: 25px; /* Add padding for spacing */
+  text-align: left; /* Align text to the left */
+  color: #f0f0f0; /* Light gray text */
+  line-height: 1.8; /* Improve readability */
+  position: absolute; /* Position it absolutely */
+  top: 20%; /* Align vertically */
+  right: 0%; /* Align to the right side of the screen */
+  transform: translateX(0); /* Remove centering adjustment */
+  background: rgba(0, 0, 0, 0.8); /* Add a semi-transparent black background */
+  border-radius: 15px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  border: 1px solid #fff; /* Add a white border for contrast */
+}
+
+.text-container h2 {
+  font-size: 2rem; /* Increase font size for the heading */
+  margin-bottom: 20px;
+  color: #fff; /* White text for the heading */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow */
+}
+
+.text-container p {
+  font-size: 1.2rem; /* Adjust font size for better readability */
+  margin-bottom: 15px;
+}
+
+.text-container ul {
+  list-style: disc; /* Use a disc for list items */
+  margin-left: 20px;
+}
+
+.text-container ul li {
+  margin-bottom: 10px;
 }

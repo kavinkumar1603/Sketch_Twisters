@@ -4,18 +4,25 @@ import videoSrc from './assests/logodesign.mp4'; // Ensure the folder name match
 import AdminProfile from './assests/Admin-Profile.png'; // Import Admin profile image
 import StudentProfile1 from './assests/Student-profile1.avif'; // Import Student profile image
 import successIcon from './assests/success-icon.png'; // Import success icon image
+import image1 from './assests/1000_F_220355751_dMFNFyBElZyq9Lu2nYVGD2d2F9QqO2wr.jpg';
+import image2 from './assests/photo1.png';
+import image3 from './assests/photo2.png';
+import image4 from './assests/photo3.png';
+import image5 from './assests/sivan.jpg';
+import image6 from './assests/satoro anime.png';
 
 function App() {
   const [showLoginOptions, setShowLoginOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [registrationDetails, setRegistrationDetails] = useState({
-5    name: "",
+    name: "",
     studentId: "",
     password: "",
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
+  const [isMainContentVisible, setIsMainContentVisible] = useState(false); // State for main content visibility
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
@@ -64,8 +71,18 @@ function App() {
       setShowLoginOptions(false); // Close modal
       setSelectedOption(null); // Reset selectedOption
       setShowSuccessModal(true); // Show success modal
-      setTimeout(() => setShowSuccessModal(false), 3000); // Hide modal after 3 seconds
+      setTimeout(() => {
+        setShowSuccessModal(false); // Hide modal after 3 seconds
+        setIsMainContentVisible(true); // Show main content
+      }, 3000);
     }
+  };
+
+  const handleSubmitClick = () => {
+    // Logic for handling the "Submit" button click
+    setShowLoginOptions(false); // Close modal
+    setSelectedOption(null); // Reset selectedOption
+    setIsMainContentVisible(true); // Show main content
   };
 
   const renderModalContent = () => {
@@ -167,15 +184,9 @@ function App() {
               )}
             </>
           )}
-          <button 
-            className="dynamic-submit-button" // Updated class name
-            onClick={() => {
-              if (selectedOption === "Student" && !isStudentLoggedIn) {
-                localStorage.setItem("studentLoggedIn", true); // Simulate student login
-              }
-              setShowLoginOptions(false); // Close modal
-              setSelectedOption(null); // Reset selectedOption
-            }}
+          <button
+            className="dynamic-submit-button"
+            onClick={handleSubmitClick} // Updated to handle "Submit" button click
           >
             Submit
           </button>
@@ -223,44 +234,88 @@ function App() {
     );
   };
 
+  const renderMainContent = () => {
+    return (
+      <div className="main-content">
+        <header className="success-header">
+          <h1>EVENT SPHERE</h1>
+          <div className="user-profile">
+            <span>{registrationDetails.name || "USER NAME"}</span> {/* Display user's name or fallback to "USER NAME" */}
+          </div>
+        </header>
+        <div className="grid-container">
+          <div className="grid-item">
+            <img src={image1} alt="College Event 1" className="grid-image" />
+          </div>
+          <div className="grid-item">
+            <img src={image2} alt="College Event 2" className="grid-image" />
+          </div>
+          <div className="grid-item">
+            <img src={image3} alt="College Event 3" className="grid-image" />
+          </div>
+          <div className="grid-item">
+            <img src={image4} alt="College Event 4" className="grid-image" />
+          </div>
+        </div>
+        <div className="text-container">
+          <h2>Welcome to SECE's EventSphere!</h2>
+          <p>Your one-stop hub for discovering exciting events, workshops, hackathons, and scholarships at Sri Eshwar College of Engineering and beyond!</p>
+          <ul>
+            <li>Explore events from departments, clubs, CIR, and GDC</li>
+            <li>Register effortlessly & stay updated</li>
+            <li>Get instant notifications via WhatsApp</li>
+          </ul>
+          <p>Never miss an opportunity – Stay connected with SECE's EventSphere!</p>
+          <button className="know-more-button">KNOW MORE</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="app-container">
-      <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
-      <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1> 
-      <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
-      <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
-      <div className="background-text">SPHERE</div>
-      <div className="content">
-        <div className="video-container">
-          <video className="video" autoPlay muted loop>
-            <source src={videoSrc} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <p className="animated-subtitle">EVENT SPHERE</p>
-        <p className="animated-subtitle infinite-opportunities-text">EVENT SPHERE</p>
-        <div className="description">
-          <p>WELCOME TO SECE'S EVENTSPHERE! 🚀</p>
-          <p>
-            YOUR ALL-IN-ONE HUB FOR EXPLORING EVENTS, WORKSHOPS, HACKATHONS, AND
-            SCHOLARSHIPS AT SRI ESHWAR COLLEGE OF ENGINEERING. STAY UPDATED ON
-            DEPARTMENTAL, CLUB, CIR, AND GDC EVENTS, REGISTER SEAMLESSLY, AND
-            RECEIVE REAL-TIME NOTIFICATIONS VIA WHATSAPP.
-            </p>
-          <p>📅 DISCOVER. REGISTER. ENGAGE. STAY AHEAD WITH SECE'S EVENTSPHERE! 🎯🔥</p>
-        </div>
-        <button className="login-button" onClick={handleLoginClick}>
-          Log in/Sign up
-        </button>
-        {showLoginOptions && (
-          <div 
-            className={`login-options-modal ${showLoginOptions ? '' : 'hidden'}`} 
-            onClick={handleOutsideClick}
-          >
-            {renderModalContent()}
+      {!isMainContentVisible ? (
+        <>
+          <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
+          <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
+          <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
+          <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
+          <div className="background-text">SPHERE</div>
+          <div className="content">
+            <div className="video-container">
+              <video className="video" autoPlay muted loop>
+                <source src={videoSrc} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <p className="animated-subtitle">EVENT SPHERE</p>
+            <p className="animated-subtitle infinite-opportunities-text">EVENT SPHERE</p>
+            <div className="description">
+              <p>WELCOME TO SECE'S EVENTSPHERE! 🚀</p>
+              <p>
+                YOUR ALL-IN-ONE HUB FOR EXPLORING EVENTS, WORKSHOPS, HACKATHONS, AND
+                SCHOLARSHIPS AT SRI ESHWAR COLLEGE OF ENGINEERING. STAY UPDATED ON
+                DEPARTMENTAL, CLUB, CIR, AND GDC EVENTS, REGISTER SEAMLESSLY, AND
+                RECEIVE REAL-TIME NOTIFICATIONS VIA WHATSAPP.
+              </p>
+              <p>📅 DISCOVER. REGISTER. ENGAGE. STAY AHEAD WITH SECE'S EVENTSPHERE! 🎯🔥</p>
+            </div>
+            <button className="login-button" onClick={handleLoginClick}>
+              Log in/Sign up
+            </button>
+            {showLoginOptions && (
+              <div 
+                className={`login-options-modal ${showLoginOptions ? '' : 'hidden'}`} 
+                onClick={handleOutsideClick}
+              >
+                {renderModalContent()}
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </>
+      ) : (
+        renderMainContent()
+      )}
       {showSuccessModal && (
         <div className="registration-success-modal">
           <div className="registration-success-content">
