@@ -678,12 +678,11 @@ html, body {
   justify-content: space-between;
   font-family: 'Le Jour Serif', serif;
   align-items: center;
-  top:-100px;`    
+  top:-100px;    
   padding: 10px 20px; /* Reduce padding for a smaller header */
   background-color: #000; /* Black background for contrast */
   color: #ffffff; /* White text for visibility */
   font-size: 1.2rem; /* Reduce font size for a compact look */   
-  
   height: 60px; /* Set a smaller height for the header */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
   -webkit-text-stroke: 0px #fff; /* Add a white stroke around the text */
