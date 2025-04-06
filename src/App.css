@@ -29,6 +29,7 @@ html, body {
   z-index: 1;
   white-space: nowrap;
   padding-left: 80vh;
+  margin-top: 50px; /* Add margin to avoid overlapping with the header */
 }
 
 .content {
@@ -111,12 +112,13 @@ html, body {
 }
 
 .header-title {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  font-size: 2rem;
-  color: #fff;
-  z-index: 10;
+  position: absolute; /* Position the text absolutely */
+  top: 10px; /* Move it to the top */
+  left: 10px; /* Move it to the left */
+  font-size: 2rem; /* Adjust font size as needed */
+  font-weight: bold; /* Make the text bold */
+  color: #fff; /* Ensure the text color contrasts with the background */
+  z-index: 10; /* Ensure it appears above other elements */
 }
 
 
@@ -689,17 +691,38 @@ html, body {
   text-stroke: 0px #fff; /* Add a white stroke for non-webkit browsers */ 
 }
 
+.main-heading {
+  position: absolute; /* Position it absolutely */
+  top: 0; /* Place it at the top of the screen */
+  left: 10px; /* Add spacing from the left edge */
+  font-size: 2rem; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  color: #000000; /* Ensure the text is visible */
+  z-index: 1002; /* Ensure it appears above the header and other elements */
+  background-color: rgb(255, 255, 255); /* Add a semi-transparent background for contrast */
+  padding: 5px 10px; /* Add padding for better appearance */
+  border-radius: 5px; /* Add rounded corners */
+}
+
 .success-header h1 {
   font-size: 1.5rem; /* Adjust font size for the title */
   margin: 0;
   top:-100px;
+  top:5px;
 }
 
 .user-profile {
-  font-size: 1rem;
-  color: #fff;
-  font-weight: bold;
-}
+  position: absolute; /* Position the user profile absolutely */
+  top: 5px; /* Move it slightly above the header */
+  right: 20px; /* Add spacing from the right edge */
+  font-size: 1.2rem; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  color: #000000; /* Change text color to white for better visibility */
+  z-index: 1001; /* Ensure it appears above the header and other elements */
+  background-color: rgba(255, 255, 255, 0.899); /* Add a semi-transparent background for contrast */
+  padding: 5px 10px; /* Add padding for better appearance */
+  border-radius: 5px; /* Add rounded corners */
+}   
 
 .main-content {
   text-align: center;
@@ -910,4 +933,3 @@ html, body {
   grid-area: 2 / 2; /* Bottom-right position */
   margin-top: -175px; /* Move the entire grid item upward */
 }
-

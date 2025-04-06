@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css';
 import videoSrc from './assests/logodesign.mp4'; // Ensure the folder name matches the actual directory
 import AdminProfile from './assests/Admin-Profile.png'; // Import Admin profile image
@@ -10,8 +11,10 @@ import image3 from './assests/photo2.png';
 import image4 from './assests/photo3.jpg';
 import image5 from './assests/sivan.jpg';
 import image6 from './assests/satoro anime.png';
+import TeacherProfile from './assests/teacher-profile.webp'; // Import Teacher profile image
 
 function App() {
+  const navigate = useNavigate(); // Initialize useNavigate
   const [showLoginOptions, setShowLoginOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [registrationDetails, setRegistrationDetails] = useState({
@@ -23,6 +26,7 @@ function App() {
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
   const [isMainContentVisible, setIsMainContentVisible] = useState(false); // State for main content visibility
+  const [loggedInStudentName, setLoggedInStudentName] = useState(""); // State for logged-in student's name
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
@@ -75,19 +79,25 @@ function App() {
       setTimeout(() => {
         setShowSuccessModal(false); // Hide modal after 3 seconds
         setIsMainContentVisible(true); // Show main content
+        navigate("/main"); // Navigate to "/main"
       }, 3000);
     }
   };
 
   const handleSubmitClick = () => {
     // Logic for handling the "Submit" button click
+    if (registrationDetails.name) {
+      setLoggedInStudentName(registrationDetails.name); // Set the logged-in student's name
+    }
     setShowLoginOptions(false); // Close modal
     setSelectedOption(null); // Reset selectedOption
     setIsMainContentVisible(true); // Show main content
+    navigate("/main"); // Navigate to "/main"
   };
 
   const renderModalContent = () => {
     if (selectedOption) {
+      const isTeacherLoggedIn = selectedOption === "Teacher" && localStorage.getItem("teacherLoggedIn");
       const isStudentLoggedIn = selectedOption === "Student" && localStorage.getItem("studentLoggedIn");
 
       if (selectedOption === "Register") {
@@ -156,10 +166,22 @@ function App() {
         <div className="dynamic-input-container">
           {selectedOption === "Teacher" && (
             <>
-              <label htmlFor="name">Admin ID</label>
-              <input type="text" id="name" placeholder="Enter your name" />
+              <label htmlFor="teacher-id">Teacher ID</label>
+              <input
+                type="text"
+                id="teacher-id"
+                placeholder="Enter your teacher ID"
+                value={registrationDetails.teacherId || ""}
+                onChange={handleInputChange}
+              />
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" placeholder="Enter your password" />
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                value={registrationDetails.password}
+                onChange={handleInputChange}
+              />
             </>
           )}
           {selectedOption === "Student" && (
@@ -192,7 +214,7 @@ function App() {
             Submit
           </button>
 
-          {isStudentLoggedIn && (
+          {(isTeacherLoggedIn || isStudentLoggedIn) && (
             <p className="register-container">
               <span>Don't have an account?</span> {/* Add the sentence */}
               <button
@@ -230,6 +252,15 @@ function App() {
               Student
             </button>
           </div>
+          <div className="login-option">
+            <img src={TeacherProfile} alt="Teacher" className="login-option-image" />
+            <button
+              className="login-option-button"
+              onClick={() => setSelectedOption("Teacher")}
+            >
+              Teacher
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -239,9 +270,9 @@ function App() {
     return (
       <div className="main-content">
         <header className="success-header">
-          <h1>EVENT SPHERE</h1>
+          <h1 className="main-heading">EVENTSPHERE</h1>
           <div className="user-profile">
-            <span>{registrationDetails.name || "USER NAME"}</span> {/* Display user's name or fallback to "USER NAME" */}
+            <span>{loggedInStudentName || "USER NAME"}</span> {/* Display logged-in student's name */}
           </div>
           <div className="navigation-menu">
             <ul>
@@ -284,48 +315,59 @@ function App() {
 
   return (
     <div className="app-container">
-      {!isMainContentVisible ? (
-        <>
-          <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
-          <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
-          <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
-          <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
-          <div className="background-text">SPHERE</div>
-          <div className="content">
-            <div className="video-container">
-              <video className="video" autoPlay muted loop>
-                <source src={videoSrc} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <p className="animated-subtitle">EVENT SPHERE</p>
-            <p className="animated-subtitle infinite-opportunities-text">EVENT SPHERE</p>
-            <div className="description">
-              <p>WELCOME TO SECE'S EVENTSPHERE! 🚀</p>
-              <p>
-                YOUR ALL-IN-ONE HUB FOR EXPLORING EVENTS, WORKSHOPS, HACKATHONS, AND
-                SCHOLARSHIPS AT SRI ESHWAR COLLEGE OF ENGINEERING. STAY UPDATED ON
-                DEPARTMENTAL, CLUB, CIR, AND GDC EVENTS, REGISTER SEAMLESSLY, AND
-                RECEIVE REAL-TIME NOTIFICATIONS VIA WHATSAPP.
-              </p>
-              <p>📅 DISCOVER. REGISTER. ENGAGE. STAY AHEAD WITH SECE'S EVENTSPHERE! 🎯🔥</p>
-            </div>
-            <button className="login-button" onClick={handleLoginClick}>
-              Log in/Sign up
-            </button>
-            {showLoginOptions && (
-              <div 
-                className={`login-options-modal ${showLoginOptions ? '' : 'hidden'}`} 
-                onClick={handleOutsideClick}
-              >
-                {renderModalContent()}
-              </div>
-            )}
-          </div>
-        </>
-      ) : (
-        renderMainContent()
-      )}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            !isMainContentVisible ? (
+              <>
+                <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
+                <h1 className="header-title animated-title slide-left">EVENT SPHERE</h1>
+                <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
+                <h1 className="header-title event-sphere-text">EVENT SPHERE</h1>
+                <div className="background-text">SPHERE</div>
+                <div className="content">
+                  <div className="video-container">
+                    <video className="video" autoPlay muted loop>
+                      <source src={videoSrc} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  <p className="animated-subtitle">EVENT SPHERE</p>
+                  <p className="animated-subtitle infinite-opportunities-text">EVENT SPHERE</p>
+                  <div className="description">
+                    <p>WELCOME TO SECE'S EVENTSPHERE! 🚀</p>
+                    <p>
+                      YOUR ALL-IN-ONE HUB FOR EXPLORING EVENTS, WORKSHOPS, HACKATHONS, AND
+                      SCHOLARSHIPS AT SRI ESHWAR COLLEGE OF ENGINEERING. STAY UPDATED ON
+                      DEPARTMENTAL, CLUB, CIR, AND GDC EVENTS, REGISTER SEAMLESSLY, AND
+                      RECEIVE REAL-TIME NOTIFICATIONS VIA WHATSAPP.
+                    </p>
+                    <p>📅 DISCOVER. REGISTER. ENGAGE. STAY AHEAD WITH SECE'S EVENTSPHERE! 🎯🔥</p>
+                  </div>
+                  <button className="login-button" onClick={handleLoginClick}>
+                    Log in/Sign up
+                  </button>
+                  {showLoginOptions && (
+                    <div 
+                      className={`login-options-modal ${showLoginOptions ? '' : 'hidden'}`} 
+                      onClick={handleOutsideClick}
+                    >
+                      {renderModalContent()}
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              renderMainContent()
+            )
+          }
+        />
+        <Route
+          path="/home"
+          element={renderMainContent()} // Route for main content
+        />  
+      </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
           <div className="registration-success-content">
