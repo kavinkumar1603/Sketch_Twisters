@@ -539,6 +539,22 @@ html, body {
   text-align: left;
 }
 
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #ffffff; /* White background for inputs */
+  color: #333333; /* Dark text for inputs */
+}
+
+.form-group input:focus {
+  border: 2px solid #435237; /* Highlight border on focus */
+  outline: none;
+}
+
 .form-group input:invalid {
   border: 2px solid #ff4d4d; /* Highlight input with red border on invalid state */
 }
@@ -551,22 +567,16 @@ html, body {
   position: absolute;
   top: 100%; /* Position below the input field */
   left: 0;
-  background-color: #ff4d4d; /* Red background for error box */
-  color: #ffffff; /* White text for contrast */
+  background-color: transparent; /* Red background for error box */
+  color: #e20000; /* White text for contrast */
   font-size: 0.8rem; /* Smaller font size for error text */
   padding: 5px 10px; /* Add padding for better appearance */
   border-radius: 5px; /* Rounded corners for the error box */
   margin-top: 5px; /* Add spacing between input and error text */
-  visibility: hidden; /* Hide error text by default */
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+  visibility: visible; /* Ensure error text is visible */
+  opacity: 1;
   z-index: 10; /* Ensure it appears above other elements */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
-}
-
-.form-group input:invalid + .error-message {
-  visibility: visible; /* Show error text when input is invalid */
-  opacity: 1;
 }
 
 .form-group .error-message::before {
