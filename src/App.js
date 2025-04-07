@@ -12,6 +12,7 @@ import image4 from './assests/photo3.jpg';
 import image5 from './assests/sivan.jpg';
 import image6 from './assests/satoro anime.png';
 import TeacherProfile from './assests/teacher-profile.webp'; // Import Teacher profile image
+import UserProfileImage from './assests/user-profile.jpg'; // Import the provided image
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -272,7 +273,8 @@ function App() {
         <header className="success-header">
           <h1 className="main-heading">EVENTSPHERE</h1>
           <div className="user-profile">
-            <span>{loggedInStudentName || "USER NAME"}</span> {/* Display logged-in student's name */}
+            <img src={UserProfileImage} alt="User Profile" /> {/* Add the image */}
+            <span>{loggedInStudentName || "USER NAME"}</span> {/* Display the username */}
           </div>
           <div className="navigation-menu">
             <ul>
@@ -364,7 +366,7 @@ function App() {
           }
         />
         <Route
-          path="/home"
+          path="/main"
           element={renderMainContent()} // Route for main content
         />  
       </Routes>

@@ -712,17 +712,30 @@ html, body {
 }
 
 .user-profile {
-  position: absolute; /* Position the user profile absolutely */
-  top: 5px; /* Move it slightly above the header */
-  right: 20px; /* Add spacing from the right edge */
-  font-size: 1.2rem; /* Adjust font size */
-  font-weight: bold; /* Make the text bold */
-  color: #000000; /* Change text color to white for better visibility */
-  z-index: 1001; /* Ensure it appears above the header and other elements */
-  background-color: rgba(255, 255, 255, 0.899); /* Add a semi-transparent background for contrast */
+  position: fixed; /* Fix it to the screen */
+  top: 2px; /* Position it at the top */
+  right: 20px; /* Position it on the right */
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Center items vertically */
+  gap: 10px; /* Add spacing between the image and text */
+  z-index: 1002; /* Ensure it appears above other elements */
+  background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent background for contrast */
   padding: 5px 10px; /* Add padding for better appearance */
-  border-radius: 5px; /* Add rounded corners */
-}   
+  border-radius: 10px; /* Add rounded corners */
+}
+
+.user-profile img {
+  width: 40px; /* Set the image width */
+  height: 40px; /* Set the image height */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image fits within the circle */
+}
+
+.user-profile span {
+  font-size: 1rem; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  color: #000; /* Black text for visibility */
+}
 
 .main-content {
   text-align: center;
