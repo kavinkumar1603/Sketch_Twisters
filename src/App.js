@@ -13,6 +13,7 @@ import image5 from './assests/sivan.jpg';
 import image6 from './assests/satoro anime.png';
 import TeacherProfile from './assests/teacher-profile.webp'; // Import Teacher profile image
 import UserProfileImage from './assests/user-profile.jpg'; // Import the provided image
+import UserProfileDetails from './UserProfileDetails'; // Import the new component
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -28,6 +29,14 @@ function App() {
   const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
   const [isMainContentVisible, setIsMainContentVisible] = useState(false); // State for main content visibility
   const [loggedInStudentName, setLoggedInStudentName] = useState(""); // State for logged-in student's name
+  const [showProfileDetails, setShowProfileDetails] = useState(false); // State to toggle profile details
+  const [loggedInUser, setLoggedInUser] = useState({
+    name: "User name",
+    id: "12345",
+    role: "Student",
+    email: "user@example.com",
+  }); // Example user details
+  const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
 
   const handleLoginClick = () => {
     setShowLoginOptions(true);
@@ -73,6 +82,12 @@ function App() {
     if (Object.keys(newErrors).length === 0) {
       // Simulate registration success
       console.log("Registration successful:", registrationDetails);
+      setLoggedInUser({
+        name: registrationDetails.name,
+        id: registrationDetails.studentId,
+        role: selectedOption || "Student",
+        email: "example@example.com", // Placeholder email
+      }); // Set the logged-in user's details
       localStorage.setItem("studentLoggedIn", true); // Save login state
       setShowLoginOptions(false); // Close modal
       setSelectedOption(null); // Reset selectedOption
@@ -88,12 +103,35 @@ function App() {
   const handleSubmitClick = () => {
     // Logic for handling the "Submit" button click
     if (registrationDetails.name) {
-      setLoggedInStudentName(registrationDetails.name); // Set the logged-in student's name
+      setLoggedInUser({
+        name: registrationDetails.name,
+        id: registrationDetails.studentId || "N/A",
+        role: selectedOption || "Student",
+        email: "example@example.com", // Placeholder email
+      }); // Set the logged-in user's details
     }
     setShowLoginOptions(false); // Close modal
     setSelectedOption(null); // Reset selectedOption
     setIsMainContentVisible(true); // Show main content
     navigate("/main"); // Navigate to "/main"
+  };
+
+  const toggleProfileDetails = () => {
+    navigate("/profile"); // Navigate to the profile details screen
+  };
+
+  const handleUserProfileClick = () => {
+    navigate("/profile"); // Navigate to the user profile page
+  };
+
+  const handleLogoutClick = () => {
+    setLoggedInUser(null); // Clear the logged-in user
+    setIsMainContentVisible(false); // Hide main content
+    navigate("/"); // Navigate back to the login page
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev); // Toggle dropdown visibility
   };
 
   const renderModalContent = () => {
@@ -187,25 +225,22 @@ function App() {
           )}
           {selectedOption === "Student" && (
             <>
-              {isStudentLoggedIn ? (
-                <>
-                  <label htmlFor="student-id">Student ID</label>
-                  <input type="text" id="student-id" placeholder="Enter your student ID" />
-                  <label htmlFor="password">Password</label>
-                  <input type="password" id="password" placeholder="Enter your password" />
-                </>
-              ) : (
-                <>
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" placeholder="Enter your name" />
-                  <label htmlFor="student-id">Student ID</label>
-                  <input type="text" id="student-id" placeholder="Enter your student ID" />
-                  <label htmlFor="password">Password</label>
-                  <input type="password" id="password" placeholder="Enter your password" />
-                  <label htmlFor="confirm-password">Confirm Password</label>
-                  <input type="password" id="confirm-password" placeholder="Confirm your password" />
-                </>
-              )}
+              <label htmlFor="student-id">Student ID</label>
+              <input
+                type="text"
+                id="student-id"
+                placeholder="Enter your student ID"
+                value={registrationDetails.studentId || ""}
+                onChange={handleInputChange}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                value={registrationDetails.password}
+                onChange={handleInputChange}
+              />
             </>
           )}
           <button
@@ -215,17 +250,15 @@ function App() {
             Submit
           </button>
 
-          {(isTeacherLoggedIn || isStudentLoggedIn) && (
-            <p className="register-container">
-              <span>Don't have an account?</span> {/* Add the sentence */}
-              <button
-                className="register-text-button" // Update class name
-                onClick={() => setSelectedOption("Register")} // Show registration form
-              >
-                Register
-              </button>
-            </p>
-          )}
+          <p className="register-container">
+            <span>Don't have an account?</span> {/* Add the sentence */}
+            <button
+              className="register-text-button" // Update class name
+              onClick={() => setSelectedOption("Register")} // Show registration form
+            >
+              Register
+            </button>
+          </p>
         </div>
       );
     }
@@ -272,10 +305,25 @@ function App() {
       <div className="main-content">
         <header className="success-header">
           <h1 className="main-heading">EVENTSPHERE</h1>
-          <div className="user-profile">
-            <img src={UserProfileImage} alt="User Profile" /> {/* Add the image */}
-            <span>{loggedInStudentName || "USER NAME"}</span> {/* Display the username */}
+          <div className="user-profile" onClick={toggleDropdown}>
+            <img src={UserProfileImage} alt="User Profile" />
+            <span>{loggedInUser?.name || "USER NAME"}</span>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <button onClick={handleUserProfileClick}>User Profile</button>
+                <button onClick={handleLogoutClick}>Logout</button>
+              </div>
+            )}
           </div>
+          {showProfileDetails && (
+            <div className="profile-details-modal">
+              <h3>User Details</h3>
+              <p><strong>Name:</strong> {loggedInUser.name}</p>
+              <p><strong>ID:</strong> {loggedInUser.id}</p>
+              <p><strong>Role:</strong> {loggedInUser.role}</p>
+              <p><strong>Email:</strong> {loggedInUser.email}</p>
+            </div>
+          )}
           <div className="navigation-menu">
             <ul>
               <li>Home</li>
@@ -369,6 +417,10 @@ function App() {
           path="/main"
           element={renderMainContent()} // Route for main content
         />  
+        <Route
+          path="/profile"
+          element={<UserProfileDetails user={loggedInUser} />} // Route for profile details
+        />
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
