@@ -40,7 +40,16 @@ function UserProfileDetails({ user }) {
     <div className="profile-details-screen">
       <h2>User Profile</h2>
       <div className="profile-details-container">
-        {editableUser.role === "student" ? ( // Show form only for students
+        {editableUser.role === "student" ? (
+          // Show details only for students
+          <>
+            <p><strong>Name:</strong> {editableUser.name}</p>
+            <p><strong>ID:</strong> {editableUser.id}</p>
+            <p><strong>Role:</strong> {editableUser.role}</p>
+            <p><strong>Email:</strong> {editableUser.email}</p>
+          </>
+        ) : (
+          // Allow editing for admin and teacher roles
           isEditing ? (
             <>
               <label className="form-group">
@@ -98,8 +107,6 @@ function UserProfileDetails({ user }) {
               </button>
             </>
           )
-        ) : (
-          <p>Registration is only available for students.</p> // Message for non-students
         )}
       </div>
       <button className="back-button" onClick={() => navigate("/main")}>

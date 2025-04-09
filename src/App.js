@@ -11,7 +11,7 @@ import image3 from './assests/photo2.png';
 import image4 from './assests/photo3.jpg';
 import image5 from './assests/sivan.jpg';
 import image6 from './assests/satoro anime.png';
-import TeacherProfile from './assests/teacher-profile.webp'; // Import Teacher profile image
+import TeacherProfile from './assests/teacher-profile.png'; // Import Teacher profile image
 import UserProfileImage from './assests/user-profile.jpg'; // Import the provided image
 import UserProfileDetails from './UserProfileDetails'; // Import the new component
 
