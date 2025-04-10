@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
-function UserProfileDetails({ user }) {
+function UserProfileDetails() {
   const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
-  const [editableUser, setEditableUser] = useState(user || {}); // State for editable user details
-  const [errors, setErrors] = useState({}); // State for validation errors
+  const location = useLocation();
+  const user = location.state?.user || {}; // Ensure user details are passed correctly
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableUser, setEditableUser] = useState(user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -14,83 +15,90 @@ function UserProfileDetails({ user }) {
       ...prev,
       [name]: value,
     }));
-    setErrors((prev) => ({
-      ...prev,
-      [name]: "", // Clear error for the field being edited
-    }));
   };
 
   const handleSave = () => {
-    const newErrors = {};
-    if (!editableUser.name) newErrors.name = "This field is required.";
-    if (!editableUser.id) newErrors.id = "This field is required.";
-    if (!editableUser.role) newErrors.role = "This field is required.";
-    if (!editableUser.email) newErrors.email = "This field is required.";
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors); // Set validation errors
-      return; // Stop saving if there are errors
+    if (!editableUser.id) {
+      alert("ID cannot be empty!"); // Validate ID field
+      return;
     }
-
-    console.log("Updated user details:", editableUser); // Log updated details
-    setIsEditing(false); // Exit edit mode
+    console.log("Updated user details:", editableUser);
+    setIsEditing(false);
   };
 
   return (
-    <div className="profile-details-screen">
-      <h2>User Profile</h2>
-      <div className="profile-details-container">
-        {editableUser.role === "student" ? (
-          // Show details only for students
-          <>
-            <p><strong>Name:</strong> {editableUser.name}</p>
-            <p><strong>ID:</strong> {editableUser.id}</p>
-            <p><strong>Role:</strong> {editableUser.role}</p>
-            <p><strong>Email:</strong> {editableUser.email}</p>
-          </>
-        ) : (
-          // Allow editing for admin and teacher roles
-          isEditing ? (
+    <div className="profile-page">
+      <div className="profile-card">
+        <h2 className="profile-title">User Profile</h2>
+        <div className="profile-avatar">
+          <img
+            src="https://via.placeholder.com/150" // Placeholder avatar
+            alt="User Avatar"
+            className="avatar-image"
+          />
+        </div>
+        <div className="profile-details">
+          {isEditing ? (
             <>
-              <label className="form-group">
+              <label>
                 <strong>Name:</strong>
                 <input
                   type="text"
                   name="name"
                   value={editableUser.name || ""}
                   onChange={handleInputChange}
+                  className="profile-input"
                 />
-                {errors.name && <p className="error-message">{errors.name}</p>}
               </label>
-              <label className="form-group">
+              <label>
                 <strong>ID:</strong>
                 <input
                   type="text"
                   name="id"
                   value={editableUser.id || ""}
                   onChange={handleInputChange}
+                  className="profile-input"
                 />
-                {errors.id && <p className="error-message">{errors.id}</p>}
               </label>
-              <label className="form-group">
+              <label>
                 <strong>Role:</strong>
                 <input
                   type="text"
                   name="role"
                   value={editableUser.role || ""}
                   onChange={handleInputChange}
+                  className="profile-input"
                 />
-                {errors.role && <p className="error-message">{errors.role}</p>}
               </label>
-              <label className="form-group">
+              <label>
                 <strong>Email:</strong>
                 <input
                   type="email"
                   name="email"
                   value={editableUser.email || ""}
                   onChange={handleInputChange}
+                  className="profile-input"
                 />
-                {errors.email && <p className="error-message">{errors.email}</p>}
+              </label>
+              <label>
+                <strong>Phone Number:</strong>
+                <input
+                  type="text"
+                  name="phone"
+                  value={editableUser.phone || ""}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                />
+              </label>
+              <label>
+                <strong>Address:</strong>
+                <input
+                  type="text"
+                  name="address"
+                  value={editableUser.address || ""}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                />
               </label>
               <button className="save-button" onClick={handleSave}>
                 Save
@@ -99,19 +107,23 @@ function UserProfileDetails({ user }) {
           ) : (
             <>
               <p><strong>Name:</strong> {editableUser.name}</p>
-              <p><strong>ID:</strong> {editableUser.id}</p>
+              <p><strong>ID:</strong> {editableUser.id || "Not Provided"}</p>
               <p><strong>Role:</strong> {editableUser.role}</p>
               <p><strong>Email:</strong> {editableUser.email}</p>
-              <button className="edit-button" onClick={() => setIsEditing(true)}>
-                Edit
-              </button>
+              <p><strong>Phone Number:</strong> {editableUser.phone || "Not Provided"}</p>
+              <p><strong>Address:</strong> {editableUser.address || "Not Provided"}</p>
+              {(editableUser.role === "admin" || editableUser.role === "Teacher") && (
+                <button className="edit-button" onClick={() => setIsEditing(true)}>
+                  Edit
+                </button>
+              )}
             </>
-          )
-        )}
+          )}
+        </div>
+        <button className="back-button" onClick={() => navigate("/main")}>
+          Back to Main
+        </button>
       </div>
-      <button className="back-button" onClick={() => navigate("/main")}>
-        Back to Main
-      </button>
     </div>
   );
 }

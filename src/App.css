@@ -458,6 +458,7 @@ html, body {
   cursor: pointer;
   text-decoration: underline; /* Add underline to mimic text */
   padding: 0; /* Remove padding */
+  margin-left: 5px; /* Add spacing from the span */
 }
 
 .register-text-button:hover {
@@ -489,7 +490,7 @@ html, body {
   display: flex; /* Align text and button inline */
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Add spacing between the text and button */
+  gap: 50px; /* Add spacing between the text and button */
   margin-top: 15px; /* Add spacing from the previous element */
   font-size: 1rem;
   color: #f0f0f0; /* Light gray text */
@@ -500,6 +501,7 @@ html, body {
   color: #2575fc; /* Text color */
   border: none; /* Remove border */
   font-size: 1rem;
+  bottom: 10px;
   cursor: pointer;
   text-decoration: underline; /* Add underline to mimic text */
   padding: 0; /* Remove padding */
@@ -520,73 +522,32 @@ html, body {
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow */
   max-width: 350px;
-  margin: 20px auto; /* Center the form */
+  margin: 20px auto; /* Center the form and reduce height */
   text-align: center;
   color: #ffffff; /* White text for contrast */
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  gap: 15px; /* Add spacing between elements */
+}
+
+.register-form-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.register-form-subtitle {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #e0e0e0; /* Slightly lighter text for subtitle */
 }
 
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Add spacing between form fields */
+  gap: 15px; /* Reduced spacing between form fields */
+  height: 325px; /* Allow the form to take full height */
 }
 
 .form-group {
-  position: relative; /* Ensure positioning context for floating error text */
   text-align: left;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  font-size: 0.9rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-  background-color: #ffffff; /* White background for inputs */
-  color: #333333; /* Dark text for inputs */
-}
-
-.form-group input:focus {
-  border: 2px solid #435237; /* Highlight border on focus */
-  outline: none;
-}
-
-.form-group input:invalid {
-  border: 2px solid #ff4d4d; /* Highlight input with red border on invalid state */
-}
-
-.form-group input:focus:invalid {
-  outline: none; /* Remove default outline */
-}
-
-.form-group .error-message {
-  position: absolute;
-  top: 100%; /* Position below the input field */
-  left: 0;
-  background-color: transparent; /* Red background for error box */
-  color: #e20000; /* White text for contrast */
-  font-size: 0.8rem; /* Smaller font size for error text */
-  padding: 5px 10px; /* Add padding for better appearance */
-  border-radius: 5px; /* Rounded corners for the error box */
-  margin-top: 5px; /* Add spacing between input and error text */
-  visibility: visible; /* Ensure error text is visible */
-  opacity: 1;
-  z-index: 10; /* Ensure it appears above other elements */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
-}
-
-.form-group .error-message::before {
-  content: "";
-  position: absolute;
-  top: -5px; /* Position the arrow above the error box */
-  left: 10px; /* Align the arrow with the error box */
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #ff4d4d transparent; /* Create a red arrow */
 }
 
 .form-group label {
@@ -622,22 +583,10 @@ html, body {
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s, transform 0.3s;
-  align-self: center; /* Center the button within the form */
 }
 
 .submit-registration-button:hover {
   background-color: #003d80; /* Darker blue on hover */
-}
-
-.register-form-container .error-message {
-  margin-bottom: 10px; /* Add spacing between error messages and the next element */
-}
-
-.error-message {
-  color: #ff4d4d; /* Red color for errors */
-  font-size: 0.9rem;
-  margin-top: 5px;
-  word-wrap: break-word; /* Ensure long error messages wrap */
 }
 
 .dynamic-input-container .dynamic-submit-button {
@@ -728,89 +677,64 @@ html, body {
 
 .success-header {
   display: flex;
-  justify-content: space-between;
-  font-family: 'Le Jour Serif', serif;
-  align-items: center;
-  top:-100px;    
-  padding: 10px 20px; /* Reduce padding for a smaller header */
-  background-color: #000; /* Black background for contrast */
-  color: #ffffff; /* White text for visibility */
-  font-size: 1.2rem; /* Reduce font size for a compact look */   
-  height: 60px; /* Set a smaller height for the header */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
-  -webkit-text-stroke: 0px #fff; /* Add a white stroke around the text */
-  text-stroke: 0px #fff; /* Add a white stroke for non-webkit browsers */ 
+  justify-content: space-between; /* Space out the elements */
+  align-items: center; /* Align items vertically */
+  padding: 10px 20px; /* Add padding for spacing */
+  background-color: #fff; /* Add a background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Stick to the top of the page */
+  z-index: 1000; /* Ensure it stays above other elements */
 }
 
 .main-heading {
-  position: absolute; /* Position it absolutely */
-  top: 0; /* Place it at the top of the screen */
-  left: 10px; /* Add spacing from the left edge */
-  font-size: 2rem; /* Adjust font size */
-  font-weight: bold; /* Make the text bold */
-  color: #000000; /* Ensure the text is visible */
-  z-index: 1002; /* Ensure it appears above the header and other elements */
-  background-color: rgb(255, 255, 255); /* Add a semi-transparent background for contrast */
-  padding: 5px 10px; /* Add padding for better appearance */
-  border-radius: 5px; /* Add rounded corners */
-}
-
-.success-header h1 {
-  font-size: 1.5rem; /* Adjust font size for the title */
-  margin: 0;
-  top:-100px;
-  top:5px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  margin: 0; /* Remove unnecessary margin */
 }
 
 .user-profile {
-  position: fixed; /* Fix it to the screen */
-  top: 10px; /* Position it at the top */
-  right: 20px; /* Position it on the right */
-  display: flex; /* Align items horizontally */
-  align-items: center; /* Center items vertically */
-  gap: 10px; /* Add spacing between the image and text */
-  z-index: 1002; /* Ensure it appears above other elements */
-  background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent background for contrast */
-  padding: 5px 10px; /* Add padding for better appearance */
-  border-radius: 10px; /* Add rounded corners */
-  cursor: pointer; /* Pointer cursor for interactivity */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative; /* Ensure dropdown is positioned relative to the user profile */
 }
 
 .user-profile img {
-  width: 40px; /* Set the image width */
-  height: 40px; /* Set the image height */
-  border-radius: 50%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image fits within the circle */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .user-profile span {
-  font-size: 1rem; /* Adjust font size */
-  font-weight: bold; /* Make the text bold */
-  color: #000; /* Black text for visibility */
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
 }
 
 .dropdown-menu {
   position: absolute;
-  top: 50px; /* Position below the username */
+  top: 100%; /* Position below the user profile */
   right: 0; /* Align to the right */
-  background-color: #fff; /* White background for contrast */
-  border: 1px solid #ccc; /* Add a border */
+  background-color: #ffffff; /* White background for the dropdown */
+  border: 1px solid #cccccc; /* Add a border */
   border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  z-index: 1003; /* Ensure it appears above other elements */
-  width: 150px; /* Set a fixed width */
-  text-align: left; /* Align text to the left */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+  z-index: 10; /* Ensure it appears above other elements */
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
 }
 
 .dropdown-menu button {
-  width: 100%; /* Make buttons span the full width */
-  padding: 10px; /* Add padding for better appearance */
-  background: none; /* Remove default background */
-  border: none; /* Remove default border */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 10px 15px; /* Add padding for better appearance */
   text-align: left; /* Align text to the left */
-  cursor: pointer; /* Pointer cursor for interactivity */
   font-size: 1rem; /* Adjust font size */
-  color: #333; /* Dark text color */
+  cursor: pointer; /* Indicate that the buttons are clickable */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .dropdown-menu button:hover {
@@ -826,55 +750,32 @@ html, body {
 }
 
 .navigation-menu {
-  background-color: #ffffff; /* Add a background color to the menu */
-  padding: 15px 0; /* Add padding for spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
-  position: fixed; /* Fix the navigation menu at the top */
-  top: 0; /* Align it to the top of the page */
-  left: 0; /* Ensure it touches the left edge */
-  right: 0; /* Ensure it touches the right edge */
-  width: 100%; /* Make it span the full width */
-  z-index: 1000; /* Ensure it stays above other elements */
-  text-align: center; /* Center align the buttons */
+  display: flex;
+  justify-content: center; /* Center align the navigation menu */
+  align-items: center; /* Align items vertically */
+  gap: 20px; /* Add spacing between navigation items */
+  flex-grow: 1; /* Allow the navigation menu to take up available space */
 }
 
 .navigation-menu ul {
-  display: flex; /* Align buttons horizontally */
-  justify-content: center; /* Center the buttons horizontally */
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove extra padding */
-  margin: 0; /* Remove extra margin */
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .navigation-menu li {
-  margin: 0 20px; /* Add spacing between buttons */
-  font-size: 1.2rem; /* Adjust font size */
-  font-weight: bold; /* Make text bold */
-  color: #000; /* Black text color */
-  cursor: pointer;
-  position: relative; /* For hover effects */
-  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+  margin: 0 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer; /* Add pointer cursor for clickable items */
+  transition: color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
 }
 
 .navigation-menu li:hover {
-  color: #2575fc; /* Change text color on hover */
-  transform: scale(1.1); /* Slightly enlarge the button on hover */
-}
-
-.navigation-menu li::after {
-  content: "";
-  position: absolute;
-  bottom: -5px; /* Position the underline below the text */
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: #2575fc; /* Underline color */
-  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
-}
-
-.navigation-menu li:hover::after {
-  width: 100%; /* Expand underline on hover */
-  left: 0; /* Align underline with the text */
+  color: #2575fc; /* Change color on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
 .grid-container {
@@ -885,10 +786,11 @@ html, body {
   padding: 0px;
   max-width: 40%; /* Restrict the grid to 40% of the screen */
   position: relative; /* Change to relative to avoid clipping */
-  top: 25%; /* Move the entire grid slightly down */
+  top: 40%; /* Move the entire grid slightly further down */
   left: 5%; /* Adjust alignment to the left */
   padding-right: 250px;
   padding-left: 20px;
+  overflow: visible; /* Ensure content is not clipped */
 }
 
 .grid-item {
@@ -901,6 +803,7 @@ html, body {
   align-items: center;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add hover effects */
   max-width: 100%; /* Ensure grid items stay within the container */
+  margin-top: 80px; /* Add margin to move individual grid items down */
 }
 
 .grid-image {
@@ -910,6 +813,7 @@ html, body {
   border-radius: 10px; /* Match the container's rounded corners */
   max-width: 100%; /* Prevent images from exceeding container width */
   max-height: 100%; /* Prevent images from exceeding container height */
+  
 }
 
 .grid-item:nth-child(1), .grid-item:nth-child(4) {
@@ -1002,17 +906,20 @@ html, body {
   height: 80%; /* Ensure it occupies the full height of the grid cell */
   border-radius: 10px; /* Match the container's rounded corners */
   padding-bottom: 0px;
-  margin-top: 20px; /* Move the image slightly downward */
+  position: relative;
+  margin-top: -20px; /* Move the image slightly downward */
 }
 
 .grid-image-bottom-left {
   grid-area: 2 / 1; /* Bottom-left position */
   object-fit: cover; /* Ensure the image fills the grid division */
   width: 100%; /* Make the image responsive */
-  height: auto; /* Maintain aspect ratio */
+  height: 100%; /* Maintain aspect ratio */
   border-radius: 10px; /* Match the container's rounded corners */
-  margin-top: -60px; /* Move the image slightly upward */
+  margin-top: -100px; /* Move the image further upward */
   padding-top: 0; /* Remove excessive padding */
+  position: relative; /* Ensure it stays within the grid container */
+  z-index: 1; /* Ensure it stays visible */
 }
 
 .grid-image-bottom-right {
@@ -1024,160 +931,163 @@ html, body {
 
 .grid-item:nth-child(4) {
   grid-area: 2 / 2; /* Bottom-right position */
-  margin-top: -175px; /* Move the entire grid item upward */
+  margin-top: -195px; /* Move the entire grid item upward */
 }
 
-.profile-details-modal {
-  position: absolute;
-  top: 60px; /* Position below the user profile */
-  right: 20px; /* Align with the user profile */
-  background-color: #fff; /* White background for contrast */
-  color: #000; /* Black text for readability */
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  z-index: 1003; /* Ensure it appears above other elements */
-  width: 250px; /* Set a fixed width */
+.grid-item:nth-child(3) {
+  grid-area: 2 / 1; /* Ensure it stays in the bottom-left position */
+  object-fit: fill; /* Maintain aspect ratio */
+  width: 100%; /* Keep the image responsive */
+  height: 100%; /* Ensure it fills the grid cell */
+  border-radius: 10px; /* Match the container's rounded corners */
+  z-index: 1; /* Ensure visibility */
+  position: relative; /* Maintain its relative position */
+  margin-bottom: -100px;
+  margin-top: -0px;
 }
 
-.profile-details-modal h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.profile-details-modal p {
-  margin: 5px 0;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.profile-details-screen {
+.profile-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+  color: #fff;
+}
+
+.profile-card {
+  background-color: #ffffff;
   color: #333;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   text-align: center;
-}
-
-.profile-details-container {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  text-align: left;
-  margin: 20px auto; /* Center the container */
-}
-
-.profile-details-container p {
-  margin: 10px 0;
-  font-size: 1rem;
-}
-
-.profile-details-container label {
-  display: block;
-  margin: 10px 0;
-  font-size: 1rem;
-}
-
-.profile-details-container input {
+  max-width: 400px;
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+}
+
+.profile-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2575fc;
+}
+
+.profile-avatar {
+  margin-bottom: 20px;
+}
+
+.avatar-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #2575fc;
+}
+
+.profile-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.profile-details p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.profile-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
 }
 
-.edit-button, .save-button {
-  margin-top: 20px;
-  padding: 10px 20px;
+.edit-button, .save-button, .back-button {
   background-color: #2575fc;
   color: #fff;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 10px 20px;
   font-size: 1rem;
-  display: block; /* Ensure the button is visible */
-  width: 100%; /* Make the button span the container width */
-  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.edit-button:hover, .save-button:hover {
+.edit-button:hover, .save-button:hover, .back-button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 .back-button {
-  margin-top: 20px;
-  padding: 10px 2px;
-  background-color: #2575fc;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-align: center;
+  background-color: #f44336;
 }
 
 .back-button:hover {
-  background-color: #0056b3;
+  background-color: #d32f2f;
 }
 
-.user-profile {
-  position: fixed; /* Fix it to the screen */
-  top: 2px; /* Position it at the top */
-  right: 20px; /* Position it on the right */
-  display: flex; /* Align items horizontally */
-  align-items: center; /* Center items vertically */
-  gap: 10px; /* Add spacing between the image and text */
-  z-index: 1002; /* Ensure it appears above other elements */
-  background-color: rgba(255, 255, 255, 0.9); /* Add a semi-transparent background for contrast */
-  padding: 5px 10px; /* Add padding for better appearance */
-  border-radius: 10px; /* Add rounded corners */
-  cursor: pointer; /* Pointer cursor for interactivity */
+.fill-profile-button {
+  background-color: #ff9800; /* Orange background */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.user-profile img {
-  width: 40px; /* Set the image width */
-  height: 40px; /* Set the image height */
-  border-radius: 50%; /* Make the image circular */
-  object-fit: cover; /* Ensure the image fits within the circle */
+.fill-profile-button:hover {
+  background-color: #e68900; /* Darker orange on hover */
+  transform: scale(1.05);
 }
 
-.user-profile span {
-  font-size: 1rem; /* Adjust font size */
-  font-weight: bold; /* Make the text bold */
-  color: #000; /* Black text for visibility */
+.form-group label {
+  font-size: 1rem;
+  color: #f0f0f0; /* Light gray text */
+  margin-bottom: 5px;
+  display: block;
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 50px; /* Position below the username */
-  right: 0; /* Align to the right */
-  background-color: #fff; /* White background for contrast */
-  border: 1px solid #ccc; /* Add a border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-  z-index: 1003; /* Ensure it appears above other elements */
-  width: 150px; /* Set a fixed width */
-  text-align: left; /* Align text to the left */
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #ffffff; /* White background */
+  color: #333333; /* Dark text */
 }
 
-.dropdown-menu button {
-  width: 100%; /* Make buttons span the full width */
+.form-group input:focus {
+  border: 2px solid #2575fc; /* Highlight border on focus */
+  outline: none;
+}
+
+select {
+  width: 100%; /* Make the dropdown responsive */
   padding: 10px; /* Add padding for better appearance */
-  background: none; /* Remove default background */
-  border: none; /* Remove default border */
-  text-align: left; /* Align text to the left */
-  cursor: pointer; /* Pointer cursor for interactivity */
+  border: 1px solid #cccccc; /* Add a border */
+  border-radius: 5px; /* Rounded corners */
   font-size: 1rem; /* Adjust font size */
-  color: #333; /* Dark text color */
+  background-color: #ffffff; /* White background */
+  color: #333333; /* Dark text */
+  appearance: none; /* Remove default dropdown arrow styling */
+  position: relative; /* Ensure proper positioning */
+  z-index: 2; /* Ensure visibility above other elements */
 }
 
-.dropdown-menu button:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
+select:focus {
+  border: 2px solid #2575fc; /* Highlight border on focus */
+  outline: none; /* Remove default outline */
+}
+
+option {
+  background-color: #ffffff; /* White background for options */
+  color: #333333; /* Dark text for options */
+  font-size: 1rem; /* Adjust font size */
 }

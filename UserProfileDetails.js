@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 
-function UserProfileDetails({ user }) {
+function UserProfileDetails() {
   const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
-  const [editableUser, setEditableUser] = useState(user); // State for editable user details
+  const location = useLocation();
+  const user = location.state?.user || {};
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableUser, setEditableUser] = useState(user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,8 +18,8 @@ function UserProfileDetails({ user }) {
   };
 
   const handleSave = () => {
-    console.log("Updated user details:", editableUser); // Log updated details
-    setIsEditing(false); // Exit edit mode
+    console.log("Updated user details:", editableUser);
+    setIsEditing(false);
   };
 
   return (
