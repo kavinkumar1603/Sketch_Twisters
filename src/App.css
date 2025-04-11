@@ -715,30 +715,26 @@ html, body {
 }
 
 .dropdown-menu {
+  opacity: 0; /* Initially hidden */
+  transform: translateY(-10px); /* Start slightly above */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
   position: absolute;
-  top: 100%; /* Position below the user profile */
-  right: 0; /* Align to the right */
-  background-color: #ffffff; /* White background for the dropdown */
-  border: 1px solid #cccccc; /* Add a border */
+  top: 100%; /* Position below the parent menu item */
+  left: 0;
+  background-color: #ffffff; /* White background */
+  border: 1px solid #cccccc; /* Add border */
   border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
-  z-index: 10; /* Ensure it appears above other elements */
-  display: flex;
-  flex-direction: column; /* Stack buttons vertically */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  list-style: none;
+  padding: 10px 0;
+  z-index: 1000; /* Ensure dropdown appears above the description */
+  pointer-events: none; /* Disable interaction when hidden */
 }
 
-.dropdown-menu button {
-  background: none; /* Remove default button background */
-  border: none; /* Remove default button border */
-  padding: 10px 15px; /* Add padding for better appearance */
-  text-align: left; /* Align text to the left */
-  font-size: 1rem; /* Adjust font size */
-  cursor: pointer; /* Indicate that the buttons are clickable */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
-}
-
-.dropdown-menu button:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
+.navigation-menu li:hover > .dropdown-menu {
+  opacity: 1; /* Make dropdown visible */
+  transform: translateY(0); /* Slide dropdown into view */
+  pointer-events: auto; /* Enable interaction */
 }
 
 .main-content {
@@ -769,13 +765,173 @@ html, body {
   font-size: 1rem;
   font-weight: bold;
   color: #000;
-  cursor: pointer; /* Add pointer cursor for clickable items */
-  transition: color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth hover and click effects */
 }
 
 .navigation-menu li:hover {
   color: #2575fc; /* Change color on hover */
   transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.navigation-menu li:active {
+  color: #0056b3; /* Darker blue on click */
+  transform: scale(1); /* Reset scale on click */
+}
+
+.navigation-menu li:hover > .dropdown-menu {
+  opacity: 1; /* Make dropdown visible */
+  transform: translateY(0); /* Slide dropdown into view */
+  pointer-events: auto; /* Enable interaction */
+}
+
+.dropdown-menu {
+  opacity: 0; /* Initially hidden */
+  transform: translateY(-10px); /* Start slightly above */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+  position: absolute;
+  top: 100%; /* Position below the parent menu item */
+  left: 0;
+  background-color: #ffffff; /* White background */
+  border: 1px solid #cccccc; /* Add a border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+  z-index: 1000; /* Ensure it appears above other elements */
+  list-style: none;
+  padding: 10px 0;
+  z-index: 1000; /* Ensure dropdown appears above the description */
+  pointer-events: none; /* Disable interaction when hidden */
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px 0;
+  z-index: 10;
+}
+
+.navigation-menu li:hover > .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover and click effects */
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dropdown-menu li:active {
+  background-color: #e0e0e0; /* Darker gray on click */
+  transform: scale(1); /* Reset scale on click */
+}
+
+.user-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-profile .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.user-profile:hover .dropdown-menu {
+  display: block; /* Show dropdown on hover */
+}
+
+.user-profile button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover and click effects */
+}
+
+.user-profile button:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.user-profile button:active {
+  background-color: #e0e0e0; /* Darker gray on click */
+  transform: scale(1); /* Reset scale on click */
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-profile .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.user-profile:hover .dropdown-menu {
+  display: block;
+}
+
+.user-profile button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.user-profile button:hover {
+  background-color: #f0f0f0;
 }
 
 .grid-container {

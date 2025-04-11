@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App'; // Corrected the import path for App
-import reportWebVitals from './reportWebVitals'; // Corrected the import path for reportWebVitals
+import App from './src/App';
+import reportWebVitals from '../reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'; // Import BrowserRouter
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

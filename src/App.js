@@ -30,6 +30,7 @@ function App() {
   const [isMainContentVisible, setIsMainContentVisible] = useState(false); // State for main content visibility
   const [loggedInUser, setLoggedInUser] = useState(null); // Updated to null initially
   const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
+  const [showEventsDropdown, setShowEventsDropdown] = useState(false); // State for Events dropdown
 
   const handleUserProfileClick = () => {
     navigate("/profile", { state: { user: loggedInUser } }); // Pass user details via state
@@ -325,33 +326,35 @@ function App() {
   };
 
   const renderMainContent = () => {
-    const handleNavigationClick = (section) => {
-      console.log(`Navigating to: ${section}`);
-      // Add logic for navigation if needed
-    };
-
     return (
       <div className="main-content">
         <header className="success-header">
           <h1 className="main-heading">EVENTSPHERE</h1>
           <div className="navigation-menu">
             <ul>
-              <li onClick={() => handleNavigationClick("Home")}>Home</li>
-              <li onClick={() => handleNavigationClick("Calendar")}>Calendar</li>
-              <li onClick={() => handleNavigationClick("Events")}>Events</li>
-              <li onClick={() => handleNavigationClick("Achievements")}>Achievements</li>
-              <li onClick={() => handleNavigationClick("Notifications")}>Notifications</li>
+              <li>Home</li>
+              <li>Calendar</li>
+              <li>
+                Events
+                <ul className="dropdown-menu">
+                  <li>Departments</li>
+                  <li>Verticals</li>
+                  <li>Google Developer Groups</li>
+                  <li>Center for International Relations</li>
+                  <li>Higher Education Cell</li>
+                </ul>
+              </li>
+              <li>Achievements</li>
+              <li>Notifications</li>
             </ul>
           </div>
-          <div className="user-profile" onClick={toggleDropdown}>
+          <div className="user-profile">
             <img src={UserProfileImage} alt="User Profile" />
             <span>{loggedInUser?.name || "USER NAME"}</span>
-            {showDropdown && (
-              <div className="dropdown-menu">
-                <button onClick={handleUserProfileClick}>User Profile</button>
-                <button onClick={handleLogoutClick}>Log Out</button>
-              </div>
-            )}
+            <div className="dropdown-menu">
+              <button>User Profile</button>
+              <button>Log Out</button>
+            </div>
           </div>
         </header>
         <div className="grid-container">

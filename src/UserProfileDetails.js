@@ -8,6 +8,7 @@ function UserProfileDetails() {
   const user = location.state?.user || {}; // Ensure user details are passed correctly
   const [isEditing, setIsEditing] = useState(false);
   const [editableUser, setEditableUser] = useState(user);
+  const [savedUser, setSavedUser] = useState(user); // Store saved user details
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +24,8 @@ function UserProfileDetails() {
       return;
     }
     console.log("Updated user details:", editableUser);
-    setIsEditing(false);
+    setSavedUser(editableUser); // Save the updated details
+    setIsEditing(false); // Exit edit mode
   };
 
   return (
@@ -106,13 +108,13 @@ function UserProfileDetails() {
             </>
           ) : (
             <>
-              <p><strong>Name:</strong> {editableUser.name}</p>
-              <p><strong>ID:</strong> {editableUser.id || "Not Provided"}</p>
-              <p><strong>Role:</strong> {editableUser.role}</p>
-              <p><strong>Email:</strong> {editableUser.email}</p>
-              <p><strong>Phone Number:</strong> {editableUser.phone || "Not Provided"}</p>
-              <p><strong>Address:</strong> {editableUser.address || "Not Provided"}</p>
-              {(editableUser.role === "admin" || editableUser.role === "Teacher") && (
+              <p><strong>Name:</strong> {savedUser.name}</p>
+              <p><strong>ID:</strong> {savedUser.id || "Not Provided"}</p>
+              <p><strong>Role:</strong> {savedUser.role}</p>
+              <p><strong>Email:</strong> {savedUser.email}</p>
+              <p><strong>Phone Number:</strong> {savedUser.phone || "Not Provided"}</p>
+              <p><strong>Address:</strong> {savedUser.address || "Not Provided"}</p>
+              {(savedUser.role === "admin" || savedUser.role === "Teacher") && (
                 <button className="edit-button" onClick={() => setIsEditing(true)}>
                   Edit
                 </button>
@@ -126,6 +128,7 @@ function UserProfileDetails() {
       </div>
     </div>
   );
+
 }
 
 export default UserProfileDetails;
