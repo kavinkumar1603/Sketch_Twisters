@@ -695,10 +695,91 @@ html, body {
 }
 
 .user-profile {
+  position: relative;
   display: flex;
   align-items: center;
   cursor: pointer;
-  position: relative; /* Ensure dropdown is positioned relative to the user profile */
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-profile:hover {
+  background-color: rgba(37, 117, 252, 0.1); /* Subtle blue background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #2575fc; /* Add a border around the avatar */
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.user-profile img:hover {
+  transform: scale(1.1); /* Slightly enlarge the avatar on hover */
+  border-color: #0056b3; /* Darker blue border on hover */
+}
+
+.user-profile span {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.user-profile span:hover {
+  color: #2575fc; /* Change text color on hover */
+}
+
+.dropdown-menu {
+  display: block; /* Show the dropdown menu */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 50px 0;
+  margin: 0;
+  z-index: 10;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333333;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.dropdown-button:hover {
+  color: #2575fc;
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .user-profile img {
@@ -715,34 +796,34 @@ html, body {
 }
 
 .dropdown-menu {
-  opacity: 0; /* Initially hidden */
-  transform: translateY(-10px); /* Start slightly above */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+  display: none;/* Hide by default */
   position: absolute;
-  top: 100%; /* Position below the parent menu item */
+  top: 100%;
   left: 0;
-  background-color: #ffffff; /* White background */
-  border: 1px solid #cccccc; /* Add border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   list-style: none;
   padding: 10px 0;
-  z-index: 1000; /* Ensure dropdown appears above the description */
-  pointer-events: none; /* Disable interaction when hidden */
+  z-index: 1002; /* Ensure it appears above other elements */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
 }
 
-.navigation-menu li:hover > .dropdown-menu {
-  opacity: 1; /* Make dropdown visible */
-  transform: translateY(0); /* Slide dropdown into view */
-  pointer-events: auto; /* Enable interaction */
+.dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333333;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.main-content {
-  text-align: center;
-  padding: 20px; /* Reduce padding for a cleaner layout */
-  color: #fff;
-  background-color: #000;
-  animation: fadeIn 1s ease-in-out; /* Add fade-in animation */
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
 }
 
 .navigation-menu {
@@ -786,152 +867,23 @@ html, body {
   pointer-events: auto; /* Enable interaction */
 }
 
-.dropdown-menu {
-  opacity: 0; /* Initially hidden */
-  transform: translateY(-10px); /* Start slightly above */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
-  position: absolute;
-  top: 100%; /* Position below the parent menu item */
-  left: 0;
-  background-color: #ffffff; /* White background */
-  border: 1px solid #cccccc; /* Add a border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
-  z-index: 1000; /* Ensure it appears above other elements */
-  list-style: none;
-  padding: 10px 0;
-  z-index: 1000; /* Ensure dropdown appears above the description */
-  pointer-events: none; /* Disable interaction when hidden */
-}
-
-.dropdown-menu li {
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: #333333;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
-}
-
-.dropdown-menu li:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  list-style: none;
-  padding: 10px 0;
-  z-index: 10;
-}
-
-.navigation-menu li:hover > .dropdown-menu {
-  display: block; /* Show dropdown on hover */
-}
-
-.dropdown-menu li {
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: #333333;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover and click effects */
-}
-
-.dropdown-menu li:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.dropdown-menu li:active {
-  background-color: #e0e0e0; /* Darker gray on click */
-  transform: scale(1); /* Reset scale on click */
-}
-
 .user-profile {
   position: relative;
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 
 .user-profile .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
   right: 0;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
 }
 
-.user-profile:hover .dropdown-menu {
-  display: block; /* Show dropdown on hover */
-}
-
-.user-profile button {
-  background: none;
-  border: none;
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover and click effects */
-}
-
-.user-profile button:hover {
-  background-color: #f0f0f0; /* Light gray background on hover */
-  transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.user-profile button:active {
-  background-color: #e0e0e0; /* Darker gray on click */
-  transform: scale(1); /* Reset scale on click */
-}
-
-.dropdown-menu li:hover {
-  background-color: #f0f0f0;
-}
-
-.user-profile {
-  position: relative;
-  cursor: pointer;
-}
-
-.user-profile .dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-.user-profile:hover .dropdown-menu {
-  display: block;
-}
-
-.user-profile button {
-  background: none;
-  border: none;
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-}
-
-.user-profile button:hover {
-  background-color: #f0f0f0;
+.user-profile:hover .dropdown-menu,
+.user-profile .dropdown-menu.show {
+  display: grid;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .grid-container {
@@ -960,6 +912,21 @@ html, body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Add hover effects */
   max-width: 100%; /* Ensure grid items stay within the container */
   margin-top: 80px; /* Add margin to move individual grid items down */
+  opacity: 0; /* Start hidden */
+  animation: fadeIn 0.5s ease-in-out forwards; /* Fade-in animation */
+}
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start fully transparent */
+    transform: translateY(20px); /* Slightly move down */
+  }
+  to {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Move to original position */
+  }
 }
 
 .grid-image {
@@ -1246,4 +1213,88 @@ option {
   background-color: #ffffff; /* White background for options */
   color: #333333; /* Dark text for options */
   font-size: 1rem; /* Adjust font size */
+}
+
+.dropdown-menu-1 {
+  display: none; /* Hide by default */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  gap: 90px; /* Adjust spacing between buttons */
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  line-spacing: 2.0rem; /* Increase line spacing for better readability */
+  z-index: 10;
+  opacity: 0; /* Start hidden */
+  transform: translateY(-10px); /* Slightly move up */
+  pointer-events: none; /* Disable interaction */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Stack items vertically */
+  gap: 15px; /* Add spacing between options */
+  padding: 15px; /* Add padding around the dropdown */
+}
+
+.navigation-menu li:hover > .dropdown-menu-1,
+.navigation-menu li:focus-within > .dropdown-menu-1 {
+  display: block; /* Show dropdown on hover or focus */
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Move to original position */
+  pointer-events: auto; /* Enable interaction */
+}
+
+.dropdown-item {
+  opacity: 0; /* Start hidden */
+  animation: fadeIn 0.5s ease-in-out forwards; /* Fade-in animation */
+  margin-bottom: 5px; /* Add spacing between buttons */
+  
+  text-align: center; /* Center align the text */
+  padding: 30px 50px; /* Add padding for better appearance */
+  background-color: #ffffff; /* White background for buttons */
+  border: 1px solid #cccccc; /* Add a border */
+  border-radius: 5px; /* Rounded corners */
+  color: #f70000; /* Text color */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth hover effects */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dropdown-item:nth-child(1) {
+  animation-delay: 0.2s; /* Delay for the first item */
+}
+
+.dropdown-item:nth-child(2) {
+  animation-delay: 0.4s; /* Delay for the second item */
+}
+
+.dropdown-item:nth-child(3) {
+  animation-delay: 0.6s; /* Delay for the third item */
+}
+
+.dropdown-item:nth-child(4) {
+  animation-delay: 0.8s; /* Delay for the fourth item */
+}
+
+.dropdown-item:nth-child(5) {
+  animation-delay: 1s; /* Delay for the fifth item */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start fully transparent */
+    transform: translateY(10px); /* Slightly move down */
+  }
+  to {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Move to original position */
+  }
 }

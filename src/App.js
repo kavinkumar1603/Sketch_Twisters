@@ -9,11 +9,10 @@ import image1 from './assests/photo 4.jpg';
 import image2 from './assests/photo1.png';
 import image3 from './assests/photo2.png';
 import image4 from './assests/photo3.jpg';
-import image5 from './assests/sivan.jpg';
-import image6 from './assests/satoro anime.png';
 import TeacherProfile from './assests/teacher-profile.png'; // Import Teacher profile image
 import UserProfileImage from './assests/user-profile.jpg'; // Import the provided image
 import UserProfileDetails from './UserProfileDetails'; // Ensure correct import
+
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -325,6 +324,24 @@ function App() {
     );
   };
 
+  const toggleUserDropdown = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    setShowDropdown((prev) => !prev); // Toggle dropdown visibility
+  };
+
+  React.useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest(".user-profile")) {
+        setShowDropdown(false); // Close dropdown if clicked outside
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   const renderMainContent = () => {
     return (
       <div className="main-content">
@@ -336,25 +353,35 @@ function App() {
               <li>Calendar</li>
               <li>
                 Events
-                <ul className="dropdown-menu">
-                  <li>Departments</li>
-                  <li>Verticals</li>
-                  <li>Google Developer Groups</li>
-                  <li>Center for International Relations</li>
-                  <li>Higher Education Cell</li>
+                <ul className="dropdown-menu-1">
+                  <li className="dropdown-item">Departments</li>
+                  <li className="dropdown-item">Verticals</li>
+                  <li className="dropdown-item">Google Developer Groups</li>
+                  <li className="dropdown-item">Center for International Relations</li>
+                  <li className="dropdown-item">Higher Education Cell</li>
                 </ul>
               </li>
               <li>Achievements</li>
               <li>Notifications</li>
             </ul>
           </div>
-          <div className="user-profile">
-            <img src={UserProfileImage} alt="User Profile" />
+          <div className="user-profile" onClick={toggleUserDropdown}>
+            <img src={UserProfileImage} alt="User Profile" className="user-profile-image" />
             <span>{loggedInUser?.name || "USER NAME"}</span>
-            <div className="dropdown-menu">
-              <button>User Profile</button>
-              <button>Log Out</button>
-            </div>
+            {showDropdown && (
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-button" onClick={handleUserProfileClick}>
+                    User Profile
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-button" onClick={handleLogoutClick}>
+                    Log Out
+                  </button>
+                </li>
+              </ul>
+            )}
           </div>
         </header>
         <div className="grid-container">
@@ -443,6 +470,10 @@ function App() {
         <Route
           path="/profile"
           element={<UserProfileDetails />} // No props passed here
+        />
+        <Route
+          path="/main/profile" // Add this route
+          element={<UserProfileDetails />} // Render UserProfileDetails for /main/profile
         />
       </Routes>
       {showSuccessModal && (
