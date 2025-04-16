@@ -18,6 +18,7 @@ import card3 from './assests/card3.jpeg'; // Import card image
 import card4 from './assests/card4.jpg'; // Import card image
 import card5 from './assests/card5.JPG'; // Import card image
 import AchievementsPage from './AchievementsPage'; // Import the AchievementsPage component
+import AddAchievementPage from './AddAchievementPage'; // Import the AddAchievementPage component
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -627,6 +628,7 @@ function App() {
           element={<UserProfileDetails />} // Render UserProfileDetails for /main/profile
         />
         <Route path="/achievements" element={<AchievementsPage />} /> {/* Add route for achievements */}
+        <Route path="/add-achievement" element={<AddAchievementPage />} /> {/* Add route for Add Achievement */}
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
