@@ -381,7 +381,7 @@ html, body {
 
 .dynamic-input-container input {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   margin-bottom: 15px;
   border: 1px solid #cccccc;
   border-radius: 5px;
@@ -525,6 +525,7 @@ html, body {
   margin: 20px auto; /* Center the form and reduce height */
   text-align: center;
   color: #ffffff; /* White text for contrast */
+  
 }
 
 .register-form-title {
@@ -541,9 +542,12 @@ html, body {
 
 .register-form {
   display: flex;
-  flex-direction: column;
-  gap: 15px; /* Reduced spacing between form fields */
-  height: 325px; /* Allow the form to take full height */
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center align buttons horizontally */
+  gap: 2px; /* Add spacing between buttons */
+  padding: 20px; /* Add padding inside the division */
+  width: 100%; /* Ensure buttons fit within the division */
+  box-sizing: border-box; /* Include padding in the width */
 }
 
 .form-group {
@@ -1297,4 +1301,59 @@ option {
     opacity: 1; /* Fully visible */
     transform: translateY(0); /* Move to original position */
   }
+}
+
+.dynamic-input-container button,
+.submit-registration-button {
+  width: 100%; /* Make buttons span the full width of the container */
+  max-width: 300px; /* Set a maximum width for buttons */
+  text-align: center; /* Center align text inside buttons */
+}
+
+.card-section-container {
+  margin-top: 100px; /* Add spacing above the card section */
+  padding: 20px; /* Add padding around the section */
+  text-align: center; /* Center align the description */
+}
+
+.card-section-description {
+  margin-bottom: 20px; /* Add spacing below the description */
+  font-size: 1.2rem; /* Adjust font size for readability */
+  color: #f0f0f0; /* Light gray text */
+}
+
+.card-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 20px; /* Add spacing between cards */
+}
+
+.card {
+  background-color: #ffffff; /* White background for cards */
+  color: #333333; /* Dark text for contrast */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
+  overflow: hidden; /* Ensure content doesn't overflow */
+  width: 250px; /* Set a fixed width for cards */
+  text-align: center; /* Center align text inside cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover effects */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add a stronger shadow on hover */
+}
+
+.card-image {
+  width: 100%; /* Make images responsive */
+  height: 150px; /* Set a fixed height for images */
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
+}
+
+.card-description {
+  padding: 15px; /* Add padding inside the card */
+  font-size: 1rem; /* Adjust font size for better readability */
+  color: #555555; /* Slightly lighter text color */
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react'; // Add useRef
 import { Routes, Route, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css';
 import videoSrc from './assests/logodesign.mp4'; // Ensure the folder name matches the actual directory
@@ -30,6 +30,8 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null); // Updated to null initially
   const [showDropdown, setShowDropdown] = useState(false); // State to toggle dropdown visibility
   const [showEventsDropdown, setShowEventsDropdown] = useState(false); // State for Events dropdown
+  const imageGridRef = useRef(null); // Reference for the image grid container
+  const cardSectionRef = useRef(null); // Reference for the card section
 
   const handleUserProfileClick = () => {
     navigate("/profile", { state: { user: loggedInUser } }); // Pass user details via state
@@ -342,6 +344,12 @@ function App() {
     };
   }, []);
 
+  const handleKnowMoreClick = () => {
+    if (cardSectionRef.current) {
+      cardSectionRef.current.scrollIntoView({ behavior: 'smooth' }); // Scroll to the card section
+    }
+  };
+
   const renderMainContent = () => {
     return (
       <div className="main-content">
@@ -384,7 +392,7 @@ function App() {
             )}
           </div>
         </header>
-        <div className="grid-container">
+        <div className="grid-container" ref={imageGridRef}> {/* Add ref to the grid container */}
           <div className="grid-item">
             <img src={image1} alt="College Event 1" className="grid-image-top-left" />
           </div>
@@ -407,7 +415,32 @@ function App() {
             <li>Get instant notifications via WhatsApp</li>
           </ul>
           <p>Never miss an opportunity – Stay connected with SECE's EventSphere!</p>
-          <button className="know-more-button">KNOW MORE</button>
+          <button className="know-more-button" onClick={handleKnowMoreClick}>
+            KNOW MORE
+          </button>
+        </div>
+        <div className="card-section-container" ref={cardSectionRef}>
+          <p className="card-section-description">
+            Explore our exciting events, workshops, and opportunities!
+          </p>
+          <div className="card-section">
+            <div className="card">
+              <img src={image1} alt="Event 1" className="card-image" />
+              <p className="card-description">Exciting workshops to enhance your skills.</p>
+            </div>
+            <div className="card">
+              <img src={image2} alt="Event 2" className="card-image" />
+              <p className="card-description">Hackathons to challenge your creativity.</p>
+            </div>
+            <div className="card">
+              <img src={image3} alt="Event 3" className="card-image" />
+              <p className="card-description">Scholarships to support your education.</p>
+            </div>
+            <div className="card">
+              <img src={image4} alt="Event 4" className="card-image" />
+              <p className="card-description">Networking events to grow your connections.</p>
+            </div>
+          </div>
         </div>
       </div>
     );
