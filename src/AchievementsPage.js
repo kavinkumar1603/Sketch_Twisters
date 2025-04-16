@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css'; // Import the CSS for styling
 
-const AchievementsPage = () => {
+const AchievementsPage = ({ achievements = [] }) => { // Default achievements to an empty array
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleAddAchievementClick = () => {
@@ -15,10 +15,10 @@ const AchievementsPage = () => {
         <h1 className="achievements-title">EVENTSPHERE</h1>
         <nav className="achievements-nav">
           <ul>
-            <li>HOME</li>
+            <li onClick={() => navigate('/main')}>HOME</li> {/* Navigate to the main page */}
             <li>CALENDAR</li>
             <li>EVENTS</li>
-            <li className="active">ACHIEVEMENTS</li>
+            <li onClick={() => navigate('/achievements')} className="active">ACHIEVEMENTS</li> {/* Navigate to achievements page */}
             <li>NOTIFICATION</li>
           </ul>
         </nav>
@@ -58,17 +58,25 @@ const AchievementsPage = () => {
             </div>
           </div>
         </div>
-        <button className="add-achievement-button" onClick={handleAddAchievementClick}>
+        <button
+          className="add-achievement-button"
+          onClick={handleAddAchievementClick} // Navigate to AddAchievementPage
+        >
           + ADD YOUR ACHIEVEMENT
         </button>
         <h2 className="achievements-section-title">ALL ACHIEVEMENTS</h2>
         <div className="all-achievements-cards">
-          {[...Array(8)].map((_, index) => (
+          {achievements.map((achievement, index) => (
             <div className="achievement-card" key={index}>
-              <div className="achievement-image"></div>
+              <div
+                className="achievement-image"
+                style={{
+                  backgroundImage: `url(${achievement.photo ? URL.createObjectURL(achievement.photo) : ''})`,
+                }}
+              ></div>
               <div className="achievement-details">
-                <h3>Title</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h3>{achievement.eventName}</h3>
+                <p>{achievement.description}</p>
               </div>
             </div>
           ))}

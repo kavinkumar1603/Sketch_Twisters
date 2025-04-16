@@ -1,134 +1,179 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.css'; // Import the CSS for styling
 
-function UserProfileDetails() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = location.state?.user || {}; // Ensure user details are passed correctly
-  const [isEditing, setIsEditing] = useState(false);
-  const [editableUser, setEditableUser] = useState(user);
-  const [savedUser, setSavedUser] = useState(user); // Store saved user details
+const UserProfileDetails = ({ user }) => {
+  const [profile, setProfile] = useState({
+    name: user?.name || '',
+    rollNo: user?.id || '',
+    password: '',
+    email: user?.email || '',
+    language: 'English',
+    role: user?.role || 'Student',
+  });
+
+  const [isEditing, setIsEditing] = useState(true); // Track editing state
+
+  useEffect(() => {
+    if (user) {
+      setProfile((prev) => ({
+        ...prev,
+        name: user.name,
+        rollNo: user.id,
+        email: user.email,
+        role: user.role,
+      }));
+    }
+  }, [user]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditableUser((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    const { id, value } = e.target;
+    setProfile((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSave = () => {
-    if (!editableUser.id) {
-      alert("ID cannot be empty!"); // Validate ID field
-      return;
-    }
-    console.log("Updated user details:", editableUser);
-    setSavedUser(editableUser); // Save the updated details
-    setIsEditing(false); // Exit edit mode
+    console.log('Profile saved:', profile);
+    alert('Profile saved successfully!');
+    setIsEditing(false); // Disable editing mode
   };
 
   return (
-    <div className="profile-page">
-      <div className="profile-card">
-        <h2 className="profile-title">User Profile</h2>
-        <div className="profile-avatar">
-          <img
-            src="https://via.placeholder.com/150" // Placeholder avatar
-            alt="User Avatar"
-            className="avatar-image"
-          />
-        </div>
-        <div className="profile-details">
-          {isEditing ? (
+    <div className="user-profile-page">
+      <header className="user-profile-header">
+        <h1 className="user-profile-title">User Profile</h1>
+        {isEditing && (
+          <button className="save-button" onClick={handleSave}>
+            Save
+          </button>
+        )}
+      </header>
+      <main className="user-profile-content">
+        <form className="user-profile-form">
+          <h3 className="form-section-title">Basic Details</h3>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              value={profile.name}
+              onChange={handleInputChange}
+              className="profile-input"
+              disabled={!isEditing} // Disable input if not editing
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="rollNo">Roll Number</label>
+            <input
+              type="text"
+              id="rollNo"
+              value={profile.rollNo}
+              onChange={handleInputChange}
+              className="profile-input"
+              disabled={!isEditing} // Disable input if not editing
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">
+              Password {profile.password && `(Entered: ${profile.password})`}
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={profile.password}
+              onChange={handleInputChange}
+              className="profile-input"
+              disabled={!isEditing} // Disable input if not editing
+            />
+          </div>
+          {profile.role === 'Student' && (
             <>
-              <label>
-                <strong>Name:</strong>
-                <input
-                  type="text"
-                  name="name"
-                  value={editableUser.name || ""}
-                  onChange={handleInputChange}
-                  className="profile-input"
-                />
-              </label>
-              <label>
-                <strong>ID:</strong>
-                <input
-                  type="text"
-                  name="id"
-                  value={editableUser.id || ""}
-                  onChange={handleInputChange}
-                  className="profile-input"
-                />
-              </label>
-              <label>
-                <strong>Role:</strong>
-                <input
-                  type="text"
-                  name="role"
-                  value={editableUser.role || ""}
-                  onChange={handleInputChange}
-                  className="profile-input"
-                />
-              </label>
-              <label>
-                <strong>Email:</strong>
+              <h3 className="form-section-title">Student Details</h3>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
-                  name="email"
-                  value={editableUser.email || ""}
+                  id="email"
+                  value={profile.email}
                   onChange={handleInputChange}
                   className="profile-input"
+                  disabled={!isEditing} // Disable input if not editing
                 />
-              </label>
-              <label>
-                <strong>Phone Number:</strong>
-                <input
-                  type="text"
-                  name="phone"
-                  value={editableUser.phone || ""}
+              </div>
+              <div className="form-group">
+                <label htmlFor="language">Preferred Language</label>
+                <select
+                  id="language"
+                  value={profile.language}
                   onChange={handleInputChange}
                   className="profile-input"
-                />
-              </label>
-              <label>
-                <strong>Address:</strong>
-                <input
-                  type="text"
-                  name="address"
-                  value={editableUser.address || ""}
-                  onChange={handleInputChange}
-                  className="profile-input"
-                />
-              </label>
-              <button className="save-button" onClick={handleSave}>
-                Save
-              </button>
-            </>
-          ) : (
-            <>
-              <p><strong>Name:</strong> {savedUser.name}</p>
-              <p><strong>ID:</strong> {savedUser.id || "Not Provided"}</p>
-              <p><strong>Role:</strong> {savedUser.role}</p>
-              <p><strong>Email:</strong> {savedUser.email}</p>
-              <p><strong>Phone Number:</strong> {savedUser.phone || "Not Provided"}</p>
-              <p><strong>Address:</strong> {savedUser.address || "Not Provided"}</p>
-              {(savedUser.role === "admin" || savedUser.role === "Teacher") && (
-                <button className="edit-button" onClick={() => setIsEditing(true)}>
-                  Edit
-                </button>
-              )}
+                  disabled={!isEditing} // Disable input if not editing
+                >
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                </select>
+              </div>
             </>
           )}
-        </div>
-        <button className="back-button" onClick={() => navigate("/main")}>
-          Back to Main
-        </button>
-      </div>
+          {profile.role === 'Teacher' && (
+            <>
+              <h3 className="form-section-title">Teacher Details</h3>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={profile.email}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                  disabled={!isEditing} // Disable input if not editing
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="department">Department</label>
+                <input
+                  type="text"
+                  id="department"
+                  value={profile.department || ''}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                  disabled={!isEditing} // Disable input if not editing
+                />
+              </div>
+            </>
+          )}
+          {profile.role === 'Admin' && (
+            <>
+              <h3 className="form-section-title">Admin Details</h3>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  value={profile.email}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                  disabled={!isEditing} // Disable input if not editing
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="accessLevel">Access Level</label>
+                <select
+                  id="accessLevel"
+                  value={profile.accessLevel || 'Full'}
+                  onChange={handleInputChange}
+                  className="profile-input"
+                  disabled={!isEditing} // Disable input if not editing
+                >
+                  <option value="Full">Full</option>
+                  <option value="Limited">Limited</option>
+                </select>
+              </div>
+            </>
+          )}
+        </form>
+      </main>
     </div>
   );
-
-}
+};
 
 export default UserProfileDetails;

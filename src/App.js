@@ -38,6 +38,7 @@ function App() {
   const [showEventsDropdown, setShowEventsDropdown] = useState(false); // State for Events dropdown
   const imageGridRef = useRef(null); // Reference for the image grid container
   const cardSectionRef = useRef(null); // Reference for the card section
+  const [achievements, setAchievements] = useState([]); // State to store achievements
 
   const handleUserProfileClick = () => {
     navigate("/profile", { state: { user: loggedInUser } }); // Pass user details via state
@@ -155,6 +156,10 @@ function App() {
       department: newDepartment || "N/A", // Save the updated department
       isEditing: false, // Disable editing mode
     }));
+  };
+
+  const handleAddAchievement = (newAchievement) => {
+    setAchievements((prev) => [...prev, newAchievement]); // Add new achievement
   };
 
   const renderModalContent = () => {
@@ -425,7 +430,7 @@ function App() {
           <h1 className="main-heading">EVENTSPHERE</h1>
           <div className="navigation-menu">
             <ul>
-              <li>Home</li>
+              <li onClick={() => navigate('/main')}>Home</li>
               <li>Calendar</li>
               <li>
                 Events
@@ -437,7 +442,7 @@ function App() {
                   <li className="dropdown-item">Higher Education Cell</li>
                 </ul>
               </li>
-              <li onClick={handleAchievementsClick}>Achievements</li>
+              <li onClick={() => navigate('/achievements')}>Achievements</li> {/* Navigate to achievements page */}
               <li>Notifications</li>
             </ul>
           </div>
@@ -621,14 +626,20 @@ function App() {
         />  
         <Route
           path="/profile"
-          element={renderUserProfile()} // Render user profile with user details
+          element={<UserProfileDetails user={loggedInUser} />} // Pass logged-in user details
         />
         <Route
           path="/main/profile" // Add this route
           element={<UserProfileDetails />} // Render UserProfileDetails for /main/profile
         />
-        <Route path="/achievements" element={<AchievementsPage />} /> {/* Add route for achievements */}
-        <Route path="/add-achievement" element={<AddAchievementPage />} /> {/* Add route for Add Achievement */}
+        <Route
+          path="/achievements"
+          element={<AchievementsPage achievements={achievements} />} // Pass achievements state
+        />
+        <Route
+          path="/add-achievement"
+          element={<AddAchievementPage onAddAchievement={handleAddAchievement} />}
+        />
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
