@@ -12,7 +12,12 @@ import image4 from './assests/photo3.jpg';
 import TeacherProfile from './assests/teacher-profile.png'; // Import Teacher profile image
 import UserProfileImage from './assests/user-profile.jpg'; // Import the provided image
 import UserProfileDetails from './UserProfileDetails'; // Ensure correct import
-
+import card1 from './assests/card1.png'; // Import card image
+import card2 from './assests/card2.jpeg'; // Import card image
+import card3 from './assests/card3.jpeg'; // Import card image
+import card4 from './assests/card4.jpg'; // Import card image
+import card5 from './assests/card5.JPG'; // Import card image
+import AchievementsPage from './AchievementsPage'; // Import the AchievementsPage component
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -134,6 +139,21 @@ function App() {
       setIsMainContentVisible(true); // Show main content
       navigate("/main"); // Navigate to "/main"
     }
+  };
+
+  const handleFillDetailsClick = () => {
+    setLoggedInUser((prevUser) => ({
+      ...prevUser,
+      isEditing: true, // Enable editing mode
+    }));
+  };
+
+  const handleSaveDetailsClick = (newDepartment) => {
+    setLoggedInUser((prevUser) => ({
+      ...prevUser,
+      department: newDepartment || "N/A", // Save the updated department
+      isEditing: false, // Disable editing mode
+    }));
   };
 
   const renderModalContent = () => {
@@ -350,6 +370,53 @@ function App() {
     }
   };
 
+  const handleAchievementsClick = () => {
+    navigate("/achievements"); // Navigate to the achievements page
+  };
+
+  const renderCardSection = () => {
+    return (
+      <div className="card-section-container">
+        <h2 className="card-section-title">Why you are here?</h2>
+        <p className="card-section-description">
+            Explore our exciting events, workshops, and opportunities!
+          </p>
+        <div className="card-section">
+          <div className="card">
+            <img src={card1} alt="Event Calendar" className="card-image" />
+            <p className="card-description">Stay Organized. Stay Ahead.</p>
+            <p>View all upcoming events in a single glance and plan your participation with ease.</p>
+            <button className="styled-button">EVENT CALENDAR</button>
+          </div>
+          <div className="card">
+            <img src={card2} alt="On Campus Events" className="card-image" />
+            <p className="card-description">Happening at SECE!</p>
+            <p>Explore events from your departments, clubs, CIR, GDC, and more – all in one place.</p>
+            <button className="styled-button">ON CAMPUS EVENTS</button>
+          </div>
+          <div className="card">
+            <img src={card3} alt="Off Campus Events" className="card-image" />
+            <p className="card-description">Go Beyond the Campus.</p>
+            <p>Discover inter-college fests, competitions, and tech events to showcase your skills.</p>
+            <button className="styled-button">OFF CAMPUS EVENTS</button>
+          </div>
+          <div className="card">
+            <img src={card4} alt="Achievements" className="card-image" />
+            <p className="card-description">SECE Stars Shine Here!</p>
+            <p>Celebrate the victories and milestones of our talented students and teams.</p>
+            <button className="styled-button" onClick={handleAchievementsClick}>ACHIEVEMENTS</button>
+          </div>
+          <div className="card">
+            <img src={card5} alt="Scholarships" className="card-image" />
+            <p className="card-description">Opportunities that Support You.</p>
+            <p>Find scholarships and grants that match your academic and career goals.</p>
+            <button className="styled-button">SCHOLARSHIPS</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderMainContent = () => {
     return (
       <div className="main-content">
@@ -369,7 +436,7 @@ function App() {
                   <li className="dropdown-item">Higher Education Cell</li>
                 </ul>
               </li>
-              <li>Achievements</li>
+              <li onClick={handleAchievementsClick}>Achievements</li>
               <li>Notifications</li>
             </ul>
           </div>
@@ -392,6 +459,7 @@ function App() {
             )}
           </div>
         </header>
+       
         <div className="grid-container" ref={imageGridRef}> {/* Add ref to the grid container */}
           <div className="grid-item">
             <img src={image1} alt="College Event 1" className="grid-image-top-left" />
@@ -420,26 +488,71 @@ function App() {
           </button>
         </div>
         <div className="card-section-container" ref={cardSectionRef}>
-          <p className="card-section-description">
-            Explore our exciting events, workshops, and opportunities!
-          </p>
-          <div className="card-section">
-            <div className="card">
-              <img src={image1} alt="Event 1" className="card-image" />
-              <p className="card-description">Exciting workshops to enhance your skills.</p>
-            </div>
-            <div className="card">
-              <img src={image2} alt="Event 2" className="card-image" />
-              <p className="card-description">Hackathons to challenge your creativity.</p>
-            </div>
-            <div className="card">
-              <img src={image3} alt="Event 3" className="card-image" />
-              <p className="card-description">Scholarships to support your education.</p>
-            </div>
-            <div className="card">
-              <img src={image4} alt="Event 4" className="card-image" />
-              <p className="card-description">Networking events to grow your connections.</p>
-            </div>
+          
+         
+        </div>
+      </div>
+    );
+  };
+
+  const renderUserProfile = () => {
+    if (!loggedInUser) {
+      return (
+        <div className="profile-page">
+          <div className="profile-card">
+            <h2 className="profile-title">No User Logged In</h2>
+            <p>Please log in to view your profile details.</p>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="profile-page">
+        <div className="profile-card">
+          <h2 className="profile-title">{loggedInUser.name || "User Name"}</h2>
+          <div className="profile-avatar">
+            <img src={UserProfileImage} alt="User Avatar" className="avatar-image" />
+          </div>
+          <div className="profile-details">
+            <p><strong>ID:</strong> {loggedInUser.id || "N/A"}</p>
+            <p><strong>Email:</strong> {loggedInUser.email || "N/A"}</p>
+            <p><strong>Role:</strong> {loggedInUser.role || "N/A"}</p>
+            <p>
+              <strong>Department:</strong>
+              {loggedInUser.isEditing ? (
+                <>
+                  <input
+                    type="text"
+                    defaultValue={loggedInUser.department || ""}
+                    onChange={(e) =>
+                      setLoggedInUser((prevUser) => ({
+                        ...prevUser,
+                        department: e.target.value,
+                      }))
+                    }
+                    autoFocus
+                    className="editable-input"
+                  />
+                  <button
+                    className="save-details-button styled-button"
+                    onClick={() => handleSaveDetailsClick(loggedInUser.department)}
+                  >
+                    Save
+                  </button>
+                </>
+              ) : (
+                <span>{loggedInUser.department || "N/A"}</span>
+              )}
+            </p>
+            {!loggedInUser.isEditing && (
+              <button 
+                className="fill-details-button styled-button" 
+                onClick={handleFillDetailsClick}
+              >
+                Edit Details
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -498,16 +611,22 @@ function App() {
         />
         <Route
           path="/main"
-          element={renderMainContent()} // Route for main content
+          element={
+            <>
+              {renderMainContent()}
+              {renderCardSection()} {/* Render the card section */}
+            </>
+          }
         />  
         <Route
           path="/profile"
-          element={<UserProfileDetails />} // No props passed here
+          element={renderUserProfile()} // Render user profile with user details
         />
         <Route
           path="/main/profile" // Add this route
           element={<UserProfileDetails />} // Render UserProfileDetails for /main/profile
         />
+        <Route path="/achievements" element={<AchievementsPage />} /> {/* Add route for achievements */}
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
