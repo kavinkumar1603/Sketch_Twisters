@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css'; // Import the CSS for styling
+import profile from './assests/user-profile.jpg'; // Import the provided profile image
 
-const AddAchievementPage = ({ onAddAchievement }) => {
+const AddAchievementPage = ({ onAddAchievement, user, onLogout }) => { // Accept user and onLogout as props
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     eventName: '',
@@ -13,6 +14,7 @@ const AddAchievementPage = ({ onAddAchievement }) => {
     description: '',
     photo: null,
   });
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -44,8 +46,15 @@ const AddAchievementPage = ({ onAddAchievement }) => {
             <li>NOTIFICATION</li>
           </ul>
         </nav>
-        <div className="user-profile">
-          <span>USER NAME</span>
+        <div className="user-profile" onClick={(e) => e.stopPropagation()}>
+          <img src={user?.profileImage || profile} alt="User Profile" className="user-profile-image" />
+          <span>{user?.name || "USER NAME"}</span>
+          <button className="dropdown-toggle" onClick={() => setShowDropdown((prev) => !prev)}>▼</button>
+          {showDropdown && (
+            <ul className="dropdown-menu">
+              <li onClick={onLogout}>LOGOUT</li>
+            </ul>
+          )}
         </div>
       </header>
       <main className="add-achievement-content">

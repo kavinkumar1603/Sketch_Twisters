@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css'; // Import the CSS for styling
 
-const UserProfileDetails = ({ user }) => {
+const UserProfileDetails = ({ user, onLogout }) => { // Accept user and onLogout as props
+  const navigate = useNavigate(); // Initialize useNavigate
+
   const [profile, setProfile] = useState({
     name: user?.name || '',
     rollNo: user?.id || '',
@@ -39,12 +42,20 @@ const UserProfileDetails = ({ user }) => {
   return (
     <div className="user-profile-page">
       <header className="user-profile-header">
-        <h1 className="user-profile-title">User Profile</h1>
-        {isEditing && (
-          <button className="save-button" onClick={handleSave}>
-            Save
-          </button>
-        )}
+        <h1 className="user-profile-title">EVENTSPHERE</h1>
+        <nav className="user-profile-nav">
+          <ul>
+            <li onClick={() => navigate('/main')}>HOME</li> {/* Use navigate */}
+            <li>CALENDAR</li>
+            <li>EVENTS</li>
+            <li onClick={() => navigate('/achievements')}>ACHIEVEMENTS</li> {/* Use navigate */}
+            <li>NOTIFICATION</li>
+          </ul>
+        </nav>
+        <div className="user-profile">
+          <span>{user?.name || "USER NAME"}</span> {/* Display user's name */}
+          <button className="logout-button" onClick={onLogout}>LOGOUT</button> {/* Logout button */}
+        </div>
       </header>
       <main className="user-profile-content">
         <form className="user-profile-form">

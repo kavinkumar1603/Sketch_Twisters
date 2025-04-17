@@ -626,7 +626,12 @@ function App() {
         />  
         <Route
           path="/profile"
-          element={<UserProfileDetails user={loggedInUser} />} // Pass logged-in user details
+          element={
+            <UserProfileDetails
+              user={loggedInUser}
+              onLogout={handleLogoutClick} // Pass logout function
+            />
+          }
         />
         <Route
           path="/main/profile" // Add this route
@@ -634,11 +639,23 @@ function App() {
         />
         <Route
           path="/achievements"
-          element={<AchievementsPage achievements={achievements} />} // Pass achievements state
+          element={
+            <AchievementsPage
+              achievements={achievements}
+              user={loggedInUser}
+              onLogout={handleLogoutClick} // Pass logout function
+            />
+          }
         />
         <Route
           path="/add-achievement"
-          element={<AddAchievementPage onAddAchievement={handleAddAchievement} />}
+          element={
+            <AddAchievementPage
+              onAddAchievement={handleAddAchievement}
+              user={loggedInUser}
+              onLogout={handleLogoutClick} // Pass logout function
+            />
+          }
         />
       </Routes>
       {showSuccessModal && (

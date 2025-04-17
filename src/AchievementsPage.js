@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './App.css'; // Import the CSS for styling
+import profile from './assests/user-profile.jpg'; // Import the provided profile image
 
-const AchievementsPage = ({ achievements = [] }) => { // Default achievements to an empty array
+const AchievementsPage = ({ achievements = [], user, onLogout }) => { // Accept user and onLogout as props
   const navigate = useNavigate(); // Initialize useNavigate
+  const [showDropdown, setShowDropdown] = useState(false); // State for dropdown
 
   const handleAddAchievementClick = () => {
     navigate('/add-achievement'); // Navigate to the Add Achievement page
@@ -22,8 +24,15 @@ const AchievementsPage = ({ achievements = [] }) => { // Default achievements to
             <li>NOTIFICATION</li>
           </ul>
         </nav>
-        <div className="user-profile">
-          <span>USER NAME</span>
+        <div className="user-profile" onClick={(e) => e.stopPropagation()}>
+          <img src={user?.profileImage || profile} alt="User Profile" className="user-profile-image" />
+          <span>{user?.name || "USER NAME"}</span>
+          <button className="dropdown-toggle" onClick={() => setShowDropdown((prev) => !prev)}>▼</button>
+          {showDropdown && (
+            <ul className="dropdown-menu">
+              <li onClick={onLogout}>LOGOUT</li>
+            </ul>
+          )}
         </div>
       </header>
       <main className="achievements-content">

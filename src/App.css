@@ -1465,7 +1465,7 @@ option {
   color: #333;
   background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
   min-height: 100vh;
-  padding: 20px;
+  padding: 0px;
 }
 
 .achievements-header {
@@ -1626,7 +1626,7 @@ option {
   color: #333;
   background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
   min-height: 100vh;
-  padding: 20px;
+  padding:0px;
   text-align: center;
 }
 
@@ -1846,3 +1846,58 @@ option {
   border-radius: 5px;
   box-sizing: border-box;
 }
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid #2575fc;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile:hover .dropdown-menu {
+  display: block;
+}
+
