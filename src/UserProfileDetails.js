@@ -28,6 +28,13 @@ const UserProfileDetails = ({ user, onLogout }) => { // Accept user and onLogout
     }
   }, [user]);
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem("loggedInUser");
+    if (savedUser) {
+      setProfile(JSON.parse(savedUser)); // Load user details from localStorage
+    }
+  }, []);
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setProfile((prev) => ({ ...prev, [id]: value }));

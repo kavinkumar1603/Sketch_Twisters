@@ -18,10 +18,25 @@ const CalendarPage = ({ user }) => {
     end: '',
   });
   const [selectedView, setSelectedView] = useState('month');
+  const [storedUser, setStoredUser] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('calendarEvents', JSON.stringify(events));
   }, [events]);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('loggedInUser');
+    if (savedUser) {
+      setStoredUser(JSON.parse(savedUser));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      setStoredUser(user);
+    }
+  }, [user]);
 
   const handleAddEvent = () => {
     if (!newEvent.title || !newEvent.start || !newEvent.end) {
@@ -86,7 +101,7 @@ const CalendarPage = ({ user }) => {
             Month
           </button>
         </div>
-        {user && (user.role === 'Admin' || user.role === 'Teacher') && (
+        {(storedUser && (storedUser.role === 'Admin' || storedUser.role === 'Teacher')) && (
           <div className="action-buttons">
             <button className="add-event-button" onClick={() => setShowAddEventModal(true)}>
               + Add Event

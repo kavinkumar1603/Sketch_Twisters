@@ -905,6 +905,18 @@ html, body {
   overflow: visible; /* Ensure content is not clipped */
 }
 
+.grid-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure it appears above the images */
+  pointer-events: none; /* Allow interaction with content */
+}
+
 .grid-item {
   /* Removed background-color property */
   border-radius: 10px; /* Rounded corners */
@@ -918,6 +930,8 @@ html, body {
   margin-top: 80px; /* Add margin to move individual grid items down */
   opacity: 0; /* Start hidden */
   animation: fadeIn 0.5s ease-in-out forwards; /* Fade-in animation */
+  position: relative; /* Ensure content is above the overlay */
+  z-index: 2; /* Ensure content is above the overlay */
 }
 
 
@@ -2174,6 +2188,7 @@ option {
   height: 100%;
   backface-visibility: hidden; /* Hide the back side when not flipped */
   border-radius: 10px;
+  padding: 200px 300px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
 }
@@ -2187,9 +2202,10 @@ option {
 }
 
 .card-front img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
+  width: 100%; /* Ensure the image fills the width of the card */
+  height: 100%; /* Ensure the image fills the height of the card */
+  object-fit: fill; /* Maintain aspect ratio and fill the card */
+  border-radius: 10px; /* Match the card's rounded corners */
 }
 
 .card-back {
@@ -2199,10 +2215,8 @@ option {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 1.5;
+  padding: 50px 90px; /* Increase right padding to move content further to the right */
+  text-align: center; /* Align text to the left */
 }
 
 /* Achievement Card Flip */
@@ -2230,9 +2244,11 @@ option {
   position: absolute;
   width: 100%;
   height: 100%;
+  text-align: center;
   backface-visibility: hidden; /* Hide the back side when not flipped */
   border-radius: 10px;
   overflow: hidden;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
 }
 
@@ -2270,9 +2286,23 @@ option {
 .calendar-page {
   padding: 20px;
   font-family: 'Raleway', sans-serif;
-  background: /*linear-gradient(135deg, #6a11cb, #2575fc);  Gradient background */transparent;
-  color: #fff;
+  background: url('./assests/calenderbg.jpg') no-repeat center center fixed; /* Corrected the file path */
+  background-size: cover; /* Ensure the image covers the entire background */
+  color: #000000; /* Ensure text remains visible */
   min-height: 100vh;
+  position: relative; /* Ensure proper positioning for overlay */
+}
+
+.calendar-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure it appears above the background image */
+  pointer-events: none; /* Allow interaction with content */
 }
 
 .calendar-header {
@@ -2287,7 +2317,7 @@ option {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .view-buttons button {
@@ -2415,6 +2445,8 @@ option {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
+  position: relative; /* Ensure content is above the overlay */
+  z-index: 2; /* Ensure content is above the overlay */
 }
 
 .calendar-cell {

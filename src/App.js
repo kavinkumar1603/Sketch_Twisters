@@ -154,11 +154,15 @@ function App() {
   };
 
   const handleSaveDetailsClick = (newDepartment) => {
-    setLoggedInUser((prevUser) => ({
-      ...prevUser,
-      department: newDepartment || "N/A", // Save the updated department
-      isEditing: false, // Disable editing mode
-    }));
+    setLoggedInUser((prevUser) => {
+      const updatedUser = {
+        ...prevUser,
+        department: newDepartment || "N/A", // Save the updated department
+        isEditing: false, // Disable editing mode
+      };
+      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser)); // Save updated user to localStorage
+      return updatedUser;
+    });
   };
 
   const handleAddAchievement = (newAchievement) => {
@@ -557,6 +561,13 @@ function App() {
       </div>
     );
   };
+
+  React.useEffect(() => {
+    const savedUser = localStorage.getItem("loggedInUser");
+    if (savedUser) {
+      setLoggedInUser(JSON.parse(savedUser)); // Load user details from localStorage on app load
+    }
+  }, []);
 
   return (
     <div className="app-container">
