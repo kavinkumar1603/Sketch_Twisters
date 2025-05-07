@@ -711,7 +711,7 @@ function App() {
             />
           }
         />
-        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/calendar" element={<CalendarPage user={loggedInUser} />} />
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
@@ -721,7 +721,6 @@ function App() {
           </div>
         </div>
       )}
-      <button onClick={handleCalendarClick}>Go to Calendar</button>
     </div>
   );
 }

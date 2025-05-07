@@ -8,7 +8,6 @@ const localizer = momentLocalizer(moment);
 
 const CalendarPage = ({ user }) => {
   const [events, setEvents] = useState(() => {
-    // Load events from localStorage on initial render
     const savedEvents = localStorage.getItem('calendarEvents');
     return savedEvents ? JSON.parse(savedEvents) : [];
   });
@@ -18,10 +17,9 @@ const CalendarPage = ({ user }) => {
     start: '',
     end: '',
   });
-  const [selectedView, setSelectedView] = useState('month'); // Default view
+  const [selectedView, setSelectedView] = useState('month');
 
   useEffect(() => {
-    // Save events to localStorage whenever they change
     localStorage.setItem('calendarEvents', JSON.stringify(events));
   }, [events]);
 
@@ -47,7 +45,7 @@ const CalendarPage = ({ user }) => {
   const handleClearEvents = () => {
     if (window.confirm('Are you sure you want to clear all events?')) {
       setEvents([]);
-      localStorage.removeItem('calendarEvents'); // Clear events from localStorage
+      localStorage.removeItem('calendarEvents');
     }
   };
 
@@ -108,7 +106,7 @@ const CalendarPage = ({ user }) => {
         view={selectedView}
         onView={setSelectedView}
         style={{ height: 500, margin: '20px' }}
-        eventPropGetter={eventStyleGetter} // Apply custom styles to events
+        eventPropGetter={eventStyleGetter}
       />
       {showAddEventModal && (
         <div className="add-event-modal">

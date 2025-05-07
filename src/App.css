@@ -2291,8 +2291,9 @@ option {
 }
 
 .view-buttons button {
-  background-color: #f0f0f0;
-  border: none;
+  background-color: transparent; /* Make the background transparent */
+  border: 2px solid #2575fc; /* Add a visible border */
+  color: #2575fc; /* Set the text color to match the border */
   padding: 10px 15px;
   margin-right: 10px;
   cursor: pointer;
@@ -2302,14 +2303,14 @@ option {
 }
 
 .view-buttons button.active {
-  background-color: #ffd700;
-  color: #000;
+  background-color: #2575fc; /* Highlight active button */
+  color: #fff; /* White text for active button */
   transform: scale(1.1);
 }
 
 .view-buttons button:hover {
-  background-color: #0056b3;
-  color: #fff;
+  background-color: #2575fc; /* Add background on hover */
+  color: #fff; /* White text on hover */
 }
 
 .action-buttons {
