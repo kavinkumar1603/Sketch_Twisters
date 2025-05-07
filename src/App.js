@@ -19,6 +19,9 @@ import card4 from './assests/card4.jpg'; // Import card image
 import card5 from './assests/card5.JPG'; // Import card image
 import AchievementsPage from './AchievementsPage'; // Import the AchievementsPage component
 import AddAchievementPage from './AddAchievementPage'; // Import the AddAchievementPage component
+import EventHubPage from './EventHubPage'; // Import the EventHubPage component
+import Header from './Header'; // Import the Header component
+import CalendarPage from './CalendarPage'; // Import the CalendarPage component
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -162,6 +165,10 @@ function App() {
     setAchievements((prev) => [...prev, newAchievement]); // Add new achievement
   };
 
+  const handleCalendarClick = () => {
+    navigate('/calendar'); // Navigate to the calendar page
+  };
+
   const renderModalContent = () => {
     if (selectedOption) {
       const isTeacherLoggedIn = selectedOption === "Teacher" && localStorage.getItem("teacherLoggedIn");
@@ -269,7 +276,7 @@ function App() {
                 type="text"
                 id="name"
                 placeholder="Enter your name"
-                value={registrationDetails.name}
+                value={registrationDetails.name}                                                                            
                 onChange={handleInputChange}
               />
               {errors.name && <p className="error-message">{errors.name}</p>}
@@ -385,38 +392,63 @@ function App() {
       <div className="card-section-container">
         <h2 className="card-section-title">Why you are here?</h2>
         <p className="card-section-description">
-            Explore our exciting events, workshops, and opportunities!
-          </p>
+          Explore our exciting events, workshops, and opportunities!
+        </p>
         <div className="card-section">
           <div className="card">
-            <img src={card1} alt="Event Calendar" className="card-image" />
-            <p className="card-description">Stay Organized. Stay Ahead.</p>
-            <p>View all upcoming events in a single glance and plan your participation with ease.</p>
-            <button className="styled-button">EVENT CALENDAR</button>
+            <div className="card-inner">
+              <div className="card-front">
+                <img src={card1} alt="Event Calendar" />
+                <p className="card-description">Event Calendar</p>
+              </div>
+              <div className="card-back">
+                <p>Stay organized with all upcoming events in a single glance and plan your participation with ease.</p>
+              </div>
+            </div>
           </div>
           <div className="card">
-            <img src={card2} alt="On Campus Events" className="card-image" />
-            <p className="card-description">Happening at SECE!</p>
-            <p>Explore events from your departments, clubs, CIR, GDC, and more – all in one place.</p>
-            <button className="styled-button">ON CAMPUS EVENTS</button>
+            <div className="card-inner">
+              <div className="card-front">
+                <img src={card2} alt="On Campus Events" />
+                <p className="card-description">On Campus Events</p>
+              </div>
+              <div className="card-back">
+                <p>Explore events from your departments, clubs, CIR, GDC, and more – all in one place.</p>
+              </div>
+            </div>
           </div>
           <div className="card">
-            <img src={card3} alt="Off Campus Events" className="card-image" />
-            <p className="card-description">Go Beyond the Campus.</p>
-            <p>Discover inter-college fests, competitions, and tech events to showcase your skills.</p>
-            <button className="styled-button">OFF CAMPUS EVENTS</button>
+            <div className="card-inner">
+              <div className="card-front">
+                <img src={card3} alt="Off Campus Events" />
+                <p className="card-description">Off Campus Events</p>
+              </div>
+              <div className="card-back">
+                <p>Discover inter-college fests, competitions, and tech events to showcase your skills.</p>
+              </div>
+            </div>
           </div>
           <div className="card">
-            <img src={card4} alt="Achievements" className="card-image" />
-            <p className="card-description">SECE Stars Shine Here!</p>
-            <p>Celebrate the victories and milestones of our talented students and teams.</p>
-            <button className="styled-button" onClick={handleAchievementsClick}>ACHIEVEMENTS</button>
+            <div className="card-inner">
+              <div className="card-front">
+                <img src={card4} alt="Achievements" />
+                <p className="card-description">Achievements</p>
+              </div>
+              <div className="card-back">
+                <p>Celebrate the victories and milestones of our talented students and teams.</p>
+              </div>
+            </div>
           </div>
           <div className="card">
-            <img src={card5} alt="Scholarships" className="card-image" />
-            <p className="card-description">Opportunities that Support You.</p>
-            <p>Find scholarships and grants that match your academic and career goals.</p>
-            <button className="styled-button">SCHOLARSHIPS</button>
+            <div className="card-inner">
+              <div className="card-front">
+                <img src={card5} alt="Scholarships" />
+                <p className="card-description">Scholarships</p>
+              </div>
+              <div className="card-back">
+                <p>Find scholarships and grants that match your academic and career goals.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -426,46 +458,6 @@ function App() {
   const renderMainContent = () => {
     return (
       <div className="main-content">
-        <header className="success-header">
-          <h1 className="main-heading">EVENTSPHERE</h1>
-          <div className="navigation-menu">
-            <ul>
-              <li onClick={() => navigate('/main')}>Home</li>
-              <li>Calendar</li>
-              <li>
-                Events
-                <ul className="dropdown-menu-1">
-                  <li className="dropdown-item">Departments</li>
-                  <li className="dropdown-item">Verticals</li>
-                  <li className="dropdown-item">Google Developer Groups</li>
-                  <li className="dropdown-item">Center for International Relations</li>
-                  <li className="dropdown-item">Higher Education Cell</li>
-                </ul>
-              </li>
-              <li onClick={() => navigate('/achievements')}>Achievements</li> {/* Navigate to achievements page */}
-              <li>Notifications</li>
-            </ul>
-          </div>
-          <div className="user-profile" onClick={toggleUserDropdown}>
-            <img src={UserProfileImage} alt="User Profile" className="user-profile-image" />
-            <span>{loggedInUser?.name || "USER NAME"}</span>
-            {showDropdown && (
-              <ul className="dropdown-menu">
-                <li>
-                  <button className="dropdown-button" onClick={handleUserProfileClick}>
-                    User Profile
-                  </button>
-                </li>
-                <li>
-                  <button className="dropdown-button" onClick={handleLogoutClick}>
-                    Log Out
-                  </button>
-                </li>
-              </ul>
-            )}
-          </div>
-        </header>
-       
         <div className="grid-container" ref={imageGridRef}> {/* Add ref to the grid container */}
           <div className="grid-item">
             <img src={image1} alt="College Event 1" className="grid-image-top-left" />
@@ -551,7 +543,8 @@ function App() {
                 <span>{loggedInUser.department || "N/A"}</span>
               )}
             </p>
-            {!loggedInUser.isEditing && (
+            {/* Show "Edit Details" button only for Admin and Teacher roles */}
+            {!loggedInUser.isEditing && (loggedInUser.role === "Admin" || loggedInUser.role === "Teacher") && (
               <button 
                 className="fill-details-button styled-button" 
                 onClick={handleFillDetailsClick}
@@ -567,6 +560,10 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* Conditionally render the Header */}
+      {!(window.location.pathname === '/' || window.location.pathname === '/profile') && (
+        <Header user={loggedInUser} onLogout={handleLogoutClick} />
+      )}
       <Routes>
         <Route
           path="/"
@@ -627,10 +624,58 @@ function App() {
         <Route
           path="/profile"
           element={
-            <UserProfileDetails
-              user={loggedInUser}
-              onLogout={handleLogoutClick} // Pass logout function
-            />
+            <div className="profile-page">
+              <div className="profile-card">
+                <h2 className="profile-title">{loggedInUser?.name || "User Name"}</h2>
+                <div className="profile-avatar">
+                  <img src={UserProfileImage} alt="User Avatar" className="avatar-image" />
+                </div>
+                <div className="profile-details">
+                  <p><strong>ID:</strong> {loggedInUser?.id || "N/A"}</p>
+                  <p><strong>Email:</strong> {loggedInUser?.email || "N/A"}</p>
+                  <p><strong>Role:</strong> {loggedInUser?.role || "N/A"}</p>
+                  <p>
+                    <strong>Department:</strong>
+                    {loggedInUser?.isEditing ? (
+                      <>
+                        <input
+                          type="text"
+                          defaultValue={loggedInUser?.department || ""}
+                          onChange={(e) =>
+                            setLoggedInUser((prevUser) => ({
+                              ...prevUser,
+                              department: e.target.value,
+                            }))
+                          }
+                          autoFocus
+                          className="editable-input"
+                        />
+                        <button
+                          className="save-details-button styled-button"
+                          onClick={() => handleSaveDetailsClick(loggedInUser?.department)}
+                        >
+                          Save
+                        </button>
+                      </>
+                    ) : (
+                      <span>{loggedInUser?.department || "N/A"}</span>
+                    )}
+                  </p>
+                  {/* Show "Edit Details" button only for Admin and Teacher roles */}
+                  {!loggedInUser?.isEditing && (loggedInUser?.role === "Admin" || loggedInUser?.role === "Teacher") && (
+                    <button 
+                      className="fill-details-button styled-button" 
+                      onClick={handleFillDetailsClick}
+                    >
+                      Edit Details
+                    </button>
+                  )}
+                </div>
+                <button className="back-button" onClick={() => navigate("/main")}>
+                  Back to Home
+                </button>
+              </div>
+            </div>
           }
         />
         <Route
@@ -657,6 +702,16 @@ function App() {
             />
           }
         />
+        <Route
+          path="/events"
+          element={
+            <EventHubPage
+              user={loggedInUser}
+              onLogout={handleLogoutClick}
+            />
+          }
+        />
+        <Route path="/calendar" element={<CalendarPage />} />
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
@@ -666,6 +721,7 @@ function App() {
           </div>
         </div>
       )}
+      <button onClick={handleCalendarClick}>Go to Calendar</button>
     </div>
   );
 }

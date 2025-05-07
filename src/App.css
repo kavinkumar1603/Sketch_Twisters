@@ -1077,6 +1077,120 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
+  color: #fff;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out; /* Add fade-in animation */
+}
+
+.profile-card {
+  background-color: #ffffff;
+  color: #333;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2575fc;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+}
+
+.profile-avatar {
+  margin-bottom: 20px;
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #2575fc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow around the avatar */
+}
+
+.profile-details {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.profile-details p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #555; /* Slightly darker text for details */
+}
+
+.profile-details strong {
+  color: #2575fc; /* Highlight labels in blue */
+}
+
+.editable-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Add inner shadow */
+}
+
+.fill-details-button,
+.save-details-button {
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.fill-details-button:hover,
+.save-details-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.back-button {
+  background-color: #f44336; /* Red background for back button */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.back-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient background */
   color: #fff;
@@ -1331,7 +1445,7 @@ option {
 }
 
 .card {
-  background-color: #000; /* Black background */
+  background-color: #f7f9fc; /* Light gray background for cards and modals */
   color: #fff; /* White text */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -1405,7 +1519,7 @@ option {
 }
 
 .card {
-  background-color: #ffffff; /* White background for cards */
+  background-color: #f7f9fc; /* Light gray background for cards and modals */
   color: #333333; /* Dark text for contrast */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
@@ -1527,7 +1641,7 @@ option {
 }
 
 .achievement-card {
-  background-color: #fff;
+  background-color: #f7f9fc; /* Light gray background for cards and modals */
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -1587,7 +1701,7 @@ option {
 }
 
 .achievement-card {
-  background-color: #fff;
+  background-color: #f7f9fc; /* Light gray background for cards and modals */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -1899,5 +2013,487 @@ option {
 
 .user-profile:hover .dropdown-menu {
   display: block;
+}
+
+/* Event Hub Page Styles */
+.event-hub-page {
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+  background-color: #000;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.event-hub-header {
+  margin-bottom: 20px;
+}
+
+.event-hub-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffd700; /* Gold color for the title */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.event-hub-nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  gap: 20px;
+}
+
+.event-hub-nav li {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.event-hub-nav li:hover {
+  color: #ffd700; /* Gold color on hover */
+}
+
+.event-hub-categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.event-hub-categories button {
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.event-hub-categories button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.trending-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.trending-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.trending-card {
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trending-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.trending-image {
+  background-color: #333;
+  height: 150px;
+}
+
+.trending-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #ffd700;
+}
+
+.trending-card p {
+  font-size: 0.9rem;
+  margin: 10px 15px;
+  color: #ccc;
+}
+
+.trending-card button {
+  background-color: #2575fc;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.trending-card button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Card Flip Container */
+.card {
+  perspective: 1000px; /* Enable 3D perspective */
+  position: relative;
+  width: 250px;
+  height: 300px; /* Adjust height to fit content */
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg); /* Flip the card on hover */
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d; /* Enable 3D effect */
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back side when not flipped */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
+}
+
+.card-front {
+  background-color: #ffffff; /* White background for the front */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-back {
+  background-color: transparent; /* Blue background for the back */
+  color: #000000; /* White text */
+  transform: rotateY(180deg); /* Position the back side */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Achievement Card Flip */
+.achievement-card {
+  perspective: 1000px; /* Enable 3D perspective */
+  position: relative;
+  width: 250px;
+  height: 300px; /* Adjust height to fit content */
+}
+
+.achievement-card:hover .card-inner {
+  transform: rotateY(180deg); /* Flip the card on hover */
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d; /* Enable 3D effect */
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back side when not flipped */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for better appearance */
+}
+
+.card-front {
+  background-color: #ffffff; /* White background for the front */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.card-front .achievement-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-back {
+  background-color: transparent; /* Blue background for the back */
+  color: black ; /* White text */
+  transform: rotateY(180deg); /* Position the back side */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Calendar Page Styles */
+.calendar-page {
+  padding: 20px;
+  font-family: 'Raleway', sans-serif;
+  background: /*linear-gradient(135deg, #6a11cb, #2575fc);  Gradient background */transparent;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.calendar-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.view-buttons button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-buttons button.active {
+  background-color: #ffd700;
+  color: #000;
+  transform: scale(1.1);
+}
+
+.view-buttons button:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.add-event-button,
+.clear-events-button {
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-event-button:hover {
+  background-color: #e74c3c;
+}
+
+.clear-events-button {
+  background-color: #f39c12;
+}
+
+.clear-events-button:hover {
+  background-color: #e67e22;
+}
+
+.add-event-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #f7f9fc; /* Light gray background for cards and modals */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #333;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-buttons button:first-of-type {
+  background-color: #2575fc;
+  color: white;
+}
+
+.modal-buttons button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-buttons button:hover {
+  transform: scale(1.05);
+}
+
+.calendar-content {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-cell {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: transparent; /* Light gray background for all calendar cells */
+  position: relative;
+}
+
+.calendar-cell .date {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.event {
+  font-size: 0.8rem;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.add-event-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #f7f9fc; /* Light gray background for cards and modals */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:first-of-type {
+  background-color: #2575fc;
+  color: white;
+}
+
+.modal-content button:last-of-type {
+  background-color: #f44336;
+  color: white;
 }
 

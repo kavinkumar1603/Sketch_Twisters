@@ -1,96 +1,104 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './App.css'; // Import the CSS for styling
-import profile from './assests/user-profile.jpg'; // Import the provided profile image
+import { useNavigate } from 'react-router-dom';
+import './App.css';
 
-const AchievementsPage = ({ achievements = [], user, onLogout }) => { // Accept user and onLogout as props
-  const navigate = useNavigate(); // Initialize useNavigate
-  const [showDropdown, setShowDropdown] = useState(false); // State for dropdown
+const AchievementsPage = ({ achievements = [], user, onLogout }) => {
+  const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleAddAchievementClick = () => {
-    navigate('/add-achievement'); // Navigate to the Add Achievement page
+    navigate('/add-achievement');
   };
 
   return (
-    <div className="achievements-page">
-      <header className="achievements-header">
-        <h1 className="achievements-title">EVENTSPHERE</h1>
-        <nav className="achievements-nav">
-          <ul>
-            <li onClick={() => navigate('/main')}>HOME</li> {/* Navigate to the main page */}
-            <li>CALENDAR</li>
-            <li>EVENTS</li>
-            <li onClick={() => navigate('/achievements')} className="active">ACHIEVEMENTS</li> {/* Navigate to achievements page */}
-            <li>NOTIFICATION</li>
-          </ul>
-        </nav>
-        <div className="user-profile" onClick={(e) => e.stopPropagation()}>
-          <img src={user?.profileImage || profile} alt="User Profile" className="user-profile-image" />
-          <span>{user?.name || "USER NAME"}</span>
-          <button className="dropdown-toggle" onClick={() => setShowDropdown((prev) => !prev)}>▼</button>
-          {showDropdown && (
-            <ul className="dropdown-menu">
-              <li onClick={onLogout}>LOGOUT</li>
-            </ul>
-          )}
-        </div>
-      </header>
-      <main className="achievements-content">
-        <h2 className="achievements-section-title">TOP ACHIEVEMENTS</h2>
-        <div className="achievements-cards">
-          <div className="achievement-card">
-            <div className="achievement-image" style={{ backgroundImage: 'url(/path/to/image1.jpg)' }}></div>
-            <div className="achievement-details">
+    <div className="achievements-content">
+      {/* Removed redundant header */}
+      <h2 className="achievements-section-title">TOP ACHIEVEMENTS</h2>
+      <div className="achievements-cards">
+        <div className="achievement-card">
+          <div className="card-inner">
+            <div className="card-front">
+              <div
+                className="achievement-image"
+                style={{ backgroundImage: 'url(/path/to/image1.jpg)' }}
+              ></div>
               <h3>JAISURYA S - 24CS090</h3>
+            </div>
+            <div className="card-back">
               <p>Won 1st place in the National Coding Championship.</p>
             </div>
           </div>
-          <div className="achievement-card">
-            <div className="achievement-image" style={{ backgroundImage: 'url(/path/to/image2.jpg)' }}></div>
-            <div className="achievement-details">
+        </div>
+        <div className="achievement-card">
+          <div className="card-inner">
+            <div className="card-front">
+              <div
+                className="achievement-image"
+                style={{ backgroundImage: 'url(/path/to/image2.jpg)' }}
+              ></div>
               <h3>KAVINKUMAR C - 24CS110</h3>
+            </div>
+            <div className="card-back">
               <p>Secured 2nd place in the AI Hackathon 2023.</p>
             </div>
           </div>
-          <div className="achievement-card">
-            <div className="achievement-image" style={{ backgroundImage: 'url(/path/to/image3.jpg)' }}></div>
-            <div className="achievement-details">
+        </div>
+        <div className="achievement-card">
+          <div className="card-inner">
+            <div className="card-front">
+              <div
+                className="achievement-image"
+                style={{ backgroundImage: 'url(/path/to/image3.jpg)' }}
+              ></div>
               <h3>KANISHKA S - 24CS104</h3>
+            </div>
+            <div className="card-back">
               <p>Published a research paper in IEEE Xplore.</p>
             </div>
           </div>
-          <div className="achievement-card">
-            <div className="achievement-image" style={{ backgroundImage: 'url(/path/to/image4.jpg)' }}></div>
-            <div className="achievement-details">
+        </div>
+        <div className="achievement-card">
+          <div className="card-inner">
+            <div className="card-front">
+              <div
+                className="achievement-image"
+                style={{ backgroundImage: 'url(/path/to/image4.jpg)' }}
+              ></div>
               <h3>KIRITHIKA S - 24CS118</h3>
+            </div>
+            <div className="card-back">
               <p>Developed an award-winning mobile application.</p>
             </div>
           </div>
         </div>
-        <button
-          className="add-achievement-button"
-          onClick={handleAddAchievementClick} // Navigate to AddAchievementPage
-        >
-          + ADD YOUR ACHIEVEMENT
-        </button>
-        <h2 className="achievements-section-title">ALL ACHIEVEMENTS</h2>
-        <div className="all-achievements-cards">
-          {achievements.map((achievement, index) => (
-            <div className="achievement-card" key={index}>
-              <div
-                className="achievement-image"
-                style={{
-                  backgroundImage: `url(${achievement.photo ? URL.createObjectURL(achievement.photo) : ''})`,
-                }}
-              ></div>
-              <div className="achievement-details">
+      </div>
+      <button
+        className="add-achievement-button"
+        onClick={handleAddAchievementClick}
+      >
+        + ADD YOUR ACHIEVEMENT
+      </button>
+      <h2 className="achievements-section-title">ALL ACHIEVEMENTS</h2>
+      <div className="all-achievements-cards">
+        {achievements.map((achievement, index) => (
+          <div className="achievement-card" key={index}>
+            <div className="card-inner">
+              <div className="card-front">
+                <div
+                  className="achievement-image"
+                  style={{
+                    backgroundImage: `url(${achievement.photo ? URL.createObjectURL(achievement.photo) : ''})`,
+                  }}
+                ></div>
                 <h3>{achievement.eventName}</h3>
+              </div>
+              <div className="card-back">
                 <p>{achievement.description}</p>
               </div>
             </div>
-          ))}
-        </div>
-      </main>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
