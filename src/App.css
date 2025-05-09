@@ -2284,249 +2284,676 @@ option {
 
 /* Calendar Page Styles */
 .calendar-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
   padding: 20px;
   font-family: 'Raleway', sans-serif;
-  background: url('./assests/calenderbg.jpg') no-repeat center center fixed; /* Corrected the file path */
-  background-size: cover; /* Ensure the image covers the entire background */
-  color: #000000; /* Ensure text remains visible */
+  background-color: #f9f9f9; /* Light background */
+  color: #333; /* Dark text for contrast */
   min-height: 100vh;
-  position: relative; /* Ensure proper positioning for overlay */
-}
-
-.calendar-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-  z-index: 1; /* Ensure it appears above the background image */
-  pointer-events: none; /* Allow interaction with content */
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  max-width: 1200px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
 }
 
 .calendar-header h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: #333;
 }
 
-.view-buttons button {
-  background-color: transparent; /* Make the background transparent */
-  border: 2px solid #2575fc; /* Add a visible border */
-  color: #2575fc; /* Set the text color to match the border */
+.calendar-header .navigation-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.navigation-buttons button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
   padding: 10px 15px;
-  margin-right: 10px;
-  cursor: pointer;
-  border-radius: 5px;
   font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.view-buttons button.active {
-  background-color: #2575fc; /* Highlight active button */
-  color: #fff; /* White text for active button */
-  transform: scale(1.1);
+.navigation-buttons button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-.view-buttons button:hover {
-  background-color: #2575fc; /* Add background on hover */
-  color: #fff; /* White text on hover */
+.calendar-container {
+  width: 100%;
+  max-width: 800px; /* Restrict the width of the calendar */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
 }
 
-.action-buttons {
+.calendar-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calendar-container th,
+.calendar-container td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.calendar-container th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.calendar-container td {
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-container td:hover {
+  background-color: #f9f9f9;
+}
+
+.calendar-container .today {
+  background-color: #ffeb3b;
+  font-weight: bold;
+}
+
+.calendar-container .event {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+.calendar-sidebar {
+  flex: 0.3; /* Sidebar takes less space */
+  background-color: #ffffff; /* White background for the sidebar */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px;
+  margin-left: 20px; /* Add spacing between the calendar and sidebar */
+}
+
+.calendar-sidebar h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calendar-widget {
+  margin-bottom: 30px;
+}
+
+.legend {
+  margin-top: 20px;
+}
+
+.legend h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend li {
   display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.legend li span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.legend li.tech span {
+  background-color: #007bff;
+}
+
+.legend li.cultural span {
+  background-color: #6f42c1;
+}
+
+.legend li.career span {
+  background-color: #fd7e14;
+}
+
+.calendar-events {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calendar-events h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.event-card {
+  display: flex;
+  background-color: #ffffff; /* White background for event cards */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.event-card img {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-card-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.event-card-content h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.event-card-content p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.event-card-content .event-details {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.event-card-content .event-details span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.event-card-content .view-details-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.event-card-content .view-details-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-page {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+    top: 50px; /* Adjust the top position for smaller screens */
+  }
+
+  .calendar-container {
+    max-width: 100%; /* Allow full width on smaller screens */
+    margin-left: 0; /* Keep aligned to the left */
+    margin-bottom: 20px; /* Add spacing below the calendar */
+  }
+
+  .calendar-sidebar {
+    flex: 1; /* Sidebar takes full width */
+  }
+
+  .calendar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .calendar-container {
+    padding: 10px;
+  }
+
+  .calendar-container th,
+  .calendar-container td {
+    padding: 5px;
+  }
+}
+
+/* Login/Signup Page Styles */
+.login-page {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Add gradient background */
+  font-family: 'Raleway', sans-serif;
+}
+
+.login-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  background-color: #ffffff;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+}
+
+.login-title .highlight {
+  color: #6a11cb;
+}
+
+.login-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+.login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+}
+
+.login-form {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+.login-tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.login-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-tab:hover {
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+
+.login-tab.active {
+  color: #ffffff;
+  background-color: #6a11cb;
+  border-bottom: 2px solid #ffffff;
+}
+
+.login-form label {
+  display: block;
+  font-size: 1rem;
+  color: #4a4a4a;
+  margin-bottom: 5px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.login-submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6a11cb;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-submit-button:hover {
+  background-color: #4a0e9e;
+}
+
+.signup-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.signup-link {
+  color: #6a11cb;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-link:hover {
+  color: #4a0e9e;
+}
+
+.calendar-actions {
+  margin-top: 20px;
 }
 
 .add-event-button,
 .clear-events-button {
-  background-color: #ff6b6b;
-  color: #fff;
-  border: none;
+  margin: 10px;
   padding: 10px 20px;
   font-size: 1rem;
-  cursor: pointer;
+  border: none;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
-.add-event-button:hover {
-  background-color: #e74c3c;
+.add-event-button {
+  background-color: #4caf50;
+  color: white;
 }
 
 .clear-events-button {
-  background-color: #f39c12;
+  background-color: #f44336;
+  color: white;
+}
+
+.add-event-button:hover {
+  background-color: #45a049;
 }
 
 .clear-events-button:hover {
-  background-color: #e67e22;
+  background-color: #e53935;
 }
 
-.add-event-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+.calendar-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.calendar-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.calendar-actions {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  gap: 20px; /* Add spacing between buttons */
 }
 
-.modal-content {
-  background: #f7f9fc; /* Light gray background for cards and modals */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 300px;
-}
-
-.modal-content h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.modal-content label {
-  display: block;
-  margin-bottom: 10px;
-  text-align: left;
-  color: #333;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal-buttons button {
-  margin: 5px;
-  padding: 10px 20px;
+.add-event-button,
+.clear-events-button {
+  padding: 12px 25px; /* Increase padding for better visibility */
+  font-size: 1.1rem; /* Slightly larger font size */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* More rounded corners */
   cursor: pointer;
+  font-weight: bold; /* Make text bold */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
 }
 
-.modal-buttons button:first-of-type {
-  background-color: #2575fc;
+.add-event-button {
+  background-color: #28a745; /* Green background */
   color: white;
 }
 
-.modal-buttons button:last-of-type {
-  background-color: #f44336;
+.clear-events-button {
+  background-color: #dc3545; /* Red background */
   color: white;
 }
 
-.modal-buttons button:hover {
-  transform: scale(1.05);
+.add-event-button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-.calendar-content {
+.clear-events-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.add-event-button:active,
+.clear-events-button:active {
+  transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Ensure buttons are responsive */
+@media (max-width: 768px) {
+  .calendar-actions {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    gap: 15px;
+  }
+
+  .add-event-button,
+  .clear-events-button {
+    width: 80%; /* Make buttons take up more space on smaller screens */
+    margin: 0 auto; /* Center buttons */
+  }
+}
+
+.calendar-placeholder {
+  text-align: center;
+  padding: 50px;
+  font-size: 1.2rem;
+  color: #666;
+  border: 1px dashed #ccc; /* Placeholder styling */
+}
+
+.calendar-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: 'Raleway', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+}
+
+.calendar-sidebar {
+  flex: 0.3;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.calendar-sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.calendar-widget {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.calendar-navigation button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  position: relative; /* Ensure content is above the overlay */
-  z-index: 2; /* Ensure content is above the overlay */
+  gap: 5px;
+  margin-top: 10px;
 }
 
-.calendar-cell {
+.calendar-day {
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 10px;
-  background-color: transparent; /* Light gray background for all calendar cells */
-  position: relative;
+  cursor: pointer;
+  background-color: #fff;
 }
 
-.calendar-cell .date {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.event {
-  font-size: 0.8rem;
+.calendar-day.selected {
+  background-color: #007bff;
   color: #fff;
-  padding: 5px;
-  border-radius: 3px;
-  margin-bottom: 5px;
-  text-align: center;
+  font-weight: bold;
 }
 
-.add-event-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+.legend {
+  margin-top: 20px;
+}
+
+.legend h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.legend ul {
+  list-style: none;
+  padding: 0;
+}
+
+.legend li {
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  margin-bottom: 10px;
 }
 
-.modal-content {
-  background: #f7f9fc; /* Light gray background for cards and modals */
-  padding: 20px;
+.legend li span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.legend li.tech span {
+  background-color: #007bff;
+}
+
+.legend li.cultural span {
+  background-color: #6f42c1;
+}
+
+.legend li.career span {
+  background-color: #fd7e14;
+}
+
+.event-list {
+  flex: 0.7;
+  background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }
 
-.modal-content h2 {
+.event-list h2 {
+  font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
-.modal-content label {
-  display: block;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 8px;
+.event-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
-.modal-content button {
-  margin: 5px;
-  padding: 10px 20px;
+.event-tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.event-tag.tech {
+  background-color: #007bff;
+}
+
+.event-tag.cultural {
+  background-color: #6f42c1;
+}
+
+.event-tag.career {
+  background-color: #fd7e14;
+}
+
+.event-details {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.view-details-button {
+  background-color: #007bff;
+  color: #fff;
   border: none;
+  padding: 10px 15px;
+  font-size: 0.9rem;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.modal-content button:first-of-type {
-  background-color: #2575fc;
-  color: white;
-}
-
-.modal-content button:last-of-type {
-  background-color: #f44336;
-  color: white;
+.view-details-button:hover {
+  background-color: #0056b3;
 }
 

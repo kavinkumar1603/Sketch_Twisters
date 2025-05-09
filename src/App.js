@@ -22,6 +22,8 @@ import AddAchievementPage from './AddAchievementPage'; // Import the AddAchievem
 import EventHubPage from './EventHubPage'; // Import the EventHubPage component
 import Header from './Header'; // Import the Header component
 import CalendarPage from './CalendarPage'; // Import the CalendarPage component
+import FullCalendar from '@fullcalendar/react'; // Import FullCalendar
+import dayGridPlugin from '@fullcalendar/daygrid'; // Import dayGrid plugin
 
 function App() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -32,6 +34,7 @@ function App() {
     studentId: "",
     password: "",
     confirmPassword: "",
+    email: "",
   });
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false); // State for success modal
@@ -42,6 +45,11 @@ function App() {
   const imageGridRef = useRef(null); // Reference for the image grid container
   const cardSectionRef = useRef(null); // Reference for the card section
   const [achievements, setAchievements] = useState([]); // State to store achievements
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [events, setEvents] = useState([
+    { title: 'Event 1', date: '2023-11-01' },
+    { title: 'Event 2', date: '2023-11-15' },
+  ]); // State to manage calendar events
 
   const handleUserProfileClick = () => {
     navigate("/profile", { state: { user: loggedInUser } }); // Pass user details via state
@@ -58,8 +66,7 @@ function App() {
   };
 
   const handleLoginClick = () => {
-    setShowLoginOptions(true);
-    setSelectedOption(null); // Reset selectedOption to show Admin/Student login options
+    navigate('/login'); // Navigate to the login page
   };
 
   const handleOptionClick = (option) => {
@@ -171,6 +178,44 @@ function App() {
 
   const handleCalendarClick = () => {
     navigate('/calendar'); // Navigate to the calendar page
+  };
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = registrationDetails;
+    const newErrors = {};
+
+    if (!email) newErrors.email = "Email is required.";
+    if (!password) newErrors.password = "Password is required.";
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      // Simulate login success
+      console.log("Login successful:", registrationDetails);
+      setIsLoggedIn(true); // Set login state to true
+      navigate("/main"); // Navigate to the main page
+    }
+  };
+
+  const handleLoginTypeClick = (type) => {
+    setSelectedOption(type); // Set the selected login type
+  };
+
+  const handleAddEvent = () => {
+    const newEvent = {
+      title: 'New Event',
+      date: new Date().toISOString().split('T')[0], // Default to today's date
+    };
+    setEvents((prevEvents) => [...prevEvents, newEvent]); // Add the new event to the state
+    alert('Event added successfully!');
+  };
+
+  const handleClearEvents = () => {
+    if (window.confirm('Are you sure you want to clear all events?')) {
+      setEvents([]); // Clear all events
+      alert('All events have been cleared.');
+    }
   };
 
   const renderModalContent = () => {
@@ -365,7 +410,7 @@ function App() {
 
   const toggleUserDropdown = (e) => {
     e.stopPropagation(); // Prevent event bubbling
-    setShowDropdown((prev) => !prev); // Toggle dropdown visibility
+    setShowDropdown((prev) => !(prev)); // Toggle dropdown visibility
   };
 
   React.useEffect(() => {
@@ -509,6 +554,8 @@ function App() {
       );
     }
 
+    const isTeacherOrAdmin = loggedInUser.role === "Teacher" || loggedInUser.role === "Admin";
+
     return (
       <div className="profile-page">
         <div className="profile-card">
@@ -547,8 +594,8 @@ function App() {
                 <span>{loggedInUser.department || "N/A"}</span>
               )}
             </p>
-            {/* Show "Edit Details" button only for Admin and Teacher roles */}
-            {!loggedInUser.isEditing && (loggedInUser.role === "Admin" || loggedInUser.role === "Teacher") && (
+            {/* Show "Edit Details" button for Teacher and Admin roles */}
+            {isTeacherOrAdmin && !loggedInUser.isEditing && (
               <button 
                 className="fill-details-button styled-button" 
                 onClick={handleFillDetailsClick}
@@ -558,6 +605,37 @@ function App() {
             )}
           </div>
         </div>
+      </div>
+    );
+  };
+
+  const renderCalendarPage = () => {
+    const isTeacherOrAdmin = loggedInUser?.role === "Teacher" || loggedInUser?.role === "Admin";
+
+    return (
+      <div className="calendar-page">
+        <h2 className="calendar-title">Event Calendar</h2>
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          events={events} // Use the events state
+        />
+        {isTeacherOrAdmin && (
+          <div className="calendar-actions">
+            <button 
+              className="add-event-button styled-button" 
+              onClick={handleAddEvent}
+            >
+              Add Event
+            </button>
+            <button 
+              className="clear-events-button styled-button" 
+              onClick={handleClearEvents}
+            >
+              Clear All Events
+            </button>
+          </div>
+        )}
       </div>
     );
   };
@@ -572,7 +650,7 @@ function App() {
   return (
     <div className="app-container">
       {/* Conditionally render the Header */}
-      {!(window.location.pathname === '/' || window.location.pathname === '/profile') && (
+      {!(window.location.pathname.startsWith('/login') || window.location.pathname === '/') && (
         <Header user={loggedInUser} onLogout={handleLogoutClick} />
       )}
       <Routes>
@@ -626,68 +704,23 @@ function App() {
         <Route
           path="/main"
           element={
-            <>
-              {renderMainContent()}
-              {renderCardSection()} {/* Render the card section */}
-            </>
+            isLoggedIn ? (
+              <>
+                {renderMainContent()}
+                {renderCardSection()} {/* Render the card section */}
+              </>
+            ) : (
+              <div className="unauthorized">
+                <h2>Unauthorized Access</h2>
+                <p>Please log in to access this page.</p>
+                <button onClick={() => navigate('/login')}>Go to Login</button>
+              </div>
+            )
           }
         />  
         <Route
           path="/profile"
-          element={
-            <div className="profile-page">
-              <div className="profile-card">
-                <h2 className="profile-title">{loggedInUser?.name || "User Name"}</h2>
-                <div className="profile-avatar">
-                  <img src={UserProfileImage} alt="User Avatar" className="avatar-image" />
-                </div>
-                <div className="profile-details">
-                  <p><strong>ID:</strong> {loggedInUser?.id || "N/A"}</p>
-                  <p><strong>Email:</strong> {loggedInUser?.email || "N/A"}</p>
-                  <p><strong>Role:</strong> {loggedInUser?.role || "N/A"}</p>
-                  <p>
-                    <strong>Department:</strong>
-                    {loggedInUser?.isEditing ? (
-                      <>
-                        <input
-                          type="text"
-                          defaultValue={loggedInUser?.department || ""}
-                          onChange={(e) =>
-                            setLoggedInUser((prevUser) => ({
-                              ...prevUser,
-                              department: e.target.value,
-                            }))
-                          }
-                          autoFocus
-                          className="editable-input"
-                        />
-                        <button
-                          className="save-details-button styled-button"
-                          onClick={() => handleSaveDetailsClick(loggedInUser?.department)}
-                        >
-                          Save
-                        </button>
-                      </>
-                    ) : (
-                      <span>{loggedInUser?.department || "N/A"}</span>
-                    )}
-                  </p>
-                  {/* Show "Edit Details" button only for Admin and Teacher roles */}
-                  {!loggedInUser?.isEditing && (loggedInUser?.role === "Admin" || loggedInUser?.role === "Teacher") && (
-                    <button 
-                      className="fill-details-button styled-button" 
-                      onClick={handleFillDetailsClick}
-                    >
-                      Edit Details
-                    </button>
-                  )}
-                </div>
-                <button className="back-button" onClick={() => navigate("/main")}>
-                  Back to Home
-                </button>
-              </div>
-            </div>
-          }
+          element={renderUserProfile()}
         />
         <Route
           path="/main/profile" // Add this route
@@ -722,7 +755,113 @@ function App() {
             />
           }
         />
-        <Route path="/calendar" element={<CalendarPage user={loggedInUser} />} />
+        <Route path="/calendar" element={renderCalendarPage()} />
+        <Route
+          path="/login"
+          element={
+            <div className="login-page">
+              <div className="login-left">
+                <h1 className="login-title">SECE's <span className="highlight">EventSphere</span></h1>
+                <p className="login-subtitle">
+                  Discover every opportunity. Track events, grab scholarships, and celebrate achievements – all in one place.
+                </p>
+              </div>
+              <div className="login-right">
+                <div className="login-form">
+                  <div className="login-tabs">
+                    <button
+                      className={`login-tab ${selectedOption === "Student" ? "active" : ""}`}
+                      onClick={() => handleLoginTypeClick("Student")}
+                    >
+                      Student
+                    </button>
+                    <button
+                      className={`login-tab ${selectedOption === "Teacher" ? "active" : ""}`}
+                      onClick={() => handleLoginTypeClick("Teacher")}
+                    >
+                      Teacher
+                    </button>
+                    <button
+                      className={`login-tab ${selectedOption === "Admin" ? "active" : ""}`}
+                      onClick={() => handleLoginTypeClick("Admin")}
+                    >
+                      Admin
+                    </button>
+                  </div>
+                  <form onSubmit={handleLoginSubmit}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      value={registrationDetails.email}
+                      onChange={handleInputChange}
+                    />
+                    {errors.email && <p className="error-message">{errors.email}</p>}
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Enter your password"
+                      value={registrationDetails.password}
+                      onChange={handleInputChange}
+                    />
+                    {errors.password && <p className="error-message">{errors.password}</p>}
+                    <button type="submit" className="login-submit-button">
+                      Login as {selectedOption || "Student"}
+                    </button>
+                  </form>
+                  <p className="signup-text">
+                    Don't have an account? <span className="signup-link">Sign up</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          }
+        />
+        <Route
+          path="/login/:type"
+          element={
+            <div className="login-page">
+              <div className="login-left">
+                <h1 className="login-title">SECE's <span className="highlight">EventSphere</span></h1>
+                <p className="login-subtitle">
+                  Discover every opportunity. Track events, grab scholarships, and celebrate achievements – all in one place.
+                </p>
+              </div>
+              <div className="login-right">
+                <div className="login-form">
+                  <form onSubmit={handleLoginSubmit}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      value={registrationDetails.email}
+                      onChange={handleInputChange}
+                    />
+                    {errors.email && <p className="error-message">{errors.email}</p>}
+                    <label htmlFor="password">Password</label>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Enter your password"
+                      value={registrationDetails.password}
+                      onChange={handleInputChange}
+                    />
+                    {errors.password && <p className="error-message">{errors.password}</p>}
+                    <button type="submit" className="login-submit-button">
+                      Login as {selectedOption}
+                    </button>
+                  </form>
+                  <p className="signup-text">
+                    Don't have an account? <span className="signup-link">Sign up</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          }
+        />
       </Routes>
       {showSuccessModal && (
         <div className="registration-success-modal">
